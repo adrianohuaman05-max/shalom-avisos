@@ -17,8 +17,8 @@ import mensajes
 import storage
 import telegram_bot as tg
 
-CHECK_EVERY_HOURS = 6      # cada cuánto re-consultar un mismo pedido
-MIN_AGE_HOURS = 24         # no revisar pedidos con menos de 24h
+CHECK_EVERY_HOURS = 2      # cada cuánto re-consultar un mismo pedido
+MIN_AGE_HOURS = 0          # revisar desde el registro (0 = sin espera)
 DEMORA_DIAS = 5            # avisar demora si sigue en tránsito tras estos días
 
 
