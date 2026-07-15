@@ -2,10 +2,10 @@
   {
     "orden": "12345678",
     "codigo": "AB12",
-    "estado": "En origen",
+    "estado": "",
     "avisado": false,
     "registrado": "2026-07-06T15:30:00+00:00",
-    "last_checked": "2026-07-15T00:21:38.618264+00:00",
+    "last_checked": null,
     "demora_avisada": false
   }
 ]
