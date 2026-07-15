@@ -5,10 +5,10 @@
     "cliente": "Brenda Cecilia Gonzales Asurza",
     "telefono": "982302017",
     "destino": "Chala",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-06T15:30:00+00:00",
-    "last_checked": null,
+    "last_checked": "2026-07-15T00:21:38.618264+00:00",
     "demora_avisada": false
   }
 ]
