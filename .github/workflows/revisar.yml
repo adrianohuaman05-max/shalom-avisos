@@ -1,0 +1,60 @@
+name: Revisar pedidos Shalom
+
+on:
+  schedule:
+    # Cada 30 minutos. GitHub usa UTC. Corre solo, sin tu laptop.
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}   # permite ejecutarlo a mano desde la web de GitHub
+
+permissions:
+  contents: write          # para guardar orders.json / state.json
+
+concurrency:
+  group: revisar-shalom
+  cancel-in-progress: false
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Ejecutar revision
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
+          SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
+        run: python revisar.py
+
+      - name: Guardar cambios de estado
+        run: |
+          git config user.name "shalom-bot"
+          git config user.email "bot@users.noreflect.github.com"
+          git add orders.json state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar estado de pedidos [skip ci]"
+            git push
+          else
+            echo "Sin cambios que guardar."
+          fi
+
+      - name: Guardar capturas de depuracion (si hubo error)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screens
+          path: "*.png"
+          if-no-files-found: ignore
+          retention-days: 3
