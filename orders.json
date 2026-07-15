@@ -10,5 +10,17 @@
     "registrado": "2026-07-06T15:30:00+00:00",
     "last_checked": "2026-07-15T00:40:06.674495+00:00",
     "demora_avisada": false
+  },
+  {
+    "orden": "88161518",
+    "codigo": "777K",
+    "cliente": "Carlos Humberto",
+    "telefono": "966713032",
+    "destino": "Pisco",
+    "estado": "En origen",
+    "avisado": false,
+    "registrado": "2026-07-15T01:19:36.214821+00:00",
+    "last_checked": "2026-07-15T01:19:46.760592+00:00",
+    "demora_avisada": false
   }
 ]
