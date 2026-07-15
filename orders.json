@@ -17,10 +17,10 @@
     "cliente": "Carlos Humberto",
     "telefono": "966713032",
     "destino": "Pisco",
-    "estado": "En destino",
+    "estado": "Entregado",
     "avisado": true,
     "registrado": "2026-07-15T01:19:36.214821+00:00",
-    "last_checked": "2026-07-15T12:19:10.007743+00:00",
+    "last_checked": "2026-07-15T14:21:15.210532+00:00",
     "demora_avisada": false
   }
 ]
