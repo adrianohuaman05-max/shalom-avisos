@@ -22,5 +22,29 @@
     "registrado": "2026-07-15T01:19:36.214821+00:00",
     "last_checked": "2026-07-15T14:21:15.210532+00:00",
     "demora_avisada": false
+  },
+  {
+    "orden": "88448686",
+    "codigo": "M7WJ",
+    "cliente": "",
+    "telefono": "941655847",
+    "destino": "",
+    "estado": "En origen",
+    "avisado": false,
+    "registrado": "2026-07-16T18:53:51.206107+00:00",
+    "last_checked": "2026-07-16T18:54:01.276815+00:00",
+    "demora_avisada": false
+  },
+  {
+    "orden": "88448492",
+    "codigo": "KPW7",
+    "cliente": "",
+    "telefono": "942226953",
+    "destino": "",
+    "estado": "En origen",
+    "avisado": false,
+    "registrado": "2026-07-16T18:53:51.708322+00:00",
+    "last_checked": "2026-07-16T18:54:05.740699+00:00",
+    "demora_avisada": false
   }
 ]
