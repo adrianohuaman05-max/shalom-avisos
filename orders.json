@@ -29,10 +29,10 @@
     "cliente": "",
     "telefono": "941655847",
     "destino": "",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-17T07:20:33.229201+00:00",
+    "last_checked": "2026-07-17T09:28:17.848137+00:00",
     "demora_avisada": false
   },
   {
@@ -44,7 +44,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-17T07:20:38.308612+00:00",
+    "last_checked": "2026-07-17T09:28:23.145612+00:00",
     "demora_avisada": false
   },
   {
@@ -56,7 +56,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-17T07:20:43.608730+00:00",
+    "last_checked": "2026-07-17T09:28:28.543623+00:00",
     "demora_avisada": false
   }
 ]
