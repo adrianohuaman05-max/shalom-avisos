@@ -20,28 +20,28 @@
   {
     "orden": "88448686",
     "codigo": "M7WJ",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-17T20:28:30.367852+00:00",
+    "last_checked": "2026-07-17T23:26:12.816910+00:00",
     "demora_avisada": false
   },
   {
     "orden": "88448492",
     "codigo": "KPW7",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-17T20:28:35.459444+00:00",
+    "last_checked": "2026-07-17T23:26:17.947246+00:00",
     "demora_avisada": false
   },
   {
     "orden": "88534222",
     "codigo": "PWKP",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-17T20:28:40.824353+00:00",
+    "last_checked": "2026-07-17T23:26:23.113419+00:00",
     "demora_avisada": false
   }
 ]
