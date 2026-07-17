@@ -32,7 +32,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-17T12:43:48.315330+00:00",
+    "last_checked": "2026-07-17T14:46:46.415972+00:00",
     "demora_avisada": false
   },
   {
@@ -44,7 +44,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-17T12:43:53.643311+00:00",
+    "last_checked": "2026-07-17T14:46:51.598153+00:00",
     "demora_avisada": false
   },
   {
@@ -56,7 +56,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-17T12:43:58.810357+00:00",
+    "last_checked": "2026-07-17T14:46:56.862426+00:00",
     "demora_avisada": false
   }
 ]
