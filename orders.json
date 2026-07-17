@@ -29,10 +29,10 @@
     "cliente": "",
     "telefono": "941655847",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-16T21:36:56.726091+00:00",
+    "last_checked": "2026-07-17T01:04:08.442567+00:00",
     "demora_avisada": false
   },
   {
@@ -41,10 +41,22 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-16T21:37:01.571753+00:00",
+    "last_checked": "2026-07-17T01:04:13.139338+00:00",
+    "demora_avisada": false
+  },
+  {
+    "orden": "88534222",
+    "codigo": "PWKP",
+    "cliente": "Miranda Huarcaya Jhony Alex",
+    "telefono": "926119247",
+    "destino": "Av. Dominicos Cdra 14",
+    "estado": "En origen",
+    "avisado": false,
+    "registrado": "2026-07-17T01:03:58.275360+00:00",
+    "last_checked": "2026-07-17T01:04:18.009261+00:00",
     "demora_avisada": false
   }
 ]
