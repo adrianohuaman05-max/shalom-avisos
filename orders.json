@@ -29,10 +29,10 @@
     "cliente": "",
     "telefono": "941655847",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-18T12:29:49.372602+00:00",
+    "last_checked": "2026-07-18T15:30:14.585743+00:00",
     "demora_avisada": false
   },
   {
@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-18T12:29:54.602374+00:00",
+    "last_checked": "2026-07-18T15:30:19.910579+00:00",
     "demora_avisada": false
   },
   {
@@ -53,10 +53,10 @@
     "cliente": "Miranda Huarcaya Jhony Alex",
     "telefono": "926119247",
     "destino": "Av. Dominicos Cdra 14",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-18T12:29:59.770270+00:00",
+    "last_checked": "2026-07-18T15:30:25.241938+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-18T12:30:04.967406+00:00",
+    "last_checked": "2026-07-18T15:30:30.475979+00:00",
     "demora_avisada": false
   }
 ]
