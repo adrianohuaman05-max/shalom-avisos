@@ -32,7 +32,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
-    "last_checked": "2026-07-18T04:07:39.166847+00:00",
+    "last_checked": "2026-07-18T06:29:34.584070+00:00",
     "demora_avisada": false
   },
   {
@@ -44,7 +44,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-18T04:07:44.814031+00:00",
+    "last_checked": "2026-07-18T06:29:39.738038+00:00",
     "demora_avisada": false
   },
   {
@@ -56,7 +56,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-18T04:07:50.131313+00:00",
+    "last_checked": "2026-07-18T06:29:44.920965+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-18T04:07:55.646988+00:00",
+    "last_checked": "2026-07-18T06:29:50.404161+00:00",
     "demora_avisada": false
   }
 ]
