@@ -43,5 +43,14 @@
     "registrado": "2026-07-17T01:03:58.275360+00:00",
     "last_checked": "2026-07-17T23:26:23.113419+00:00",
     "demora_avisada": false
+  },
+  {
+    "orden": "88681588",
+    "codigo": "C9CM",
+    "estado": "En origen",
+    "avisado": false,
+    "registrado": "2026-07-18T00:57:40.200634+00:00",
+    "last_checked": "2026-07-18T00:57:50.134472+00:00",
+    "demora_avisada": false
   }
 ]
