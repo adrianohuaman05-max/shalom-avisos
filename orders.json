@@ -44,7 +44,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-18T20:22:23.257269+00:00",
+    "last_checked": "2026-07-18T22:25:22.907055+00:00",
     "demora_avisada": false
   },
   {
@@ -56,7 +56,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-18T20:22:27.991039+00:00",
+    "last_checked": "2026-07-18T22:25:28.020452+00:00",
     "demora_avisada": false
   },
   {
@@ -65,10 +65,10 @@
     "cliente": "Castro Urbina Yanela Anibita",
     "telefono": "981561306",
     "destino": "Higuereta",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-18T20:22:33.340117+00:00",
+    "last_checked": "2026-07-18T22:25:33.355412+00:00",
     "demora_avisada": false
   }
 ]
