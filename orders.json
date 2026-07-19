@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-19T04:50:57.575142+00:00",
+    "last_checked": "2026-07-19T07:29:27.035117+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-19T04:51:03.238208+00:00",
+    "last_checked": "2026-07-19T07:29:33.226057+00:00",
     "demora_avisada": false
   }
 ]
