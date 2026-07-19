@@ -44,7 +44,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-19T20:55:40.771081+00:00",
+    "last_checked": "2026-07-19T23:02:15.811588+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-19T20:55:46.024476+00:00",
+    "last_checked": "2026-07-19T23:02:21.072705+00:00",
     "demora_avisada": false
   }
 ]
