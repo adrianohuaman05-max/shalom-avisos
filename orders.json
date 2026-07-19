@@ -44,7 +44,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-18T22:25:22.907055+00:00",
+    "last_checked": "2026-07-19T01:05:04.269086+00:00",
     "demora_avisada": false
   },
   {
@@ -53,10 +53,10 @@
     "cliente": "Miranda Huarcaya Jhony Alex",
     "telefono": "926119247",
     "destino": "Av. Dominicos Cdra 14",
-    "estado": "En destino",
+    "estado": "Entregado",
     "avisado": true,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
-    "last_checked": "2026-07-18T22:25:28.020452+00:00",
+    "last_checked": "2026-07-19T01:05:09.582016+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-18T22:25:33.355412+00:00",
+    "last_checked": "2026-07-19T01:05:14.662514+00:00",
     "demora_avisada": false
   }
 ]
