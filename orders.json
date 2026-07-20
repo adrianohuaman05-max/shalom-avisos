@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-20T18:08:26.418246+00:00",
+    "last_checked": "2026-07-20T21:44:53.421297+00:00",
     "demora_avisada": false
   },
   {
@@ -65,10 +65,10 @@
     "cliente": "Castro Urbina Yanela Anibita",
     "telefono": "981561306",
     "destino": "Higuereta",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-20T18:08:31.515416+00:00",
+    "last_checked": "2026-07-20T21:44:58.817156+00:00",
     "demora_avisada": false
   }
 ]
