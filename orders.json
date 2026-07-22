@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-21T23:33:10.176471+00:00",
+    "last_checked": "2026-07-22T02:56:26.434860+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-21T23:33:14.939668+00:00",
+    "last_checked": "2026-07-22T02:56:31.127649+00:00",
     "demora_avisada": false
   },
   {
@@ -77,10 +77,10 @@
     "cliente": "Marin Horna Jesary Nenita",
     "telefono": "941655847",
     "destino": "Av. Canta Callao con Alisos",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-21T22:28:20.237278+00:00",
+    "last_checked": "2026-07-22T02:56:35.827706+00:00",
     "demora_avisada": false
   },
   {
@@ -89,10 +89,22 @@
     "cliente": "Salas Torres Angelica Luz",
     "telefono": "988475207",
     "destino": "Av. Angelica Gamarra",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-21T22:28:25.468645+00:00",
+    "last_checked": "2026-07-22T02:56:40.526466+00:00",
+    "demora_avisada": false
+  },
+  {
+    "orden": "89056824",
+    "codigo": "MWPH",
+    "cliente": "Barrio Montezuma Nicolas",
+    "telefono": "926721591",
+    "destino": "Higuereta",
+    "estado": "En tránsito",
+    "avisado": false,
+    "registrado": "2026-07-22T02:56:16.258080+00:00",
+    "last_checked": "2026-07-22T02:56:45.193674+00:00",
     "demora_avisada": false
   }
 ]
