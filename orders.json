@@ -44,7 +44,7 @@
     "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-22T18:15:50.287309+00:00",
+    "last_checked": "2026-07-22T21:18:35.322775+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-22T18:15:55.470123+00:00",
+    "last_checked": "2026-07-22T21:18:40.536756+00:00",
     "demora_avisada": false
   },
   {
@@ -80,7 +80,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-22T18:16:00.690659+00:00",
+    "last_checked": "2026-07-22T21:18:45.885639+00:00",
     "demora_avisada": false
   },
   {
@@ -92,7 +92,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-22T18:16:06.018995+00:00",
+    "last_checked": "2026-07-22T21:18:51.182645+00:00",
     "demora_avisada": false
   },
   {
@@ -104,7 +104,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-22T18:16:11.149406+00:00",
+    "last_checked": "2026-07-22T21:18:56.250883+00:00",
     "demora_avisada": false
   }
 ]
