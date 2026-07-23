@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-22T21:18:35.322775+00:00",
+    "last_checked": "2026-07-23T00:03:29.861731+00:00",
     "demora_avisada": false
   },
   {
@@ -65,10 +65,10 @@
     "cliente": "Castro Urbina Yanela Anibita",
     "telefono": "981561306",
     "destino": "Higuereta",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-22T21:18:40.536756+00:00",
+    "last_checked": "2026-07-23T00:03:34.896204+00:00",
     "demora_avisada": false
   },
   {
@@ -77,10 +77,10 @@
     "cliente": "Marin Horna Jesary Nenita",
     "telefono": "941655847",
     "destino": "Av. Canta Callao con Alisos",
-    "estado": "En origen",
-    "avisado": false,
+    "estado": "En destino",
+    "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-22T21:18:45.885639+00:00",
+    "last_checked": "2026-07-23T00:03:40.210514+00:00",
     "demora_avisada": false
   },
   {
@@ -89,10 +89,10 @@
     "cliente": "Salas Torres Angelica Luz",
     "telefono": "988475207",
     "destino": "Av. Angelica Gamarra",
-    "estado": "En origen",
-    "avisado": false,
+    "estado": "En destino",
+    "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-22T21:18:51.182645+00:00",
+    "last_checked": "2026-07-23T00:03:46.010705+00:00",
     "demora_avisada": false
   },
   {
@@ -104,7 +104,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-22T21:18:56.250883+00:00",
+    "last_checked": "2026-07-23T00:03:51.657165+00:00",
     "demora_avisada": false
   }
 ]
