@@ -41,10 +41,10 @@
     "cliente": "",
     "telefono": "942226953",
     "destino": "",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-23T09:27:44.601972+00:00",
+    "last_checked": "2026-07-23T13:06:00.749737+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-23T09:27:49.348629+00:00",
+    "last_checked": "2026-07-23T13:06:05.882028+00:00",
     "demora_avisada": false
   },
   {
@@ -80,7 +80,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-23T09:27:54.213259+00:00",
+    "last_checked": "2026-07-23T13:06:10.862588+00:00",
     "demora_avisada": false
   },
   {
@@ -89,10 +89,10 @@
     "cliente": "Salas Torres Angelica Luz",
     "telefono": "988475207",
     "destino": "Av. Angelica Gamarra",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-23T09:27:58.912885+00:00",
+    "last_checked": "2026-07-23T13:06:15.891465+00:00",
     "demora_avisada": false
   },
   {
@@ -104,7 +104,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-23T09:28:03.612737+00:00",
+    "last_checked": "2026-07-23T13:06:20.892312+00:00",
     "demora_avisada": false
   }
 ]
