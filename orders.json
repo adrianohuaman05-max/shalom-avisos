@@ -44,7 +44,7 @@
     "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-23T13:06:00.749737+00:00",
+    "last_checked": "2026-07-23T15:36:26.687162+00:00",
     "demora_avisada": false
   },
   {
@@ -65,10 +65,10 @@
     "cliente": "Castro Urbina Yanela Anibita",
     "telefono": "981561306",
     "destino": "Higuereta",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-23T13:06:05.882028+00:00",
+    "last_checked": "2026-07-23T15:36:31.937240+00:00",
     "demora_avisada": false
   },
   {
@@ -77,10 +77,10 @@
     "cliente": "Marin Horna Jesary Nenita",
     "telefono": "941655847",
     "destino": "Av. Canta Callao con Alisos",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-23T13:06:10.862588+00:00",
+    "last_checked": "2026-07-23T15:36:37.152407+00:00",
     "demora_avisada": false
   },
   {
@@ -92,7 +92,7 @@
     "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-23T13:06:15.891465+00:00",
+    "last_checked": "2026-07-23T15:36:42.466711+00:00",
     "demora_avisada": false
   },
   {
@@ -101,10 +101,10 @@
     "cliente": "Barrio Montezuma Nicolas",
     "telefono": "926721591",
     "destino": "Higuereta",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-23T13:06:20.892312+00:00",
+    "last_checked": "2026-07-23T15:36:47.567448+00:00",
     "demora_avisada": false
   }
 ]
