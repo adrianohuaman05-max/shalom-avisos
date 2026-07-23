@@ -44,7 +44,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-23T00:03:29.861731+00:00",
+    "last_checked": "2026-07-23T03:55:40.692446+00:00",
     "demora_avisada": false
   },
   {
@@ -68,7 +68,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-23T00:03:34.896204+00:00",
+    "last_checked": "2026-07-23T03:55:45.903062+00:00",
     "demora_avisada": false
   },
   {
@@ -80,7 +80,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-23T00:03:40.210514+00:00",
+    "last_checked": "2026-07-23T03:55:51.017161+00:00",
     "demora_avisada": false
   },
   {
@@ -92,7 +92,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-23T00:03:46.010705+00:00",
+    "last_checked": "2026-07-23T03:55:56.118840+00:00",
     "demora_avisada": false
   },
   {
@@ -101,10 +101,10 @@
     "cliente": "Barrio Montezuma Nicolas",
     "telefono": "926721591",
     "destino": "Higuereta",
-    "estado": "En origen",
-    "avisado": false,
+    "estado": "En destino",
+    "avisado": true,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-23T00:03:51.657165+00:00",
+    "last_checked": "2026-07-23T03:56:01.350080+00:00",
     "demora_avisada": false
   }
 ]
