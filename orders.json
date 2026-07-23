@@ -29,10 +29,10 @@
   {
     "orden": "88448492",
     "codigo": "KPW7",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-23T15:36:26.687162+00:00",
+    "last_checked": "2026-07-23T18:47:52.917241+00:00",
     "demora_avisada": false
   },
   {
@@ -47,37 +47,37 @@
   {
     "orden": "88681588",
     "codigo": "C9CM",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-23T15:36:31.937240+00:00",
+    "last_checked": "2026-07-23T18:47:58.228491+00:00",
     "demora_avisada": false
   },
   {
     "orden": "89057121",
     "codigo": "CP37",
-    "estado": "En origen",
+    "estado": "Entregado",
     "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
-    "last_checked": "2026-07-23T15:36:37.152407+00:00",
+    "last_checked": "2026-07-23T18:48:03.558148+00:00",
     "demora_avisada": false
   },
   {
     "orden": "89057021",
     "codigo": "7PW7",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-23T15:36:42.466711+00:00",
+    "last_checked": "2026-07-23T18:48:08.672433+00:00",
     "demora_avisada": false
   },
   {
     "orden": "89056824",
     "codigo": "MWPH",
-    "estado": "En origen",
+    "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
-    "last_checked": "2026-07-23T15:36:47.567448+00:00",
+    "last_checked": "2026-07-23T18:48:13.942611+00:00",
     "demora_avisada": false
   }
 ]
