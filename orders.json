@@ -29,10 +29,10 @@
   {
     "orden": "88448492",
     "codigo": "KPW7",
-    "estado": "En origen",
+    "estado": "Entregado",
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
-    "last_checked": "2026-07-24T22:08:44.594027+00:00",
+    "last_checked": "2026-07-25T02:56:19.098249+00:00",
     "demora_avisada": false
   },
   {
@@ -50,7 +50,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-24T22:08:49.624864+00:00",
+    "last_checked": "2026-07-25T02:56:24.409540+00:00",
     "demora_avisada": false
   },
   {
@@ -65,10 +65,10 @@
   {
     "orden": "89057021",
     "codigo": "7PW7",
-    "estado": "En origen",
+    "estado": "Entregado",
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
-    "last_checked": "2026-07-24T22:08:54.774321+00:00",
+    "last_checked": "2026-07-25T02:56:29.705722+00:00",
     "demora_avisada": false
   },
   {
@@ -83,10 +83,10 @@
   {
     "orden": "89318663",
     "codigo": "KNJJ",
-    "estado": "En origen",
-    "avisado": false,
+    "estado": "En destino",
+    "avisado": true,
     "registrado": "2026-07-24T19:00:02.289526+00:00",
-    "last_checked": "2026-07-24T22:09:00.089886+00:00",
+    "last_checked": "2026-07-25T02:56:34.922609+00:00",
     "demora_avisada": false
   }
 ]
