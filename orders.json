@@ -47,10 +47,10 @@
   {
     "orden": "88681588",
     "codigo": "C9CM",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
-    "last_checked": "2026-07-25T02:56:24.409540+00:00",
+    "last_checked": "2026-07-25T05:47:51.972165+00:00",
     "demora_avisada": false
   },
   {
@@ -83,10 +83,10 @@
   {
     "orden": "89318663",
     "codigo": "KNJJ",
-    "estado": "En destino",
+    "estado": "En origen",
     "avisado": true,
     "registrado": "2026-07-24T19:00:02.289526+00:00",
-    "last_checked": "2026-07-25T02:56:34.922609+00:00",
+    "last_checked": "2026-07-25T05:47:57.098133+00:00",
     "demora_avisada": false
   }
 ]
