@@ -95,7 +95,7 @@
     "estado": "",
     "avisado": false,
     "registrado": "2026-08-01T17:32:29.982864+00:00",
-    "last_checked": "2026-08-02T12:06:01.442354+00:00",
+    "last_checked": "2026-08-02T14:10:00.801161+00:00",
     "demora_avisada": false
   },
   {
@@ -104,7 +104,7 @@
     "estado": "",
     "avisado": false,
     "registrado": "2026-08-01T17:32:30.562576+00:00",
-    "last_checked": "2026-08-02T12:06:24.761942+00:00",
+    "last_checked": "2026-08-02T14:10:24.109742+00:00",
     "demora_avisada": false
   },
   {
@@ -113,7 +113,7 @@
     "estado": "",
     "avisado": false,
     "registrado": "2026-08-01T17:32:31.172759+00:00",
-    "last_checked": "2026-08-02T12:06:48.052159+00:00",
+    "last_checked": "2026-08-02T14:10:47.424467+00:00",
     "demora_avisada": false
   }
 ]
