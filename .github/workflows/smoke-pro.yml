@@ -1,0 +1,44 @@
+name: Prueba ShalomPRO
+
+# Solo a mano. No toca orders.json ni manda nada a Telegram: únicamente
+# comprueba si desde una IP de GitHub se puede entrar a pro.shalom.pe y leer
+# los envíos. Cuando la prueba pase, este workflow se puede borrar.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Probar lectura de ShalomPRO
+        env:
+          SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
+          SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
+        run: python smoke_pro.py
+
+      # Solo la pantalla de login, que no tiene datos de clientes. Los artifacts
+      # de un repo público son descargables por cualquiera.
+      - name: Guardar captura del login (si falló)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-login
+          path: debug_login.png
+          if-no-files-found: ignore
+          retention-days: 3
