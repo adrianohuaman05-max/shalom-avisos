@@ -95,16 +95,16 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-08-01T17:32:29.982864+00:00",
-    "last_checked": "2026-08-03T10:46:35.373044+00:00",
+    "last_checked": "2026-08-03T13:43:42.113208+00:00",
     "demora_avisada": false
   },
   {
     "orden": "90336175",
     "codigo": "P7HJ",
-    "estado": "En tránsito",
+    "estado": "En origen",
     "avisado": false,
     "registrado": "2026-08-01T17:32:30.562576+00:00",
-    "last_checked": "2026-08-03T10:46:40.439140+00:00",
+    "last_checked": "2026-08-03T13:43:47.261583+00:00",
     "demora_avisada": false
   },
   {
@@ -113,7 +113,7 @@
     "estado": "En origen",
     "avisado": false,
     "registrado": "2026-08-01T17:32:31.172759+00:00",
-    "last_checked": "2026-08-03T10:46:45.755460+00:00",
+    "last_checked": "2026-08-03T13:43:52.363089+00:00",
     "demora_avisada": false
   }
 ]
