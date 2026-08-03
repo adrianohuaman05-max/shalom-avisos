@@ -4,7 +4,12 @@ on:
   schedule:
     # Cada 30 minutos. GitHub usa UTC. Corre solo, sin tu laptop.
     - cron: "*/30 * * * *"
-  workflow_dispatch: {}   # permite ejecutarlo a mano desde la web de GitHub
+  workflow_dispatch:      # permite ejecutarlo a mano desde la web de GitHub
+    inputs:
+      sin_avisos:
+        description: "Solo sincronizar estados, sin avisar a nadie (util la primera vez)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write          # para guardar orders.json / state.json
@@ -36,7 +41,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
           SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
-        run: python revisar.py
+        run: python revisar.py ${{ inputs.sin_avisos && '--sin-avisos' || '' }}
 
       - name: Guardar cambios de estado
         run: |
