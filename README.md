@@ -6,18 +6,25 @@ link de WhatsApp listos para enviarle al cliente.
 
 - ✅ Corre 24/7 en GitHub Actions (**gratis**).
 - ✅ No usa tu plan de Claude.
-- ✅ Todo desde tu **celular** (registras pedidos y recibes avisos por Telegram).
+- ✅ **No registras nada**: los envíos se leen solos de tu cuenta ShalomPRO.
 - ✅ Tu laptop puede estar apagada.
 
 ---
 
 ## Cómo funciona
 
-1. Le mandas al **bot de Telegram** los datos de un envío nuevo.
-2. Cada 30 min, GitHub revisa en Shalom los pedidos pendientes (que ya tengan +24h).
-3. Cuando un pedido llega a **"En destino"**, el bot te escribe con el mensaje corto
-   y un link de WhatsApp: lo tocas → se abre el chat del cliente → envías.
+La fuente de verdad es el portal **ShalomPRO** (`pro.shalom.pe`), que ya tiene
+todo lo que antes se copiaba a mano: número de orden, código, estado y —en el
+detalle de cada envío— el **celular del destinatario**.
+
+1. Registras el envío en Shalom como siempre y lo dejas en la agencia.
+2. Cada 30 min GitHub abre el portal y lee la vista de seguimiento de una sola
+   carga. Los pedidos nuevos **se descubren solos**.
+3. Cuando uno llega a **"En destino"**, el bot te escribe con el mensaje corto y
+   un link de WhatsApp: lo tocas → se abre el chat del cliente → envías.
+   Si va a domicilio ("En reparto"), el mensaje cambia solo.
 4. Si un pedido lleva +5 días en tránsito, también te avisa para reclamar.
+5. Cuando el pedido desaparece del seguimiento, se da por entregado y se cierra.
 
 ---
 
@@ -66,27 +73,48 @@ Crea estos cuatro:
 
 ## Uso diario
 
-**Registrar un pedido nuevo** — mándale al bot (puedes copiar y editar):
+Ninguno. Registras el envío en Shalom como siempre y el bot se entera solo.
 
-```
-Orden: 12345678
-Codigo: AB12
-Cliente: Ana Torres
-Telefono: 987654321
-Destino: Chala
-```
+**Comandos del bot:**
+- `/listar` — ver los pedidos en curso y su estado.
+- `/ayuda` — recordatorio de cómo funciona.
 
-**Otros comandos del bot:**
-- `/listar` — ver tus pedidos pendientes.
-- `/ayuda` — ver el formato para registrar.
+Para forzar una revisión: **Actions → "Revisar pedidos Shalom" → Run workflow**.
+Ahí hay una casilla **"sin avisos"** que sincroniza los estados sin escribirle a
+nadie — útil la primera vez, para fijar el punto de partida sin disparar avisos
+de pedidos que ya atendiste a mano.
+
+---
+
+## Privacidad
+
+Este repo es **público**, así que `orders.json` guarda **solo** datos de
+logística: número de orden, código y estado. El nombre y el celular del cliente
+se leen del portal en el momento del aviso, viajan al chat privado de Telegram y
+**no se escriben nunca a disco ni a los logs**.
+
+Por lo mismo, los logs enmascaran cualquier dato personal y las capturas de
+error se limitan a la pantalla de login: los artifacts de un repo público los
+puede descargar cualquiera.
+
+> ⚠️ Las versiones anteriores sí guardaban nombre y teléfono en `orders.json`.
+> El código actual los borra en la primera ejecución, pero **siguen visibles en
+> el historial de commits** hasta que se reescriba el historial.
 
 ---
 
 ## Notas técnicas
-- El estado se lee de la web logueada de Shalom (su API usa reCAPTCHA + respuesta
-  encriptada, por eso se usa un navegador headless con Playwright).
-- Estado y pedidos se guardan en `orders.json` / `state.json` (GitHub los versiona).
-- **Riesgo conocido:** si Shalom llegara a bloquear al servidor de GitHub por el
-  reCAPTCHA, el plan B es usar una API de Shalom de terceros (de pago). En las
-  ejecuciones fallidas se guarda una captura (`debug-screens`) para diagnosticar.
-- Ajustes en `revisar.py`: `CHECK_EVERY_HOURS`, `MIN_AGE_HOURS`, `DEMORA_DIAS`.
+- El estado se lee del DOM del portal con Playwright. La API interna
+  (`/service-orders/shipments/tracking`) no sirve: exige cabeceras firmadas con
+  HMAC (`X-API-KEY`, `X-NONCE`, `X-TIMESTAMP`, `X-SIGNATURE`) y además devuelve
+  el cuerpo encriptado. Sin ellas responde `401 Missing headers`.
+- El login del portal usa **reCAPTCHA v3** (por score, sin puzzle). Comprobado
+  que un Chromium headless lo pasa desde una IP de GitHub.
+- La vista de seguimiento solo muestra envíos **activos**; los entregados pasan
+  al historial. Por eso la lista se mantiene corta sola.
+- Ojo al tocar los selectores: la página renderiza el layout de escritorio
+  (`.shipment-row`) y el de móvil (`.shipment-card__*`) a la vez. Y el panel de
+  detalle **no se cierra con Escape**, hay que pulsar `.drawer__close-btn`.
+- `shalom_tracker.py` (rastreo público, pedido por pedido) queda como plan B por
+  si el portal cambia; ya no se usa.
+- Ajustes en `revisar.py`: `DEMORA_DIAS`, `AVISAR_EN`.
