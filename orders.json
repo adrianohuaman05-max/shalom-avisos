@@ -6,7 +6,8 @@
     "avisado": true,
     "registrado": "2026-07-06T15:30:00+00:00",
     "last_checked": "2026-07-15T00:40:06.674495+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "88161518",
@@ -15,7 +16,8 @@
     "avisado": true,
     "registrado": "2026-07-15T01:19:36.214821+00:00",
     "last_checked": "2026-07-15T14:21:15.210532+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "88448686",
@@ -24,7 +26,8 @@
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.206107+00:00",
     "last_checked": "2026-07-18T20:22:18.496573+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "88448492",
@@ -33,7 +36,8 @@
     "avisado": true,
     "registrado": "2026-07-16T18:53:51.708322+00:00",
     "last_checked": "2026-07-25T02:56:19.098249+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "88534222",
@@ -42,7 +46,8 @@
     "avisado": true,
     "registrado": "2026-07-17T01:03:58.275360+00:00",
     "last_checked": "2026-07-19T01:05:09.582016+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "88681588",
@@ -51,7 +56,8 @@
     "avisado": true,
     "registrado": "2026-07-18T00:57:40.200634+00:00",
     "last_checked": "2026-07-25T17:33:58.440547+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "89057121",
@@ -60,7 +66,8 @@
     "avisado": true,
     "registrado": "2026-07-21T19:37:06.564016+00:00",
     "last_checked": "2026-07-23T18:48:03.558148+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "89057021",
@@ -69,7 +76,8 @@
     "avisado": true,
     "registrado": "2026-07-21T19:37:07.106938+00:00",
     "last_checked": "2026-07-25T02:56:29.705722+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "89056824",
@@ -78,7 +86,8 @@
     "avisado": true,
     "registrado": "2026-07-22T02:56:16.258080+00:00",
     "last_checked": "2026-07-23T21:36:53.998939+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "89318663",
@@ -87,16 +96,19 @@
     "avisado": true,
     "registrado": "2026-07-24T19:00:02.289526+00:00",
     "last_checked": "2026-07-25T17:34:03.736816+00:00",
-    "demora_avisada": false
+    "demora_avisada": false,
+    "cerrado": true
   },
   {
     "orden": "90333962",
     "codigo": "CDKH",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-08-01T17:32:29.982864+00:00",
-    "last_checked": "2026-08-03T16:39:40.901121+00:00",
-    "demora_avisada": false
+    "last_checked": "2026-08-04T00:08:14.284271+00:00",
+    "demora_avisada": false,
+    "fecha_envio": "01-08-2026",
+    "cerrado": false
   },
   {
     "orden": "90336175",
@@ -104,16 +116,31 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-08-01T17:32:30.562576+00:00",
-    "last_checked": "2026-08-03T16:39:46.001347+00:00",
-    "demora_avisada": false
+    "last_checked": "2026-08-04T00:08:14.284308+00:00",
+    "demora_avisada": false,
+    "fecha_envio": "01-08-2026",
+    "cerrado": false
   },
   {
     "orden": "90336399",
     "codigo": "NCPD",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-08-01T17:32:31.172759+00:00",
-    "last_checked": "2026-08-03T16:39:51.199808+00:00",
-    "demora_avisada": false
+    "last_checked": "2026-08-04T00:08:14.284332+00:00",
+    "demora_avisada": false,
+    "fecha_envio": "01-08-2026",
+    "cerrado": false
+  },
+  {
+    "orden": "87654321",
+    "codigo": "NKMM",
+    "estado": "En tránsito",
+    "fecha_envio": "02-08-2026",
+    "avisado": false,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-04T00:08:14.275081+00:00",
+    "last_checked": "2026-08-04T00:08:14.275098+00:00"
   }
 ]
