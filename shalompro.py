@@ -188,6 +188,7 @@ class ShalomPro:
         self.context = self.browser.new_context(
             locale="es-PE",
             timezone_id="America/Lima",
+            accept_downloads=True,  # el ticket va con inline=0: puede bajar como descarga
             viewport={"width": 1440, "height": 900},  # forzar layout de escritorio
             user_agent=(
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -361,15 +362,27 @@ class ShalomPro:
         """Bytes del ticket en PDF, o None si no se pudo.
 
         El portal no publica una URL fija del ticket: al pulsar "Descargar Ticket
-        Shalom" pide un token (POST /ticket-pdf/token) y carga el PDF en un
-        iframe con ese token dentro de la URL. En vez de reconstruir esa firma,
-        dejamos que la propia página haga el trámite y le tomamos prestada la URL
-        del iframe, que es del mismo origen (el de reCAPTCHA es de google.com).
+        Shalom" pide un token (POST /ticket-pdf/token) y abre
+        /ticket-pdf/<id>?token=<id>:<caducidad>:<firma>, que además va con
+        `inline=0` — o sea, según el navegador puede acabar en una pestaña nueva
+        o en una descarga.
+
+        Por eso no se busca el elemento: se escucha la PETICIÓN de red, que
+        ocurre igual en los dos casos. Y el `<id>` de la URL no es el número de
+        orden sino un id interno de Shalom, así que la URL hay que verla, no
+        deducirla.
         """
         page = self.page
         if not self._abrir_detalle(orden):
             return None
 
+        urls = []
+
+        def _mirar(req):
+            if "/ticket-pdf/" in req.url and "token=" in req.url:
+                urls.append(req.url)
+
+        self.context.on("request", _mirar)
         try:
             boton = page.get_by_role(
                 "button", name=re.compile("Descargar Ticket", re.I))
@@ -378,27 +391,16 @@ class ShalomPro:
                 return None
             boton.first.click()
 
-            src = None
             for _ in range(30):
                 page.wait_for_timeout(500)
-                src = page.evaluate(
-                    """() => {
-                         const f = [...document.querySelectorAll('iframe')].find(x => {
-                           if (!x.src) return false;
-                           try { return new URL(x.src).origin === location.origin; }
-                           catch (e) { return false; }
-                         });
-                         return f ? f.src : null;
-                       }"""
-                )
-                if src:
+                if urls:
                     break
-            if not src:
+            if not urls:
                 print(f"[{orden}] el ticket no llegó a generarse.")
                 return None
 
             # request del contexto = mismas cookies de sesión que la página.
-            resp = self.context.request.get(src, timeout=30000)
+            resp = self.context.request.get(urls[-1], timeout=30000)
             if not resp.ok:
                 print(f"[{orden}] el ticket respondió {resp.status}.")
                 return None
@@ -406,11 +408,23 @@ class ShalomPro:
             if not datos.startswith(b"%PDF"):
                 print(f"[{orden}] lo devuelto no es un PDF ({len(datos)} bytes).")
                 return None
+            print(f"[{orden}] ticket obtenido ({len(datos)} bytes).")
             return datos
         except Exception as e:
-            print(f"[{orden}] fallo al obtener el ticket: {type(e).__name__}")
+            print(f"[{orden}] fallo al obtener el ticket: {type(e).__name__}: {e}")
             return None
         finally:
+            try:
+                self.context.remove_listener("request", _mirar)
+            except Exception:
+                pass
+            # El ticket puede haber abierto pestañas; cerrarlas o se acumulan.
+            for p in list(self.context.pages):
+                if p is not page and "ticket-pdf" in (p.url or ""):
+                    try:
+                        p.close()
+                    except Exception:
+                        pass
             self._cerrar_detalle()
 
 
