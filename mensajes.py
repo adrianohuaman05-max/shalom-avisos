@@ -27,15 +27,32 @@ def nombre_corto(destinatario):
         partes[0].capitalize() if partes else "")
 
 
+ical = ("av", "av.", "jr", "jr.", "calle", "psje", "pasaje", "mz", "urb",
+        "prolongacion", "prolongación", "carretera", "ca.", "esq")
+
+
 def agencia(destino, ubigeo=""):
-    """'Av. Carlos Izaguirre Cdra. 14' + 'Lima / Lima / Los Olivos'
-       -> 'Av. Carlos Izaguirre Cdra. 14 (Los Olivos)'"""
+    """Nombre de agencia legible para el cliente.
+
+    El distrito solo se añade cuando el destino es una CALLE, porque ahí sin él
+    es ambiguo ('Av. Carlos Izaguirre Cdra. 14' -> '... (Los Olivos)'). Cuando
+    la agencia se llama como el sitio ('Tingo Maria Co Buenos Aires', 'Chala')
+    añadirlo estorba: el cliente reconoce el pueblo, no el distrito.
+    """
+    destino = (destino or "").strip()
+    if not destino:
+        return "la agencia"
+
+    primera = destino.split()[0].lower() if destino.split() else ""
+    if primera not in ical:
+        return destino
+
     distrito = ""
     if ubigeo and "/" in ubigeo:
         distrito = ubigeo.split("/")[-1].strip()
-    if distrito and distrito.lower() not in (destino or "").lower():
+    if distrito and distrito.lower() not in destino.lower():
         return f"{destino} ({distrito})"
-    return destino or "la agencia"
+    return destino
 
 
 def mensaje_cliente(destinatario, destino, ubigeo="", estado="En destino"):
