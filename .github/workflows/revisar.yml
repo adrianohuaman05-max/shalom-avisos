@@ -10,6 +10,10 @@ on:
         description: "Solo sincronizar estados, sin avisar a nadie (util la primera vez)"
         type: boolean
         default: false
+      probar_ticket:
+        description: "N de pedido para probar el envio del ticket (deja vacio para una corrida normal)"
+        type: string
+        default: ""
 
 permissions:
   contents: write          # para guardar orders.json / state.json
@@ -41,7 +45,12 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
           SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
-        run: python revisar.py ${{ inputs.sin_avisos && '--sin-avisos' || '' }}
+        run: |
+          if [ -n "${{ inputs.probar_ticket }}" ]; then
+            python revisar.py --probar-ticket "${{ inputs.probar_ticket }}"
+          else
+            python revisar.py ${{ inputs.sin_avisos && '--sin-avisos' || '' }}
+          fi
 
       - name: Guardar cambios de estado
         run: |

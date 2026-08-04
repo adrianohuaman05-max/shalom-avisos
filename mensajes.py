@@ -73,6 +73,29 @@ def mensaje_cliente(destinatario, destino, ubigeo="", estado="En destino"):
     )
 
 
+HUECO_CLAVE = "____"
+
+
+def mensaje_registro(destinatario, orden, codigo, destino, ubigeo=""):
+    """Mensaje para el cliente al enviar el paquete, con los datos de seguimiento.
+
+    La clave la elige Aldahir al registrar el envío, así que el portal no la
+    tiene: va como hueco para rellenar antes de enviar. Se deja al final para
+    que sea lo último que se ve y no se escape sin completar.
+    """
+    nombre = nombre_corto(destinatario)
+    saludo = f"Hola {nombre} 👋" if nombre else "¡Hola! 👋"
+    return (
+        f"{saludo} Ya envié tu pedido por Shalom, va en camino a "
+        f"{agencia(destino, ubigeo)}.\n\n"
+        f"Para hacerle seguimiento:\n"
+        f"N° de orden: {orden}\n"
+        f"Código: {codigo}\n"
+        f"Clave: {HUECO_CLAVE}\n\n"
+        f"Te aviso apenas llegue a la agencia. ¡Gracias por tu compra! 🙌"
+    )
+
+
 AYUDA = (
     "🤖 <b>Bot de avisos Shalom</b>\n\n"
     "Ya no hace falta que registres nada: leo tus envíos directamente de "

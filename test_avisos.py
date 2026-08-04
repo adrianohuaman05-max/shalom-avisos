@@ -135,6 +135,18 @@ check("reparto no manda a la agencia", "agencia" not in txt_rep.lower(), True)
 check("reparto habla de dirección", "dirección" in txt_rep, True)
 check("link al número correcto", link.startswith("https://wa.me/51987654321?text="), True)
 
+print("\n=== Aviso de registro (el que sustituye a la foto del ticket) ===")
+reg = mensajes.mensaje_registro(d["destinatario"], d["orden"], d["codigo"],
+                                d["destino"], d["destino_ubigeo"])
+print("  " + reg.replace("\n", "\n  "))
+check("lleva el n° de orden", d["orden"] in reg, True)
+check("lleva el código", "3TNH" in reg, True)
+check("deja hueco para la clave", mensajes.HUECO_CLAVE in reg, True)
+check("dice a dónde va", "Tingo Maria" in reg, True)
+check("no promete que ya llegó", "listo para recoger" not in reg, True)
+check("link wa.me correcto",
+      mensajes.wa_link(d["telefono"], reg).startswith("https://wa.me/51987654321?"), True)
+
 print("\n=== Demora: se cuenta desde la fecha real de envío ===")
 def hace(dias):
     return (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=dias)).strftime("%d-%m-%Y")

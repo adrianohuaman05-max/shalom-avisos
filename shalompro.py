@@ -194,6 +194,9 @@ class ShalomPro:
                 "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
             ),
         )
+        # El iframe del ticket llama print() al cargar, lo que abre el diálogo
+        # nativo y congela el navegador. Se anula en todos los frames.
+        self.context.add_init_script("window.print = () => {};")
         self.page = self.context.new_page()
         self.login()
         return self
@@ -302,11 +305,8 @@ class ShalomPro:
             f["estado"] = normalizar_estado(f.get("estado"))
         return filas
 
-    def detalle(self, orden):
-        """Datos completos de un envío, incluido el celular del destinatario.
-
-        Ojo: el resultado trae datos personales. No escribirlo a disco ni a logs.
-        """
+    def _abrir_detalle(self, orden):
+        """Abre el panel lateral del envío. Devuelve True si quedó abierto."""
         page = self.page
         if "seguimientoenvios" not in page.url:
             page.goto(SEGUIMIENTO_URL, wait_until="networkidle", timeout=60000)
@@ -315,7 +315,7 @@ class ShalomPro:
         fila = page.locator(".shipment-row").filter(
             has=page.locator(f".order-number:text-is('{orden}')"))
         if fila.count() == 0:
-            return None
+            return False
 
         fila.first.get_by_text("Ver detalle").click()
         try:
@@ -334,19 +334,84 @@ class ShalomPro:
         except Exception:
             print(f"[{orden}] no abrió el panel de detalle. "
                   f"Estructura: {self.estructura(30)}")
-            return None
+            return False
+        return True
 
-        datos = _parsear_drawer(page.evaluate(_LEER_DRAWER_JS))
-
-        # Cerrar el panel para que el siguiente detalle abra limpio.
-        # (Escape no lo cierra: hay que pulsar el botón.)
+    def _cerrar_detalle(self):
+        """Escape no cierra el panel: hay que pulsar el botón."""
         try:
-            page.locator(".drawer__close-btn").first.click()
-            page.wait_for_selector(".drawer__content", state="detached", timeout=5000)
+            self.page.locator(".drawer__close-btn").first.click()
+            self.page.wait_for_selector(
+                ".drawer__content", state="detached", timeout=5000)
         except Exception:
             pass
 
+    def detalle(self, orden):
+        """Datos completos de un envío, incluido el celular del destinatario.
+
+        Ojo: el resultado trae datos personales. No escribirlo a disco ni a logs.
+        """
+        if not self._abrir_detalle(orden):
+            return None
+        datos = _parsear_drawer(self.page.evaluate(_LEER_DRAWER_JS))
+        self._cerrar_detalle()
         return datos
+
+    def ticket_pdf(self, orden):
+        """Bytes del ticket en PDF, o None si no se pudo.
+
+        El portal no publica una URL fija del ticket: al pulsar "Descargar Ticket
+        Shalom" pide un token (POST /ticket-pdf/token) y carga el PDF en un
+        iframe con ese token dentro de la URL. En vez de reconstruir esa firma,
+        dejamos que la propia página haga el trámite y le tomamos prestada la URL
+        del iframe, que es del mismo origen (el de reCAPTCHA es de google.com).
+        """
+        page = self.page
+        if not self._abrir_detalle(orden):
+            return None
+
+        try:
+            boton = page.get_by_role(
+                "button", name=re.compile("Descargar Ticket", re.I))
+            if boton.count() == 0:
+                print(f"[{orden}] no hay botón de ticket en el panel.")
+                return None
+            boton.first.click()
+
+            src = None
+            for _ in range(30):
+                page.wait_for_timeout(500)
+                src = page.evaluate(
+                    """() => {
+                         const f = [...document.querySelectorAll('iframe')].find(x => {
+                           if (!x.src) return false;
+                           try { return new URL(x.src).origin === location.origin; }
+                           catch (e) { return false; }
+                         });
+                         return f ? f.src : null;
+                       }"""
+                )
+                if src:
+                    break
+            if not src:
+                print(f"[{orden}] el ticket no llegó a generarse.")
+                return None
+
+            # request del contexto = mismas cookies de sesión que la página.
+            resp = self.context.request.get(src, timeout=30000)
+            if not resp.ok:
+                print(f"[{orden}] el ticket respondió {resp.status}.")
+                return None
+            datos = resp.body()
+            if not datos.startswith(b"%PDF"):
+                print(f"[{orden}] lo devuelto no es un PDF ({len(datos)} bytes).")
+                return None
+            return datos
+        except Exception as e:
+            print(f"[{orden}] fallo al obtener el ticket: {type(e).__name__}")
+            return None
+        finally:
+            self._cerrar_detalle()
 
 
 if __name__ == "__main__":

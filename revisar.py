@@ -92,11 +92,51 @@ def nuevo_registro(envio):
         "estado": envio["estado"],
         "fecha_envio": envio.get("fecha", ""),
         "avisado": False,
+        "registro_avisado": False,
         "cerrado": False,
         "demora_avisada": False,
         "registrado": now().isoformat(),
         "last_checked": now().isoformat(),
     }
+
+
+def avisar_registro(pro, pedido):
+    """Al descubrir un envío nuevo: manda los datos de seguimiento + el ticket.
+
+    Es lo que el cliente pide nada más comprar, y sustituye a la foto de la
+    boleta. Si el ticket falla, el mensaje se manda igual: los datos de
+    seguimiento valen por sí solos y no se pierde el aviso por un PDF.
+    """
+    d = pro.detalle(pedido["orden"])
+    if not d:
+        print(f"[{pedido['orden']}] registrado, pero sin detalle todavía; "
+              f"se reintenta en la próxima corrida.")
+        return False
+
+    texto = mensajes.mensaje_registro(
+        d.get("destinatario", ""), d.get("orden") or pedido["orden"],
+        d.get("codigo") or pedido.get("codigo", ""),
+        d.get("destino", ""), d.get("destino_ubigeo", ""))
+    link = mensajes.wa_link(d.get("telefono", ""), texto)
+
+    tg.send_message(
+        f"📦 <b>Pedido registrado</b>\n\n"
+        f"Cliente: <b>{d.get('destinatario') or '—'}</b>\n"
+        f"Pedido: {pedido['orden']} · cód. {d.get('codigo') or '—'}\n"
+        f"Destino: {mensajes.agencia(d.get('destino',''), d.get('destino_ubigeo',''))}\n\n"
+        f"Mensaje: <i>{texto}</i>\n\n"
+        f"⚠️ Completa la clave antes de enviarlo.\n"
+        f"👉 Toca para enviarle por WhatsApp:\n{link}"
+    )
+
+    pdf = pro.ticket_pdf(pedido["orden"])
+    if pdf:
+        tg.send_document(pdf, f"ticket-{pedido['orden']}.pdf",
+                         caption="🎫 Ticket Shalom — reenvíaselo si te lo pide.")
+        print(f"[{pedido['orden']}] aviso de registro + ticket enviados.")
+    else:
+        print(f"[{pedido['orden']}] aviso de registro enviado (sin ticket).")
+    return True
 
 
 def avisar_llegada(pro, pedido, estado):
@@ -179,7 +219,30 @@ def cerrar_desaparecidos(orders, vistos):
         print(f"Cerrados {cerrados} pedido(s) que ya no están en seguimiento.")
 
 
+def probar_ticket(orden):
+    """Manda a Telegram el aviso de registro de un pedido concreto, sin tocar
+    nada del estado. Sirve para comprobar que el ticket se descarga bien sin
+    tener que esperar al siguiente envío real."""
+    print(f"Prueba de ticket para el pedido {orden}...")
+    with ShalomPro(headless=True) as pro:
+        activos = pro.listar()
+        if orden not in {e["orden"] for e in activos}:
+            print(f"El pedido {orden} no está en seguimiento. Activos: "
+                  f"{[e['orden'] for e in activos]}")
+            return 1
+        ok = avisar_registro(pro, {"orden": orden, "codigo": ""})
+    print("Listo." if ok else "No se pudo completar la prueba.")
+    return 0 if ok else 1
+
+
 def main():
+    if "--probar-ticket" in sys.argv:
+        i = sys.argv.index("--probar-ticket")
+        if i + 1 >= len(sys.argv):
+            print("Falta el número de pedido: --probar-ticket 90455950")
+            return 1
+        return probar_ticket(sys.argv[i + 1])
+
     sin_avisos = "--sin-avisos" in sys.argv
 
     orders = storage.load_orders()
@@ -200,6 +263,11 @@ def main():
                 pedido = nuevo_registro(envio)
                 orders.append(pedido)
                 print(f"[{pedido['orden']}] nuevo, estado '{pedido['estado']}'.")
+                if not sin_avisos and pedido["estado"] not in AVISAR_EN:
+                    # Si ya llegó, no tiene sentido mandar "va en camino":
+                    # el aviso de llegada de abajo lo cubre.
+                    if avisar_registro(pro, pedido):
+                        pedido["registro_avisado"] = True
             else:
                 anterior = pedido.get("estado")
                 if anterior != envio["estado"]:
@@ -216,6 +284,15 @@ def main():
                 continue
 
             estado = pedido["estado"]
+
+            # Reintento si el aviso de registro falló (sin detalle, ticket caído).
+            # Ojo al `is False`: los pedidos de antes de esta función no tienen
+            # el campo, y a esos NO hay que avisarles — el cliente ya sabe de
+            # ellos y recibiría un "va en camino" con semanas de retraso.
+            if pedido.get("registro_avisado") is False and estado not in AVISAR_EN:
+                if avisar_registro(pro, pedido):
+                    pedido["registro_avisado"] = True
+
             if estado in AVISAR_EN and not pedido.get("avisado"):
                 if avisar_llegada(pro, pedido, estado):
                     pedido["avisado"] = True
@@ -233,4 +310,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

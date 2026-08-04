@@ -24,6 +24,24 @@ def get_updates(offset=0, timeout=0):
         return []
 
 
+def send_document(contenido, nombre, caption="", chat_id=None):
+    """Manda un archivo en memoria (el ticket PDF) al chat privado."""
+    chat_id = chat_id or CHAT_ID
+    if not TOKEN or not chat_id or not contenido:
+        return None
+    try:
+        r = requests.post(
+            f"{API}/sendDocument",
+            data={"chat_id": chat_id, "caption": caption, "parse_mode": "HTML"},
+            files={"document": (nombre, contenido, "application/pdf")},
+            timeout=60,
+        )
+        return r.json()
+    except Exception as e:
+        print("Error send_document:", e)
+        return None
+
+
 def send_message(text, chat_id=None, disable_preview=True):
     """Envía un mensaje al dueño del bot (o a un chat concreto)."""
     chat_id = chat_id or CHAT_ID
