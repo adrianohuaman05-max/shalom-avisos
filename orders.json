@@ -105,7 +105,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-08-01T17:32:29.982864+00:00",
-    "last_checked": "2026-08-04T19:43:24.860925+00:00",
+    "last_checked": "2026-08-04T21:16:22.830222+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -116,7 +116,7 @@
     "estado": "En tránsito",
     "avisado": false,
     "registrado": "2026-08-01T17:32:30.562576+00:00",
-    "last_checked": "2026-08-04T19:43:24.860937+00:00",
+    "last_checked": "2026-08-04T21:16:22.830228+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -127,7 +127,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-08-01T17:32:31.172759+00:00",
-    "last_checked": "2026-08-04T19:43:24.860963+00:00",
+    "last_checked": "2026-08-04T21:16:22.830247+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -141,18 +141,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T00:08:14.275081+00:00",
-    "last_checked": "2026-08-04T19:43:24.766407+00:00"
+    "last_checked": "2026-08-04T21:16:22.830188+00:00"
   },
   {
     "orden": "90676127",
     "codigo": "7J9M",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "04-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T17:56:28.697701+00:00",
-    "last_checked": "2026-08-04T19:43:24.766386+00:00"
+    "last_checked": "2026-08-04T21:16:22.823357+00:00"
   }
 ]
