@@ -19,9 +19,9 @@ def wa_link(telefono, texto):
 
 
 def nombre_corto(destinatario):
-    """'Ramirez Soto Ana Lucia' -> 'Lucia'. El portal a veces pone el
-    apellido primero y a veces solo el nombre, así que esto es aproximado; por
-    eso el mensaje se revisa antes de enviarlo."""
+    """'Ramirez Soto Ana Lucia' -> 'Lucia'. El portal a veces pone el apellido
+    primero y a veces solo el nombre, así que esto es aproximado; por eso el
+    mensaje se revisa antes de enviarlo."""
     partes = (destinatario or "").split()
     return partes[-1].capitalize() if len(partes) >= 3 else (
         partes[0].capitalize() if partes else "")

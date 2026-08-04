@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Prueba del camino del aviso: parseo del panel -> mensaje -> link de WhatsApp.
 
@@ -7,8 +7,9 @@ ejecuta cuando un pedido llega a destino. No necesita credenciales ni red.
 
     python test_avisos.py
 
-El texto del panel viene tal cual del portal (capturado del DOM real), con el
-celular cambiado por uno inventado: no metemos el de un cliente en un test.
+La ESTRUCTURA del panel es la del portal real (capturada del DOM), pero los
+datos del destinatario —nombre, DNI, celular y número de orden— son inventados:
+en un test no entran datos de clientes.
 """
 import datetime as dt
 import sys
