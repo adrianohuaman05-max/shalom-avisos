@@ -105,7 +105,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-08-01T17:32:29.982864+00:00",
-    "last_checked": "2026-08-05T14:56:27.084859+00:00",
+    "last_checked": "2026-08-05T16:46:13.121312+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -116,7 +116,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-08-01T17:32:30.562576+00:00",
-    "last_checked": "2026-08-05T14:56:27.084866+00:00",
+    "last_checked": "2026-08-05T16:46:13.121318+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -127,7 +127,7 @@
     "estado": "En destino",
     "avisado": true,
     "registrado": "2026-08-01T17:32:31.172759+00:00",
-    "last_checked": "2026-08-05T14:56:27.617652+00:00",
+    "last_checked": "2026-08-05T16:46:13.121323+00:00",
     "demora_avisada": false,
     "fecha_envio": "01-08-2026",
     "cerrado": false
@@ -141,7 +141,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T00:08:14.275081+00:00",
-    "last_checked": "2026-08-05T14:56:27.084822+00:00"
+    "last_checked": "2026-08-05T16:46:13.121278+00:00"
   },
   {
     "orden": "90676127",
@@ -153,6 +153,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T17:56:28.697701+00:00",
-    "last_checked": "2026-08-05T14:56:27.076708+00:00"
+    "last_checked": "2026-08-05T16:46:13.104142+00:00"
+  },
+  {
+    "orden": "90819287",
+    "codigo": "H3N3",
+    "estado": "En origen",
+    "fecha_envio": "05-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-05T16:46:09.027630+00:00",
+    "last_checked": "2026-08-05T16:46:09.027647+00:00"
   }
 ]
