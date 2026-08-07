@@ -153,16 +153,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T17:56:28.697701+00:00",
-    "last_checked": "2026-08-07T22:40:23.331800+00:00"
+    "last_checked": "2026-08-07T23:37:09.952760+00:00"
   },
   {
     "orden": "90819287",
     "codigo": "H3N3",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "05-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-05T16:46:09.027630+00:00",
     "last_checked": "2026-08-07T22:40:23.331779+00:00"
@@ -177,7 +177,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-06T22:34:23.014928+00:00",
-    "last_checked": "2026-08-07T22:40:22.798681+00:00"
+    "last_checked": "2026-08-07T23:37:09.952741+00:00"
   },
   {
     "orden": "91031465",
