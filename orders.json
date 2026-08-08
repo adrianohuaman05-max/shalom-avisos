@@ -153,7 +153,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-04T17:56:28.697701+00:00",
-    "last_checked": "2026-08-08T15:34:00.922464+00:00"
+    "last_checked": "2026-08-08T16:38:22.364468+00:00"
   },
   {
     "orden": "90819287",
@@ -194,37 +194,37 @@
   {
     "orden": "91187294",
     "codigo": "973H",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "07-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:05.683836+00:00",
-    "last_checked": "2026-08-08T15:34:00.922434+00:00"
+    "last_checked": "2026-08-08T16:38:22.348838+00:00"
   },
   {
     "orden": "91186788",
     "codigo": "9TJJ",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "07-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:10.040150+00:00",
-    "last_checked": "2026-08-08T15:34:00.922453+00:00"
+    "last_checked": "2026-08-08T16:38:22.364406+00:00"
   },
   {
     "orden": "91187655",
     "codigo": "CHH9",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "07-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:13.422774+00:00",
-    "last_checked": "2026-08-08T15:34:00.922459+00:00"
+    "last_checked": "2026-08-08T16:38:22.364447+00:00"
   }
 ]
