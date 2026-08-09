@@ -146,11 +146,11 @@
   {
     "orden": "90676127",
     "codigo": "7J9M",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "04-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-04T17:56:28.697701+00:00",
     "last_checked": "2026-08-08T23:33:10.036684+00:00"
@@ -201,7 +201,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:05.683836+00:00",
-    "last_checked": "2026-08-08T23:33:10.005552+00:00"
+    "last_checked": "2026-08-09T02:00:24.696179+00:00"
   },
   {
     "orden": "91186788",
@@ -213,7 +213,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:10.040150+00:00",
-    "last_checked": "2026-08-08T23:33:10.036626+00:00"
+    "last_checked": "2026-08-09T02:00:24.702777+00:00"
   },
   {
     "orden": "91187655",
@@ -225,6 +225,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:13.422774+00:00",
-    "last_checked": "2026-08-08T23:33:10.036662+00:00"
+    "last_checked": "2026-08-09T02:00:24.702810+00:00"
   }
 ]
