@@ -206,14 +206,14 @@
   {
     "orden": "91186788",
     "codigo": "9TJJ",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "07-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:10.040150+00:00",
-    "last_checked": "2026-08-11T15:03:36.094637+00:00"
+    "last_checked": "2026-08-11T16:25:18.387405+00:00"
   },
   {
     "orden": "91187655",
