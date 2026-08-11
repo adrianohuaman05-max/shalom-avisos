@@ -213,16 +213,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:10.040150+00:00",
-    "last_checked": "2026-08-11T13:56:11.959190+00:00"
+    "last_checked": "2026-08-11T15:03:36.094637+00:00"
   },
   {
     "orden": "91187655",
     "codigo": "CHH9",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "07-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-08T01:53:13.422774+00:00",
     "last_checked": "2026-08-11T13:56:11.968138+00:00"
