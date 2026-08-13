@@ -230,61 +230,61 @@
   {
     "orden": "91793104",
     "codigo": "CDKW",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-13T15:07:30.035489+00:00"
+    "last_checked": "2026-08-13T16:26:02.708930+00:00"
   },
   {
     "orden": "91795567",
     "codigo": "9HMK",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:33.299943+00:00",
-    "last_checked": "2026-08-13T15:07:33.299959+00:00"
+    "last_checked": "2026-08-13T16:26:02.727266+00:00"
   },
   {
     "orden": "91796816",
     "codigo": "W9JD",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-13T15:07:36.842761+00:00"
+    "last_checked": "2026-08-13T16:26:02.727309+00:00"
   },
   {
     "orden": "91793794",
     "codigo": "HJWK",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-13T15:07:40.380421+00:00"
+    "last_checked": "2026-08-13T16:26:02.727353+00:00"
   },
   {
     "orden": "91794508",
     "codigo": "TJJN",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:43.861476+00:00",
-    "last_checked": "2026-08-13T15:07:43.861492+00:00"
+    "last_checked": "2026-08-13T16:26:02.727380+00:00"
   }
 ]
