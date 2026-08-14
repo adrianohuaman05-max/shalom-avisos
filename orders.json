@@ -237,7 +237,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-14T16:58:15.185847+00:00"
+    "last_checked": "2026-08-14T17:58:07.034876+00:00"
   },
   {
     "orden": "91795567",
@@ -249,7 +249,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:33.299943+00:00",
-    "last_checked": "2026-08-14T16:58:15.218936+00:00"
+    "last_checked": "2026-08-14T17:58:07.094244+00:00"
   },
   {
     "orden": "91796816",
@@ -261,7 +261,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-14T16:58:15.817550+00:00"
+    "last_checked": "2026-08-14T17:58:07.094259+00:00"
   },
   {
     "orden": "91793794",
@@ -273,18 +273,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-14T16:58:15.817634+00:00"
+    "last_checked": "2026-08-14T17:58:07.094290+00:00"
   },
   {
     "orden": "91794508",
     "codigo": "TJJN",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:43.861476+00:00",
-    "last_checked": "2026-08-14T16:58:15.817656+00:00"
+    "last_checked": "2026-08-14T17:58:07.094316+00:00"
   }
 ]
