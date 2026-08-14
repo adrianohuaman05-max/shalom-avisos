@@ -237,7 +237,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-14T19:05:48.218706+00:00"
+    "last_checked": "2026-08-14T20:04:41.454597+00:00"
   },
   {
     "orden": "91795567",
@@ -249,19 +249,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:33.299943+00:00",
-    "last_checked": "2026-08-14T19:05:48.257947+00:00"
+    "last_checked": "2026-08-14T20:04:41.545333+00:00"
   },
   {
     "orden": "91796816",
     "codigo": "W9JD",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-14T19:05:48.257962+00:00"
+    "last_checked": "2026-08-14T20:04:41.545347+00:00"
   },
   {
     "orden": "91793794",
@@ -273,7 +273,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-14T19:05:48.258000+00:00"
+    "last_checked": "2026-08-14T20:04:42.142924+00:00"
   },
   {
     "orden": "91794508",
@@ -285,7 +285,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:43.861476+00:00",
-    "last_checked": "2026-08-14T19:05:48.258027+00:00"
+    "last_checked": "2026-08-14T20:04:42.143002+00:00"
   },
   {
     "orden": "91981322",
@@ -297,6 +297,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-14T19:05:43.814167+00:00"
+    "last_checked": "2026-08-14T20:04:41.454577+00:00"
   }
 ]
