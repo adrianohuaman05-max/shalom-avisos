@@ -237,7 +237,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-14T22:27:18.844318+00:00"
+    "last_checked": "2026-08-15T04:35:40.978786+00:00"
   },
   {
     "orden": "91795567",
@@ -261,7 +261,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-14T22:27:18.858651+00:00"
+    "last_checked": "2026-08-15T04:35:40.978820+00:00"
   },
   {
     "orden": "91793794",
@@ -273,16 +273,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-14T22:27:18.858662+00:00"
+    "last_checked": "2026-08-15T04:35:40.978827+00:00"
   },
   {
     "orden": "91794508",
     "codigo": "TJJN",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "13-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:43.861476+00:00",
     "last_checked": "2026-08-14T22:27:18.858696+00:00"
@@ -290,13 +290,25 @@
   {
     "orden": "91981322",
     "codigo": "W3KW",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "14-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-14T22:27:18.844296+00:00"
+    "last_checked": "2026-08-15T04:35:40.971830+00:00"
+  },
+  {
+    "orden": "92066863",
+    "codigo": "D3JJ",
+    "estado": "En origen",
+    "fecha_envio": "14-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-15T04:35:37.617445+00:00",
+    "last_checked": "2026-08-15T04:35:37.617459+00:00"
   }
 ]
