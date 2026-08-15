@@ -237,7 +237,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-15T14:26:43.582866+00:00"
+    "last_checked": "2026-08-15T14:50:52.912603+00:00"
   },
   {
     "orden": "91795567",
@@ -261,19 +261,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-15T14:26:43.582905+00:00"
+    "last_checked": "2026-08-15T14:50:52.912637+00:00"
   },
   {
     "orden": "91793794",
     "codigo": "HJWK",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-15T14:26:43.582913+00:00"
+    "last_checked": "2026-08-15T14:50:52.912647+00:00"
   },
   {
     "orden": "91794508",
@@ -297,7 +297,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-15T14:26:43.566291+00:00"
+    "last_checked": "2026-08-15T14:50:52.896208+00:00"
   },
   {
     "orden": "92066863",
@@ -309,6 +309,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-15T04:35:37.617445+00:00",
-    "last_checked": "2026-08-15T14:26:43.566264+00:00"
+    "last_checked": "2026-08-15T14:50:52.896186+00:00"
   }
 ]
