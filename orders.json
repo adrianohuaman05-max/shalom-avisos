@@ -230,14 +230,14 @@
   {
     "orden": "91793104",
     "codigo": "CDKW",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-16T19:24:02.338851+00:00"
+    "last_checked": "2026-08-16T19:46:02.122620+00:00"
   },
   {
     "orden": "91795567",
@@ -261,7 +261,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-16T19:24:02.338887+00:00"
+    "last_checked": "2026-08-16T19:46:02.831284+00:00"
   },
   {
     "orden": "91793794",
@@ -273,7 +273,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
-    "last_checked": "2026-08-16T19:24:02.338897+00:00"
+    "last_checked": "2026-08-16T19:46:02.831301+00:00"
   },
   {
     "orden": "91794508",
@@ -297,7 +297,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-16T19:24:02.338839+00:00"
+    "last_checked": "2026-08-16T19:46:02.122612+00:00"
   },
   {
     "orden": "92066863",
@@ -309,7 +309,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-15T04:35:37.617445+00:00",
-    "last_checked": "2026-08-16T19:24:02.323838+00:00"
+    "last_checked": "2026-08-16T19:46:02.117194+00:00"
   },
   {
     "orden": "92159941",
@@ -321,7 +321,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-15T22:49:59.536546+00:00",
-    "last_checked": "2026-08-16T19:24:02.338732+00:00"
+    "last_checked": "2026-08-16T19:46:02.122567+00:00"
   },
   {
     "orden": "92159481",
@@ -333,6 +333,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-15T22:50:03.091314+00:00",
-    "last_checked": "2026-08-16T19:24:02.338796+00:00"
+    "last_checked": "2026-08-16T19:46:02.122597+00:00"
   }
 ]
