@@ -244,17 +244,47 @@ class ShalomPro:
         except Exception:
             return []
 
-    def login(self):
+    def login(self, intentos=3):
+        """Entra al portal, reintentando: el login falla de vez en cuando.
+
+        Visto en produccion: dos corridas seguidas murieron con "no llego a
+        /home" y la pantalla capturada era el formulario limpio, sin mensaje de
+        error — o sea, credenciales bien y rechazo del lado del servidor.
+        """
         if not EMAIL or not PASSWORD:
             raise RuntimeError(
                 "Faltan SHALOM_EMAIL / SHALOM_PASSWORD en el entorno.")
 
+        for intento in range(1, intentos + 1):
+            try:
+                if self._intentar_login():
+                    if intento > 1:
+                        print(f"Login correcto al intento {intento}.")
+                    return
+            except Exception as e:
+                print(f"Login intento {intento}: {type(e).__name__}")
+            if intento < intentos:
+                self.page.wait_for_timeout(5000 * intento)
+
+        self.captura("login")
+        texto = ""
+        try:
+            texto = _limpiar(self.page.inner_text("body"))[:300]
+        except Exception:
+            pass
+        raise RuntimeError(
+            f"El login no llego a /home tras {intentos} intentos (url actual: "
+            f"{self.page.url}). Puede ser credenciales o que reCAPTCHA v3 haya "
+            f"dado score bajo desde esta IP. Texto en pantalla: {texto}")
+
+    def _intentar_login(self):
+        """Un intento. True si acabo dentro, False si se quedo en /login."""
         page = self.page
         page.goto(LOGIN_URL, wait_until="networkidle", timeout=60000)
 
-        # Ya podríamos venir logueados (sesión reutilizada): el portal redirige.
+        # Ya podriamos venir logueados (sesion reutilizada): el portal redirige.
         if "/login" not in page.url:
-            return
+            return True
 
         correo = page.locator(
             'input[type="email"], input[placeholder*="orreo" i]').first
@@ -263,24 +293,29 @@ class ShalomPro:
         correo.fill(EMAIL)
         clave.fill(PASSWORD)
 
-        # reCAPTCHA v3 (invisible, por score): el token lo genera el JS de la
-        # página sola. No hay nada que resolver, pero el servidor puede rechazar
-        # el intento si el score es bajo — por eso el chequeo de abajo.
-        page.get_by_role("button", name=re.compile("Iniciar sesión", re.I)).first.click()
+        # reCAPTCHA v3 (invisible, por score) genera su token de forma asincrona
+        # al cargar la pagina. Si se pulsa antes de que este listo, el servidor
+        # rechaza el intento y nos quedamos en /login sin ningun mensaje: esa es
+        # la causa mas probable de los fallos intermitentes.
+        try:
+            page.wait_for_function(
+                "() => window.grecaptcha && "
+                "typeof window.grecaptcha.execute === 'function'",
+                timeout=15000,
+            )
+        except Exception:
+            pass  # si no aparece, se intenta igual: peor es no intentarlo
+        page.wait_for_timeout(1500)
+
+        page.get_by_role(
+            "button", name=re.compile("Iniciar sesion|Iniciar sesión", re.I)
+        ).first.click()
 
         try:
             page.wait_for_url(re.compile(r"/home"), timeout=45000)
+            return True
         except Exception:
-            self.captura("login")
-            texto = ""
-            try:
-                texto = _limpiar(page.inner_text("body"))[:300]
-            except Exception:
-                pass
-            raise RuntimeError(
-                f"El login no llegó a /home (url actual: {page.url}). "
-                f"Puede ser credenciales o que reCAPTCHA v3 haya dado score bajo "
-                f"desde esta IP. Texto en pantalla: {texto}")
+            return False
 
     def listar(self):
         """Envíos activos, SIN datos personales (seguro para logs y disco)."""

@@ -235,7 +235,7 @@ def probar_ticket(orden):
     return 0 if ok else 1
 
 
-def main():
+def _revisar():
     if "--probar-ticket" in sys.argv:
         i = sys.argv.index("--probar-ticket")
         if i + 1 >= len(sys.argv):
@@ -307,6 +307,45 @@ def main():
     if sin_avisos:
         print("Modo --sin-avisos: estados sincronizados, no se avisó a nadie.")
     print("Listo.")
+
+
+HORAS_ENTRE_AVISOS_DE_FALLO = 6
+
+
+def avisar_fallo(state, err):
+    """Avisa por Telegram si la corrida revienta.
+
+    Sin esto, una caida solo se ve entrando a GitHub a mirar los workflows, y
+    lo normal es enterarse dias despues. Se limita a un aviso cada
+    HORAS_ENTRE_AVISOS_DE_FALLO para que un fallo persistente (Shalom caido,
+    cuenta bloqueada) no llene el chat: seguiria fallando cada 2 horas.
+    """
+    ultimo = horas_desde(state.get("ultimo_fallo_avisado"))
+    if ultimo is not None and ultimo < HORAS_ENTRE_AVISOS_DE_FALLO:
+        print("Fallo no avisado por Telegram: ya se aviso hace poco.")
+        return
+    tg.send_message(
+        "⚠️ <b>El bot no pudo revisar los pedidos</b>\n\n"
+        f"<code>{str(err)[:400]}</code>\n\n"
+        "Reintenta solo en la próxima corrida. Si se repite varias veces, "
+        "revisa que la cuenta de ShalomPRO siga entrando bien."
+    )
+    state["ultimo_fallo_avisado"] = now().isoformat()
+
+
+def main():
+    try:
+        return _revisar()
+    except Exception as err:
+        # El estado no se guardo (el fallo corto antes), asi que se recarga solo
+        # para anotar el aviso y no perder lo que ya hubiera en disco.
+        try:
+            state = storage.load_state()
+            avisar_fallo(state, err)
+            storage.save_state(state)
+        except Exception as e2:
+            print("Ademas fallo el aviso de fallo:", type(e2).__name__)
+        raise
 
 
 if __name__ == "__main__":
