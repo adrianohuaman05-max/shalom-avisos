@@ -235,7 +235,41 @@ def probar_ticket(orden):
     return 0 if ok else 1
 
 
+def reavisar(ordenes):
+    """Reenvia el aviso de llegada de pedidos concretos, sin tocar el estado.
+
+    Util cuando ya se avisaron pero hace falta el mensaje otra vez (se perdio el
+    chat, el cliente lo pide de nuevo). Lee el estado real del portal, asi que
+    manda el mensaje que corresponda a como este el pedido ahora.
+    """
+    print(f"Reenviando aviso de: {', '.join(ordenes)}")
+    enviados = 0
+    with ShalomPro(headless=True) as pro:
+        activos = {e["orden"]: e for e in pro.listar()}
+        for orden in ordenes:
+            envio = activos.get(orden)
+            if not envio:
+                print(f"[{orden}] no esta en seguimiento; se omite.")
+                continue
+            if envio["estado"] not in AVISAR_EN:
+                print(f"[{orden}] esta '{envio['estado']}', todavia no ha llegado; "
+                      f"se omite.")
+                continue
+            if avisar_llegada(pro, {"orden": orden}, envio["estado"]):
+                enviados += 1
+    print(f"Reenviados {enviados} de {len(ordenes)}.")
+    return 0 if enviados else 1
+
+
 def _revisar():
+    if "--reavisar" in sys.argv:
+        i = sys.argv.index("--reavisar")
+        if i + 1 >= len(sys.argv):
+            print("Falta la lista de pedidos: --reavisar 123,456")
+            return 1
+        ordenes = [o.strip() for o in sys.argv[i + 1].split(",") if o.strip()]
+        return reavisar(ordenes)
+
     if "--probar-ticket" in sys.argv:
         i = sys.argv.index("--probar-ticket")
         if i + 1 >= len(sys.argv):

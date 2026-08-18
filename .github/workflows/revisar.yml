@@ -14,6 +14,10 @@ on:
         description: "N de pedido para probar el envio del ticket (deja vacio para una corrida normal)"
         type: string
         default: ""
+      reavisar:
+        description: "Reenviar el aviso de llegada de estos pedidos, separados por coma"
+        type: string
+        default: ""
 
 permissions:
   contents: write          # para guardar orders.json / state.json
@@ -46,7 +50,9 @@ jobs:
           SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
           SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
         run: |
-          if [ -n "${{ inputs.probar_ticket }}" ]; then
+          if [ -n "${{ inputs.reavisar }}" ]; then
+            python revisar.py --reavisar "${{ inputs.reavisar }}"
+          elif [ -n "${{ inputs.probar_ticket }}" ]; then
             python revisar.py --probar-ticket "${{ inputs.probar_ticket }}"
           else
             python revisar.py ${{ inputs.sin_avisos && '--sin-avisos' || '' }}
