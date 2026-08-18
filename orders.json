@@ -230,11 +230,11 @@
   {
     "orden": "91793104",
     "codigo": "CDKW",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "13-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
     "last_checked": "2026-08-18T16:36:32.330428+00:00"
@@ -261,7 +261,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-18T16:36:32.330433+00:00"
+    "last_checked": "2026-08-18T23:31:18.554040+00:00"
   },
   {
     "orden": "91793794",
@@ -297,7 +297,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-18T16:36:32.330406+00:00"
+    "last_checked": "2026-08-18T23:31:18.554020+00:00"
   },
   {
     "orden": "92066863",
