@@ -237,7 +237,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:30.035472+00:00",
-    "last_checked": "2026-08-17T08:08:24.344723+00:00"
+    "last_checked": "2026-08-18T06:50:19.744627+00:00"
   },
   {
     "orden": "91795567",
@@ -261,16 +261,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-17T08:08:24.344728+00:00"
+    "last_checked": "2026-08-18T06:50:19.744631+00:00"
   },
   {
     "orden": "91793794",
     "codigo": "HJWK",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "13-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:40.380406+00:00",
     "last_checked": "2026-08-17T08:08:24.344733+00:00"
@@ -297,16 +297,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-17T08:08:24.344715+00:00"
+    "last_checked": "2026-08-18T06:50:19.744609+00:00"
   },
   {
     "orden": "92066863",
     "codigo": "D3JJ",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "14-08-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-15T04:35:37.617445+00:00",
     "last_checked": "2026-08-17T08:08:24.329414+00:00"
@@ -314,11 +314,11 @@
   {
     "orden": "92159941",
     "codigo": "MDD9",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "15-08-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-15T22:49:59.536546+00:00",
     "last_checked": "2026-08-17T08:08:24.344631+00:00"
@@ -326,11 +326,11 @@
   {
     "orden": "92159481",
     "codigo": "3KPN",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "15-08-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-15T22:50:03.091314+00:00",
     "last_checked": "2026-08-17T08:08:24.344667+00:00"
