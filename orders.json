@@ -261,7 +261,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-13T15:07:36.842745+00:00",
-    "last_checked": "2026-08-18T23:49:36.390685+00:00"
+    "last_checked": "2026-08-19T01:26:03.363978+00:00"
   },
   {
     "orden": "91793794",
@@ -297,7 +297,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-18T23:49:36.390665+00:00"
+    "last_checked": "2026-08-19T01:26:03.363924+00:00"
   },
   {
     "orden": "92066863",
@@ -334,5 +334,29 @@
     "demora_avisada": false,
     "registrado": "2026-08-15T22:50:03.091314+00:00",
     "last_checked": "2026-08-17T08:08:24.344667+00:00"
+  },
+  {
+    "orden": "92483816",
+    "codigo": "DD9K",
+    "estado": "En tránsito",
+    "fecha_envio": "18-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-19T01:25:57.263731+00:00",
+    "last_checked": "2026-08-19T01:25:57.263747+00:00"
+  },
+  {
+    "orden": "92395439",
+    "codigo": "HDPP",
+    "estado": "En tránsito",
+    "fecha_envio": "18-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-19T01:26:00.437894+00:00",
+    "last_checked": "2026-08-19T01:26:00.437904+00:00"
   }
 ]
