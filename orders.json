@@ -290,11 +290,11 @@
   {
     "orden": "91981322",
     "codigo": "W3KW",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "14-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
     "last_checked": "2026-08-20T20:32:45.766934+00:00"
@@ -345,7 +345,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T01:25:57.263731+00:00",
-    "last_checked": "2026-08-20T20:32:45.766928+00:00"
+    "last_checked": "2026-08-20T21:32:03.239635+00:00"
   },
   {
     "orden": "92395439",
@@ -369,7 +369,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
-    "last_checked": "2026-08-20T20:32:45.747339+00:00"
+    "last_checked": "2026-08-20T21:32:03.173041+00:00"
   },
   {
     "orden": "92519100",
@@ -381,7 +381,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:41.808592+00:00",
-    "last_checked": "2026-08-20T20:32:45.766916+00:00"
+    "last_checked": "2026-08-20T21:32:03.239622+00:00"
   },
   {
     "orden": "92674532",
@@ -393,7 +393,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-20T20:32:45.747309+00:00"
+    "last_checked": "2026-08-20T21:32:03.173008+00:00"
   },
   {
     "orden": "92674365",
@@ -405,6 +405,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:42.131743+00:00",
-    "last_checked": "2026-08-20T20:32:45.747332+00:00"
+    "last_checked": "2026-08-20T21:32:03.173033+00:00"
   }
 ]
