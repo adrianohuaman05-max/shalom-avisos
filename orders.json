@@ -345,7 +345,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T01:25:57.263731+00:00",
-    "last_checked": "2026-08-20T22:31:34.863634+00:00"
+    "last_checked": "2026-08-20T23:28:47.517783+00:00"
   },
   {
     "orden": "92395439",
@@ -369,16 +369,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
-    "last_checked": "2026-08-20T22:31:34.844640+00:00"
+    "last_checked": "2026-08-20T23:28:47.499507+00:00"
   },
   {
     "orden": "92519100",
     "codigo": "TTHT",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "19-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:41.808592+00:00",
     "last_checked": "2026-08-20T22:31:34.863621+00:00"
@@ -393,7 +393,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-20T22:31:34.844605+00:00"
+    "last_checked": "2026-08-20T23:28:47.499463+00:00"
   },
   {
     "orden": "92674365",
@@ -405,6 +405,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:42.131743+00:00",
-    "last_checked": "2026-08-20T22:31:34.844632+00:00"
+    "last_checked": "2026-08-20T23:28:47.499496+00:00"
   }
 ]
