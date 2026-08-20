@@ -297,7 +297,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-14T19:05:43.814154+00:00",
-    "last_checked": "2026-08-20T15:06:34.429947+00:00"
+    "last_checked": "2026-08-20T16:00:44.104347+00:00"
   },
   {
     "orden": "92066863",
@@ -338,14 +338,14 @@
   {
     "orden": "92483816",
     "codigo": "DD9K",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "18-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T01:25:57.263731+00:00",
-    "last_checked": "2026-08-20T15:06:34.429926+00:00"
+    "last_checked": "2026-08-20T16:00:43.536153+00:00"
   },
   {
     "orden": "92395439",
@@ -369,18 +369,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
-    "last_checked": "2026-08-20T15:06:34.413127+00:00"
+    "last_checked": "2026-08-20T16:00:42.817492+00:00"
   },
   {
     "orden": "92519100",
     "codigo": "TTHT",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "19-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:41.808592+00:00",
-    "last_checked": "2026-08-20T15:06:34.429889+00:00"
+    "last_checked": "2026-08-20T16:00:42.822299+00:00"
   }
 ]
