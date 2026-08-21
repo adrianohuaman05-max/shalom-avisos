@@ -362,6 +362,7 @@ def _revisar():
         cerrar_desaparecidos(orders, vistos)
         renovar_sesion_si_toca(pro, state)
 
+    registrar_resultado(state, ok=True)
     storage.save_orders(orders)
     storage.save_state(state)
     if sin_avisos:
@@ -370,6 +371,50 @@ def _revisar():
 
 
 HORAS_ENTRE_AVISOS_DE_FALLO = 6
+FALLOS_PARA_MANTENIMIENTO = 3   # ~6 h cayendo: ya no se va a arreglar solo
+CADA_CUANTOS_FALLOS_INSISTIR = 12
+
+
+def registrar_resultado(state, ok):
+    """Lleva la cuenta de fallos seguidos y avisa cuando toca mantenimiento.
+
+    Un fallo suelto se arregla solo en la siguiente corrida y no merece ruido.
+    Varios seguidos ya no: significa que algo cambio (el portal, las
+    credenciales, el reCAPTCHA) y hace falta meter mano. Ese caso merece un
+    aviso distinto y mas claro que el de un tropiezo puntual.
+    """
+    seguidos = int(state.get("fallos_seguidos", 0))
+
+    if ok:
+        if seguidos >= FALLOS_PARA_MANTENIMIENTO:
+            tg.send_message(
+                "✅ <b>El bot volvió a funcionar</b>\n\n"
+                f"Se había caído {seguidos} corridas seguidas y ya entró bien. "
+                "No hay que hacer nada."
+            )
+            print(f"Recuperado tras {seguidos} fallos seguidos.")
+        state["fallos_seguidos"] = 0
+        return
+
+    seguidos += 1
+    state["fallos_seguidos"] = seguidos
+
+    toca = (seguidos == FALLOS_PARA_MANTENIMIENTO or
+            (seguidos > FALLOS_PARA_MANTENIMIENTO and
+             (seguidos - FALLOS_PARA_MANTENIMIENTO) % CADA_CUANTOS_FALLOS_INSISTIR == 0))
+    if not toca:
+        return
+
+    horas = seguidos * 2  # el cron sale cada ~2 h
+    tg.send_message(
+        "🔧 <b>El bot necesita mantenimiento</b>\n\n"
+        f"Llevo <b>{seguidos} corridas seguidas</b> sin poder entrar "
+        f"(unas {horas} horas).\n\n"
+        "Esto ya no se arregla solo. Los pedidos NO se pierden: en cuanto "
+        "vuelva a entrar se pone al día de todo.\n\n"
+        "Pásale este mensaje a Claude para que lo revise."
+    )
+    print(f"Aviso de mantenimiento enviado ({seguidos} fallos seguidos).")
 
 
 def avisar_fallo(state, err):
@@ -401,6 +446,7 @@ def main():
         # para anotar el aviso y no perder lo que ya hubiera en disco.
         try:
             state = storage.load_state()
+            registrar_resultado(state, ok=False)
             avisar_fallo(state, err)
             storage.save_state(state)
         except Exception as e2:
