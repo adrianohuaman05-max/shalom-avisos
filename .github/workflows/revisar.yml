@@ -49,6 +49,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
           SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
+          # Sesion ya iniciada: evita el login y con el su reCAPTCHA.
+          SHALOM_STORAGE_STATE: ${{ secrets.SHALOM_STORAGE_STATE }}
         run: |
           if [ -n "${{ inputs.reavisar }}" ]; then
             python revisar.py --reavisar "${{ inputs.reavisar }}"
@@ -58,7 +60,11 @@ jobs:
             python revisar.py ${{ inputs.sin_avisos && '--sin-avisos' || '' }}
           fi
 
+      # always(): si la revision falla, revisar.py deja anotado en state.json que
+      # ya aviso del fallo. Sin esto ese paso se salta, la marca no se guarda y
+      # el limite de "un aviso cada 6h" se reinicia en cada corrida fallida.
       - name: Guardar cambios de estado
+        if: always()
         run: |
           git config user.name "shalom-bot"
           git config user.email "bot@users.noreflect.github.com"

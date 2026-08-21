@@ -20,6 +20,7 @@ disco ni en los logs — el repo es público. Se leen en memoria y solo viajan a
 chat privado de Telegram. Por eso `listar()` no trae datos personales y hay que
 pedir el detalle explícitamente con `detalle()`.
 """
+import json
 import os
 import re
 
@@ -27,6 +28,12 @@ from playwright.sync_api import sync_playwright
 
 EMAIL = os.environ.get("SHALOM_EMAIL", "")
 PASSWORD = os.environ.get("SHALOM_PASSWORD", "")
+
+# Sesión ya iniciada (cookies), en JSON. Si está, el navegador arranca logueado
+# y no se toca el formulario: reCAPTCHA v3 puntúa por reputación de IP y desde
+# los runners de GitHub rechaza el login con "Verificación de seguridad
+# fallida". Se genera con guardar_sesion.py desde una máquina normal.
+STORAGE_STATE = os.environ.get("SHALOM_STORAGE_STATE", "")
 
 BASE = "https://pro.shalom.pe"
 LOGIN_URL = f"{BASE}/login"
@@ -174,6 +181,7 @@ class ShalomPro:
     def __init__(self, headless=True, debug_dir="."):
         self.headless = headless
         self.debug_dir = debug_dir
+        self.sesion_guardada = False
         self._p = None
         self.browser = None
         self.context = None
@@ -185,7 +193,7 @@ class ShalomPro:
             headless=self.headless,
             args=["--no-sandbox", "--disable-blink-features=AutomationControlled"],
         )
-        self.context = self.browser.new_context(
+        opciones = dict(
             locale="es-PE",
             timezone_id="America/Lima",
             accept_downloads=True,  # el ticket va con inline=0: puede bajar como descarga
@@ -195,6 +203,14 @@ class ShalomPro:
                 "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
             ),
         )
+        if STORAGE_STATE:
+            try:
+                opciones["storage_state"] = json.loads(STORAGE_STATE)
+                self.sesion_guardada = True
+            except Exception as e:
+                print("SHALOM_STORAGE_STATE no es JSON válido, se ignora:",
+                      type(e).__name__)
+        self.context = self.browser.new_context(**opciones)
         # El iframe del ticket llama print() al cargar, lo que abre el diálogo
         # nativo y congela el navegador. Se anula en todos los frames.
         self.context.add_init_script("window.print = () => {};")
@@ -251,9 +267,19 @@ class ShalomPro:
         /home" y la pantalla capturada era el formulario limpio, sin mensaje de
         error — o sea, credenciales bien y rechazo del lado del servidor.
         """
+        # Con sesion guardada normalmente no hace falta ni mirar el formulario.
+        if self.sesion_guardada:
+            self.page.goto(BASE + "/home", wait_until="networkidle", timeout=60000)
+            if "/login" not in self.page.url:
+                print("Sesion guardada valida: no hizo falta iniciar sesion.")
+                return
+            print("La sesion guardada caduco; se intenta con usuario y clave.")
+
         if not EMAIL or not PASSWORD:
             raise RuntimeError(
-                "Faltan SHALOM_EMAIL / SHALOM_PASSWORD en el entorno.")
+                "Faltan SHALOM_EMAIL / SHALOM_PASSWORD en el entorno"
+                + (" y la sesion guardada ya no vale." if self.sesion_guardada
+                   else "."))
 
         for intento in range(1, intentos + 1):
             try:
@@ -275,7 +301,7 @@ class ShalomPro:
         raise RuntimeError(
             f"El login no llego a /home tras {intentos} intentos (url actual: "
             f"{self.page.url}). Puede ser credenciales o que reCAPTCHA v3 haya "
-            f"dado score bajo desde esta IP. Texto en pantalla: {texto}")
+            f"dado score bajo desde esta IP (si ves 'Verificacion de seguridad fallida' es justo eso). Renueva la sesion con guardar_sesion.py y actualiza el secret SHALOM_STORAGE_STATE. Texto en pantalla: {texto}")
 
     def _intentar_login(self):
         """Un intento. True si acabo dentro, False si se quedo en /login."""
