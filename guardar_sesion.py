@@ -28,6 +28,13 @@ import json
 import os
 import sys
 
+# En esta maquina Chromium se instalo en D: para no llenar C:. Sin esta variable
+# Playwright lo busca en C: y falla con "Executable doesn't exist". Se apunta
+# sola para no tener que acordarse al lanzar el script.
+_NAVEGADORES = r"D:\Python\playwright-browsers"
+if not os.environ.get("PLAYWRIGHT_BROWSERS_PATH") and os.path.isdir(_NAVEGADORES):
+    os.environ["PLAYWRIGHT_BROWSERS_PATH"] = _NAVEGADORES
+
 from playwright.sync_api import sync_playwright
 
 BASE = "https://pro.shalom.pe"
