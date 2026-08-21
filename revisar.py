@@ -27,6 +27,7 @@ import datetime as dt
 import sys
 
 import mensajes
+import renovacion
 import storage
 import telegram_bot as tg
 from shalompro import ShalomPro
@@ -261,6 +262,30 @@ def reavisar(ordenes):
     return 0 if enviados else 1
 
 
+HORAS_ENTRE_RENOVACIONES = 12
+
+
+def renovar_sesion_si_toca(pro, state):
+    """Guarda las cookies frescas en el secret para que la sesion no caduque.
+
+    Se limita a una vez cada HORAS_ENTRE_RENOVACIONES: el portal rota la cookie
+    en cada visita, asi que sin limite se escribiria el secret ~12 veces al dia
+    sin ninguna ganancia.
+    """
+    if not renovacion.disponible():
+        return
+    desde = horas_desde(state.get("ultima_renovacion_sesion"))
+    if desde is not None and desde < HORAS_ENTRE_RENOVACIONES:
+        return
+    try:
+        estado = pro.context.storage_state()
+    except Exception as e:
+        print("No se pudo leer la sesion del navegador:", type(e).__name__)
+        return
+    if renovacion.guardar_sesion(estado):
+        state["ultima_renovacion_sesion"] = now().isoformat()
+
+
 def _revisar():
     if "--reavisar" in sys.argv:
         i = sys.argv.index("--reavisar")
@@ -335,6 +360,7 @@ def _revisar():
                     pedido["demora_avisada"] = True
 
         cerrar_desaparecidos(orders, vistos)
+        renovar_sesion_si_toca(pro, state)
 
     storage.save_orders(orders)
     storage.save_state(state)

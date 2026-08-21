@@ -51,6 +51,10 @@ jobs:
           SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
           # Sesion ya iniciada: evita el login y con el su reCAPTCHA.
           SHALOM_STORAGE_STATE: ${{ secrets.SHALOM_STORAGE_STATE }}
+          # Token de alcance fino (solo este repo, Secrets: write) para que
+          # el bot renueve su propia sesion y no caduque nunca.
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           if [ -n "${{ inputs.reavisar }}" ]; then
             python revisar.py --reavisar "${{ inputs.reavisar }}"
