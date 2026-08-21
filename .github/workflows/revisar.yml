@@ -73,12 +73,25 @@ jobs:
           git config user.name "shalom-bot"
           git config user.email "bot@users.noreflect.github.com"
           git add orders.json state.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Actualizar estado de pedidos [skip ci]"
-            git push
-          else
+          if git diff --cached --quiet; then
             echo "Sin cambios que guardar."
+            exit 0
           fi
+          git commit -m "Actualizar estado de pedidos [skip ci]"
+          # El remoto puede haber avanzado mientras esta corrida trabajaba (otra
+          # corrida, o un commit nuestro). Sin rebasar, el push se rechaza y se
+          # pierde el estado: entre otras cosas, el contador de fallos seguidos,
+          # que es justo lo que dispara el aviso de mantenimiento.
+          for intento in 1 2 3; do
+            if git pull --rebase --autostash origin main && git push origin main; then
+              echo "Estado guardado."
+              exit 0
+            fi
+            echo "Push rechazado; reintento $intento..."
+            sleep 5
+          done
+          echo "No se pudo guardar el estado tras 3 intentos."
+          exit 1
 
       - name: Guardar capturas de depuracion (si hubo error)
         if: always()
