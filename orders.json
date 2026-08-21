@@ -369,7 +369,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
-    "last_checked": "2026-08-20T23:53:24.052787+00:00"
+    "last_checked": "2026-08-21T01:35:30.832630+00:00"
   },
   {
     "orden": "92519100",
@@ -386,25 +386,25 @@
   {
     "orden": "92674532",
     "codigo": "PHNW",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "20-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-20T23:53:24.052761+00:00"
+    "last_checked": "2026-08-21T01:35:30.826072+00:00"
   },
   {
     "orden": "92674365",
     "codigo": "7MJM",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "20-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:42.131743+00:00",
-    "last_checked": "2026-08-20T23:53:24.052780+00:00"
+    "last_checked": "2026-08-21T01:35:30.832593+00:00"
   }
 ]
