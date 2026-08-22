@@ -25,6 +25,7 @@ Uso:
 """
 import datetime as dt
 import sys
+import time
 
 import mensajes
 import renovacion
@@ -37,6 +38,13 @@ AVISAR_EN = ("En destino", "En reparto")
 
 # Campos con datos personales que las versiones viejas guardaban en orders.json.
 CAMPOS_PERSONALES = ("cliente", "telefono", "destino")
+
+
+# El estado en curso, para que el manejador de fallos guarde ESTE y no una
+# copia recien leida del disco. Sin esto, un fallo despues de procesar_comandos
+# tiraba el avance de telegram_offset y el bot volvia a contestar los mismos
+# mensajes en cada corrida caida.
+_estado_en_curso = None
 
 
 def now():
@@ -263,25 +271,53 @@ def reavisar(ordenes):
 
 
 HORAS_ENTRE_RENOVACIONES = 12
+HORAS_MARGEN_CADUCIDAD = 3
+
+
+def horas_hasta_caducar(estado):
+    """Horas hasta que caduque la PRIMERA cookie de shalom, o None si ninguna
+    tiene fecha. Manda la mas corta: en cuanto una muere, la sesion se rompe."""
+    plazos = [c.get("expires") or 0 for c in (estado.get("cookies") or [])
+              if "shalom" in (c.get("domain") or "")]
+    plazos = [p for p in plazos if p > 0]
+    return (min(plazos) - time.time()) / 3600.0 if plazos else None
 
 
 def renovar_sesion_si_toca(pro, state):
     """Guarda las cookies frescas en el secret para que la sesion no caduque.
 
-    Se limita a una vez cada HORAS_ENTRE_RENOVACIONES: el portal rota la cookie
-    en cada visita, asi que sin limite se escribiria el secret ~12 veces al dia
-    sin ninguna ganancia.
+    El ritmo no puede ser un numero fijo. Shalom NO emite cookie de "Recuerdame"
+    aunque se marque la casilla (comprobado: solo manda enviashalom_session y
+    XSRF-TOKEN), asi que lo unico que sostiene la sesion es la cookie de sesion
+    de Laravel, que dura un par de horas. El navegador la recibe fresca en cada
+    visita, pero en el secret sigue la copia vieja: si se renovara solo cada 12 h
+    esa copia ya estaria caducada mucho antes, Playwright la descartaria al
+    cargarla y volveriamos al formulario. Por eso manda la caducidad real de las
+    cookies y no el reloj.
     """
     if not renovacion.disponible():
-        return
-    desde = horas_desde(state.get("ultima_renovacion_sesion"))
-    if desde is not None and desde < HORAS_ENTRE_RENOVACIONES:
+        print("Sin GH_SECRETS_TOKEN la sesión NO se renueva: cuando caduque la "
+              "cookie habrá que rehacerla a mano con guardar_sesion.py.")
         return
     try:
         estado = pro.context.storage_state()
     except Exception as e:
         print("No se pudo leer la sesion del navegador:", type(e).__name__)
         return
+
+    quedan = horas_hasta_caducar(estado)
+    desde = horas_desde(state.get("ultima_renovacion_sesion"))
+
+    if quedan is not None and quedan < HORAS_MARGEN_CADUCIDAD:
+        print(f"La sesión guardada caduca en {quedan:.1f} h: se renueva ya.")
+    elif pro.uso_formulario:
+        # Entrar por el formulario es lo raro: reCAPTCHA lo rechaza casi
+        # siempre. Cuando por fin cuela, esa sesion se guarda YA — es justo la
+        # que evita tener que volver a pasar por ahi.
+        print("Se entró por el formulario: se guarda esta sesión de inmediato.")
+    elif desde is not None and desde < HORAS_ENTRE_RENOVACIONES:
+        return
+
     if renovacion.guardar_sesion(estado):
         state["ultima_renovacion_sesion"] = now().isoformat()
 
@@ -304,8 +340,10 @@ def _revisar():
 
     sin_avisos = "--sin-avisos" in sys.argv
 
+    global _estado_en_curso
     orders = storage.load_orders()
     state = storage.load_state()
+    _estado_en_curso = state
     limpiar_datos_personales(orders)
     procesar_comandos(orders, state)
 
@@ -371,11 +409,46 @@ def _revisar():
 
 
 HORAS_ENTRE_AVISOS_DE_FALLO = 6
-FALLOS_PARA_MANTENIMIENTO = 3   # ~6 h cayendo: ya no se va a arreglar solo
+MINUTOS_ENTRE_CORRIDAS = 30     # el cron de revisar.yml
+FALLOS_PARA_MANTENIMIENTO = 3
 CADA_CUANTOS_FALLOS_INSISTIR = 12
 
+# Que hacer segun por que no dejo entrar el portal. El dueno lee esto en el
+# movil: tiene que decir el siguiente paso, no el traceback.
+ARREGLOS = {
+    "recaptcha": (
+        "El portal da por robot al navegador del bot (su reCAPTCHA no ve una "
+        "persona detrás). No es tu contraseña.\n\n"
+        "<b>Arreglo:</b> abre una sesión desde tu PC con "
+        "<code>python guardar_sesion.py</code> y pega lo que genere en el "
+        "secret <code>SHALOM_STORAGE_STATE</code> del repo. Con eso el bot deja "
+        "de iniciar sesión: entra ya logueado y reCAPTCHA no aparece."),
+    "credenciales": (
+        "El portal dice que el correo o la contraseña no son correctos.\n\n"
+        "<b>Arreglo:</b> entra a mano a pro.shalom.pe. Si te cambió la clave, "
+        "actualiza los secrets <code>SHALOM_EMAIL</code> y "
+        "<code>SHALOM_PASSWORD</code>."),
+    "bloqueada": (
+        "El portal dice que la cuenta está bloqueada o suspendida.\n\n"
+        "<b>Arreglo:</b> entra a mano a pro.shalom.pe y desbloquéala; el bot "
+        "solo lee, no puede hacerlo por ti."),
+    "sin_credenciales": (
+        "Faltan los secrets del portal.\n\n"
+        "<b>Arreglo:</b> revisa que existan <code>SHALOM_EMAIL</code> y "
+        "<code>SHALOM_PASSWORD</code> en Settings → Secrets → Actions."),
+}
 
-def registrar_resultado(state, ok):
+
+def arreglo_de(err):
+    """Instruccion concreta para este fallo, o cadena vacia si no se sabe."""
+    texto = ARREGLOS.get(getattr(err, "motivo", ""), "")
+    pista = getattr(err, "pista", "")
+    if texto and pista:
+        texto += f"\n\n<i>De paso: {pista}.</i>"
+    return texto
+
+
+def registrar_resultado(state, ok, err=None):
     """Lleva la cuenta de fallos seguidos y avisa cuando toca mantenimiento.
 
     Un fallo suelto se arregla solo en la siguiente corrida y no merece ruido.
@@ -405,14 +478,16 @@ def registrar_resultado(state, ok):
     if not toca:
         return
 
-    horas = seguidos * 2  # el cron sale cada ~2 h
+    horas = round(seguidos * MINUTOS_ENTRE_CORRIDAS / 60)
+    arreglo = arreglo_de(err)
     tg.send_message(
         "🔧 <b>El bot necesita mantenimiento</b>\n\n"
         f"Llevo <b>{seguidos} corridas seguidas</b> sin poder entrar "
         f"(unas {horas} horas).\n\n"
-        "Esto ya no se arregla solo. Los pedidos NO se pierden: en cuanto "
-        "vuelva a entrar se pone al día de todo.\n\n"
-        "Pásale este mensaje a Claude para que lo revise."
+        + (arreglo + "\n\n" if arreglo else
+           "Esto ya no se arregla solo.\n\n")
+        + "Los pedidos NO se pierden: en cuanto vuelva a entrar se pone al día "
+          "de todo."
     )
     print(f"Aviso de mantenimiento enviado ({seguidos} fallos seguidos).")
 
@@ -429,11 +504,13 @@ def avisar_fallo(state, err):
     if ultimo is not None and ultimo < HORAS_ENTRE_AVISOS_DE_FALLO:
         print("Fallo no avisado por Telegram: ya se aviso hace poco.")
         return
+    arreglo = arreglo_de(err)
     tg.send_message(
         "⚠️ <b>El bot no pudo revisar los pedidos</b>\n\n"
-        f"<code>{str(err)[:400]}</code>\n\n"
-        "Reintenta solo en la próxima corrida. Si se repite varias veces, "
-        "revisa que la cuenta de ShalomPRO siga entrando bien."
+        f"<code>{str(err)[:300]}</code>\n\n"
+        + (arreglo if arreglo else
+           "Reintenta solo en la próxima corrida. Si se repite varias veces, "
+           "revisa que la cuenta de ShalomPRO siga entrando bien.")
     )
     state["ultimo_fallo_avisado"] = now().isoformat()
 
@@ -442,11 +519,14 @@ def main():
     try:
         return _revisar()
     except Exception as err:
-        # El estado no se guardo (el fallo corto antes), asi que se recarga solo
-        # para anotar el aviso y no perder lo que ya hubiera en disco.
+        # Se guarda el estado que traia la corrida, no una copia limpia del
+        # disco: si el fallo llego despues de atender los comandos de Telegram,
+        # recargar tiraba el offset y el bot volvia a contestar lo mismo en cada
+        # corrida caida. Si reviento antes de leerlo siquiera, se lee ahora.
         try:
-            state = storage.load_state()
-            registrar_resultado(state, ok=False)
+            state = (_estado_en_curso if _estado_en_curso is not None
+                     else storage.load_state())
+            registrar_resultado(state, ok=False, err=err)
             avisar_fallo(state, err)
             storage.save_state(state)
         except Exception as e2:
