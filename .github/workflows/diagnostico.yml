@@ -1,0 +1,66 @@
+name: Diagnostico del bot
+
+# Solo a mano. No toca orders.json ni state.json y no avisa a ningun cliente:
+# dice que secrets faltan, si la sesion guardada sigue viva y —si el portal no
+# deja entrar— por que motivo. Es lo primero que hay que mirar cuando dejan de
+# llegar avisos.
+on:
+  workflow_dispatch:
+    inputs:
+      avisar_telegram:
+        description: "Mandar tambien el resumen por Telegram"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+          python -m playwright install chrome \
+            || echo "Sin Chrome de marca; se usara Chromium."
+          sudo apt-get install -y --no-install-recommends xvfb
+
+      - name: Revisar
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SHALOM_EMAIL: ${{ secrets.SHALOM_EMAIL }}
+          SHALOM_PASSWORD: ${{ secrets.SHALOM_PASSWORD }}
+          SHALOM_STORAGE_STATE: ${{ secrets.SHALOM_STORAGE_STATE }}
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+          SHALOM_HEADLESS: "0"
+          SHALOM_CHROME_CHANNEL: chrome
+          AVISAR: ${{ inputs.avisar_telegram }}
+        run: |
+          CORRER=(xvfb-run -a --server-args="-screen 0 1920x1080x24" python diagnostico.py)
+          if [ "$AVISAR" = "true" ]; then
+            "${CORRER[@]}" --telegram
+          else
+            "${CORRER[@]}"
+          fi
+
+      # Solo la pantalla del login, que no tiene datos de clientes: los
+      # artifacts de un repo publico los descarga cualquiera.
+      - name: Guardar captura del login (si fallo)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-login
+          path: debug_login.png
+          if-no-files-found: ignore
+          retention-days: 3

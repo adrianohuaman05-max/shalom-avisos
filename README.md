@@ -49,19 +49,62 @@ detalle de cada envío— el **celular del destinatario**.
 
 ### 4) Agregar los Secrets (contraseñas ocultas)
 En el repo: **Settings → Secrets and variables → Actions → New repository secret**.
-Crea estos cuatro:
 
-| Nombre                | Valor                                   |
-|-----------------------|-----------------------------------------|
-| `TELEGRAM_BOT_TOKEN`  | el token del paso 1                     |
-| `TELEGRAM_CHAT_ID`    | tu id del paso 2                        |
-| `SHALOM_EMAIL`        | tu correo de Shalom Pro                 |
-| `SHALOM_PASSWORD`     | tu contraseña de Shalom Pro             |
+| Nombre                 | Valor                                    | ¿Obligatorio? |
+|------------------------|------------------------------------------|---------------|
+| `TELEGRAM_BOT_TOKEN`   | el token del paso 1                      | sí            |
+| `TELEGRAM_CHAT_ID`     | tu id del paso 2                         | sí            |
+| `SHALOM_EMAIL`         | tu correo de Shalom Pro                  | sí            |
+| `SHALOM_PASSWORD`      | tu contraseña de Shalom Pro              | sí            |
+| `SHALOM_STORAGE_STATE` | tu sesión ya iniciada (ver paso 5)        | **sí, en la práctica** |
+| `GH_SECRETS_TOKEN`     | token para que el bot renueve su sesión   | muy recomendable |
 
 > ⚠️ Nunca pongas estas claves dentro del código ni las compartas en el chat.
 > Solo van aquí, en Secrets.
 
-### 5) Encender y probar
+### 5) Guardar tu sesión de ShalomPRO (lo que hace que todo funcione)
+
+El portal protege el login con **reCAPTCHA v3**: no pone ningún puzzle, le pone
+nota al navegador de 0 a 1 según lo humano que parezca y deja pasar solo a
+partir de cierto punto. Un navegador automático, encima desde una IP de centro
+de datos como las de GitHub, saca nota baja y el portal responde
+**"Verificación de seguridad fallida"**. Eso no se arregla con la contraseña:
+la contraseña ni llega a mirarse.
+
+La salida es no iniciar sesión desde GitHub. Inicias sesión **tú, en tu PC, en
+un Chrome normal**, y el bot reutiliza esa sesión:
+
+```
+pip install playwright
+python guardar_sesion.py
+```
+
+Se abre un Chrome con un perfil aparte (no toca el tuyo). Inicia sesión
+**marcando "Recuérdame"**, espera a ver la pantalla principal y vuelve a la
+consola a pulsar Enter. Genera `sesion.json`: pega **todo** su contenido en el
+secret `SHALOM_STORAGE_STATE` y luego borra el archivo.
+
+> Ese archivo vale como tu sesión abierta. No lo subas al repo ni lo pases por
+> chat. `.gitignore` ya lo cubre.
+
+### 6) Que la sesión no caduque nunca (`GH_SECRETS_TOKEN`)
+
+Cada vez que el bot entra bien, el portal le refresca las cookies. Si puede
+guardarlas de vuelta en el secret, la sesión se renueva sola y no hay que
+repetir el paso 5 nunca más. Para eso necesita un token propio:
+
+Foto de perfil → **Settings** → **Developer settings** → **Personal access
+tokens** → **Fine-grained tokens** → **Generate new token**
+
+| Campo | Valor |
+|---|---|
+| Repository access | **Only select repositories** → `shalom-avisos` |
+| Permissions → Repository → **Secrets** | **Read and write** |
+
+Guárdalo en el secret `GH_SECRETS_TOKEN`. Sin él el bot funciona igual, solo
+que algún día la sesión caducará y habrá que repetir el paso 5 a mano.
+
+### 7) Encender y probar
 1. Ve a la pestaña **Actions** del repo y activa los workflows si te lo pide.
 2. Abre **"Revisar pedidos Shalom" → Run workflow** para probarlo al instante.
 3. Deberías ver la ejecución en verde. Si tienes un pedido ya en destino, te llega
@@ -83,6 +126,25 @@ Para forzar una revisión: **Actions → "Revisar pedidos Shalom" → Run workfl
 Ahí hay una casilla **"sin avisos"** que sincroniza los estados sin escribirle a
 nadie — útil la primera vez, para fijar el punto de partida sin disparar avisos
 de pedidos que ya atendiste a mano.
+
+---
+
+## Cuando dejan de llegar avisos
+
+Lo primero, siempre: **Actions → "Diagnostico del bot" → Run workflow**. En un
+minuto dice qué secret falta, si la sesión guardada sigue viva y —si el portal
+no deja entrar— por qué motivo. No toca nada ni escribe a ningún cliente.
+
+| Lo que dice | Qué pasa | Arreglo |
+|---|---|---|
+| `no hay sesión guardada` | El secret `SHALOM_STORAGE_STATE` está vacío. El bot depende del login automático, que el portal rechaza casi siempre. | Paso 5 de la instalación. |
+| `Verificación de seguridad fallida` / motivo `recaptcha` | reCAPTCHA da por robot al navegador del bot. **No es tu contraseña.** | Paso 5: renovar la sesión. |
+| `todas las cookies están caducadas` | La sesión guardada venció. | Paso 5 otra vez; y monta el paso 6 para que no vuelva a pasar. |
+| motivo `credenciales` | El portal dice que el correo o la clave no valen. | Entra a mano a pro.shalom.pe y actualiza `SHALOM_EMAIL` / `SHALOM_PASSWORD`. |
+| motivo `bloqueada` | La cuenta está bloqueada. | Desbloquéala en el portal; el bot solo lee. |
+
+El propio bot ya manda por Telegram el arreglo que toca en cada caso, sin
+traceback.
 
 ---
 
@@ -108,8 +170,17 @@ puede descargar cualquiera.
   (`/service-orders/shipments/tracking`) no sirve: exige cabeceras firmadas con
   HMAC (`X-API-KEY`, `X-NONCE`, `X-TIMESTAMP`, `X-SIGNATURE`) y además devuelve
   el cuerpo encriptado. Sin ellas responde `401 Missing headers`.
-- El login del portal usa **reCAPTCHA v3** (por score, sin puzzle). Comprobado
-  que un Chromium headless lo pasa desde una IP de GitHub.
+- El login del portal usa **reCAPTCHA v3** (por score, sin puzzle). Al principio
+  un Chromium headless lo pasaba desde GitHub, luego solo ~1 de cada 3 veces, y
+  desde el 21-08-2026 ninguna. Por eso el camino bueno es `SHALOM_STORAGE_STATE`
+  y el login automático es el plan B.
+- Lo que sube esa nota, y por qué está puesto así en el código:
+  **Chrome de marca** (canal `chrome`) en vez del Chromium de Playwright;
+  **con ventana** sobre Xvfb en vez de headless; **sin mentir en el user-agent**
+  (antes anunciaba Windows y Chrome 126 corriendo Chromium 130 sobre Linux — esa
+  contradicción sola ya delata la automatización, porque las client hints
+  siguen diciendo la verdad); y escribir el formulario tecla a tecla, que es lo
+  único que genera los eventos que reCAPTCHA espera de una persona.
 - La vista de seguimiento solo muestra envíos **activos**; los entregados pasan
   al historial. Por eso la lista se mantiene corta sola.
 - Ojo al tocar los selectores: la página renderiza el layout de escritorio

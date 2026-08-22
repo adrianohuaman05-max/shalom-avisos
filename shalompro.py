@@ -22,7 +22,10 @@ pedir el detalle explícitamente con `detalle()`.
 """
 import json
 import os
+import random
 import re
+import time
+import unicodedata
 
 from playwright.sync_api import sync_playwright
 
@@ -38,6 +41,141 @@ STORAGE_STATE = os.environ.get("SHALOM_STORAGE_STATE", "")
 BASE = "https://pro.shalom.pe"
 LOGIN_URL = f"{BASE}/login"
 SEGUIMIENTO_URL = f"{BASE}/seguimientoenvios"
+
+# Chrome de verdad (canal "chrome") en vez del Chromium de Playwright: la nota
+# de reCAPTCHA v3 depende de la huella del navegador, y la compilacion de marca
+# es la que tienen los usuarios reales. Si no esta instalado se cae solo al
+# Chromium de siempre. Con SHALOM_CHROME_CHANNEL="" se fuerza Chromium.
+CANAL = os.environ.get("SHALOM_CHROME_CHANNEL", "chrome").strip()
+
+
+def _bool_env(nombre):
+    """None si la variable no esta puesta; True/False segun su valor."""
+    v = os.environ.get(nombre, "").strip().lower()
+    if v in ("0", "false", "no", "off"):
+        return False
+    if v in ("1", "true", "si", "s\u00ed", "yes", "on"):
+        return True
+    return None
+
+
+class ErrorLogin(RuntimeError):
+    """Fallo de login con el motivo ya identificado.
+
+    Guardar el motivo aparte permite que revisar.py mande a Telegram la
+    instruccion concreta ("renueva la sesion", "cambio la clave") en lugar del
+    volcado tecnico que nadie sabe interpretar desde el movil.
+    """
+
+    def __init__(self, mensaje, motivo, pista=""):
+        super().__init__(mensaje)
+        self.motivo = motivo
+        self.pista = pista
+
+
+def _sin_tildes(texto):
+    return "".join(c for c in unicodedata.normalize("NFD", texto or "")
+                   if unicodedata.category(c) != "Mn")
+
+
+# Lo que dice la pantalla cuando el login no pasa, y como se traduce.
+_SENALES = (
+    ("verificacion de seguridad", "recaptcha"),
+    ("recaptcha", "recaptcha"),
+    ("captcha", "recaptcha"),
+    ("credenciales", "credenciales"),
+    ("contrasena incorrecta", "credenciales"),
+    ("usuario o contrasena", "credenciales"),
+    ("correo o contrasena", "credenciales"),
+    ("bloquead", "bloqueada"),
+    ("suspendid", "bloqueada"),
+    ("inhabilitad", "bloqueada"),
+)
+
+
+def clasificar_fallo_login(texto):
+    """Motivo del rechazo a partir del texto que quedo en pantalla."""
+    t = _sin_tildes(texto).lower()
+    for aguja, motivo in _SENALES:
+        if aguja in t:
+            return motivo
+    return "desconocido"
+
+
+# Google puntua el login con reCAPTCHA v3: no hay puzzle que resolver, solo una
+# nota de 0 a 1 segun lo humano que parezca el navegador. Un Chromium headless
+# con el user-agent falseado saca nota baja y el portal contesta "Verificacion
+# de seguridad fallida". Este script tapa los delatores mas conocidos; el resto
+# lo hacen el canal "chrome", la ventana real (Xvfb) y no mentir en el
+# user-agent (ver _user_agent).
+_ESCUDO_JS = r"""
+// navigator.webdriver: el delator mas famoso.
+try { delete Object.getPrototypeOf(navigator).webdriver; } catch (e) {}
+try {
+  Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+} catch (e) {}
+
+// Chrome de verdad expone window.chrome; los headless viejos no.
+window.chrome = window.chrome || {
+  runtime: {}, app: {}, csi: function () {}, loadTimes: function () {}
+};
+
+try {
+  Object.defineProperty(navigator, 'languages',
+    { get: () => ['es-PE', 'es', 'en-US', 'en'] });
+} catch (e) {}
+
+// Cero plugins = navegador de laboratorio.
+try {
+  if (!navigator.plugins || navigator.plugins.length === 0) {
+    Object.defineProperty(navigator, 'plugins',
+      { get: () => [1, 2, 3].map(() => ({ name: 'PDF Viewer' })) });
+  }
+} catch (e) {}
+
+// permissions.query diciendo 'prompt' mientras Notification.permission dice
+// 'denied' es otra contradiccion clasica de headless.
+try {
+  const query = navigator.permissions.query.bind(navigator.permissions);
+  navigator.permissions.query = (p) =>
+    (p && p.name === 'notifications')
+      ? Promise.resolve({ state: Notification.permission })
+      : query(p);
+} catch (e) {}
+
+// Sin GPU el renderer sale 'SwiftShader' o 'llvmpipe', que no tiene ningun
+// equipo de usuario.
+try {
+  const original = WebGLRenderingContext.prototype.getParameter;
+  const parche = function (p) {
+    if (p === 37445) { return 'Intel Inc.'; }
+    if (p === 37446) { return 'Intel Iris OpenGL Engine'; }
+    return original.apply(this, arguments);
+  };
+  WebGLRenderingContext.prototype.getParameter = parche;
+  if (window.WebGL2RenderingContext) {
+    WebGL2RenderingContext.prototype.getParameter = parche;
+  }
+} catch (e) {}
+
+// El iframe del ticket llama print() al cargar: abre el dialogo nativo del
+// sistema y congela el navegador. Se anula en todos los frames.
+window.print = function () {};
+"""
+
+
+def _teclear(campo, texto):
+    """Escribe tecla a tecla, con la cadencia de una persona.
+
+    reCAPTCHA v3 mira los eventos de teclado y raton: un campo que aparece
+    relleno de golpe no genera ninguno.
+    """
+    pausa = random.randint(45, 110)
+    try:
+        campo.press_sequentially(texto, delay=pausa)
+    except AttributeError:      # Playwright < 1.38
+        campo.type(texto, delay=pausa)
+
 
 # Etiquetas que separan las secciones del panel de detalle.
 _SECCIONES = ("Destinatario", "Forma de entrega", "Origen", "Destino",
@@ -177,43 +315,128 @@ def _parsear_drawer(texto):
     return datos
 
 
+# Sin --enable-automation (Playwright lo pone por su cuenta): pinta la barra de
+# "controlado por software de pruebas" y marca la huella del navegador.
+_ARGS = [
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-blink-features=AutomationControlled",
+    "--window-size=1366,768",
+    "--lang=es-PE",
+]
+
+
 class ShalomPro:
     def __init__(self, headless=True, debug_dir="."):
-        self.headless = headless
+        # SHALOM_HEADLESS manda sobre el argumento: asi el workflow puede
+        # abrirlo con ventana (sobre Xvfb) sin tocar el codigo.
+        forzado = _bool_env("SHALOM_HEADLESS")
+        self.headless = headless if forzado is None else forzado
         self.debug_dir = debug_dir
         self.sesion_guardada = False
+        self.motivo_sin_sesion = ""
+        # True si hubo que pasar por el formulario. Entrar asi es raro y
+        # costoso (reCAPTCHA rechaza casi siempre), asi que cuando se logra
+        # conviene guardar esa sesion en el acto en vez de esperar turno.
+        self.uso_formulario = False
         self._p = None
         self.browser = None
         self.context = None
         self.page = None
 
+    def _lanzar(self):
+        """Chrome de marca si esta instalado; si no, el Chromium de Playwright."""
+        comun = dict(headless=self.headless, args=_ARGS,
+                     ignore_default_args=["--enable-automation"])
+        ventana = "sin ventana" if self.headless else "con ventana"
+        if CANAL:
+            try:
+                nav = self._p.chromium.launch(channel=CANAL, **comun)
+                print(f"Navegador: Chrome (canal '{CANAL}'), {ventana}.")
+                return nav
+            except Exception as e:
+                print(f"No se pudo abrir el canal '{CANAL}' ({type(e).__name__}); "
+                      f"se usa el Chromium de Playwright.")
+        nav = self._p.chromium.launch(**comun)
+        print(f"Navegador: Chromium de Playwright, {ventana}.")
+        return nav
+
+    def _user_agent(self):
+        """El user-agent real del navegador, solo con 'Headless' borrado.
+
+        Inventarlo es peor que no tocarlo: el navegador manda ademas client
+        hints (Sec-CH-UA, Sec-CH-UA-Platform) que no cambian con el user_agent
+        de Playwright, y cualquier contradiccion entre ambos delata la
+        automatizacion. La version anterior anunciaba "Windows NT 10.0" y
+        "Chrome/126" mientras corria Chromium 130 sobre Linux.
+
+        Devuelve None cuando el user-agent real ya vale y no hay que tocarlo.
+        """
+        try:
+            temp = self.browser.new_context()
+            try:
+                ua = temp.new_page().evaluate("navigator.userAgent")
+            finally:
+                temp.close()
+        except Exception:
+            return None
+        limpio = (ua or "").replace("HeadlessChrome", "Chrome")
+        return limpio if limpio != ua else None
+
+    def _leer_storage_state(self):
+        """Cookies de la sesion guardada, o None dejando anotado el porque.
+
+        Solo se imprimen nombres y fechas: el valor de las cookies ES la sesion
+        y los logs de este repo son publicos.
+        """
+        if not STORAGE_STATE.strip():
+            self.motivo_sin_sesion = (
+                "el secret SHALOM_STORAGE_STATE está vacío o no existe")
+            return None
+        try:
+            estado = json.loads(STORAGE_STATE)
+        except Exception as e:
+            self.motivo_sin_sesion = (
+                f"SHALOM_STORAGE_STATE no es JSON válido ({type(e).__name__})")
+            return None
+        cookies = [c for c in (estado.get("cookies") or [])
+                   if "shalom" in (c.get("domain") or "")]
+        if not cookies:
+            self.motivo_sin_sesion = (
+                "SHALOM_STORAGE_STATE no trae ninguna cookie de shalom.pe")
+            return None
+
+        nombres = sorted(c.get("name", "?") for c in cookies)
+        print(f"Sesión guardada: {len(cookies)} cookie(s) de shalom.pe "
+              f"({', '.join(nombres)}).")
+        vencidas = [c.get("name", "?") for c in cookies
+                    if 0 < (c.get("expires") or 0) <= time.time()]
+        if vencidas:
+            print(f"Aviso: ya caducaron {len(vencidas)} de ellas "
+                  f"({', '.join(vencidas)}); puede que no sirva.")
+        if not any(str(c.get("name", "")).startswith("remember_") for c in cookies):
+            print("Aviso: no hay cookie de 'Recuérdame'; la sesión durará poco.")
+        return estado
+
     def __enter__(self):
         self._p = sync_playwright().start()
-        self.browser = self._p.chromium.launch(
-            headless=self.headless,
-            args=["--no-sandbox", "--disable-blink-features=AutomationControlled"],
-        )
+        self.browser = self._lanzar()
         opciones = dict(
             locale="es-PE",
             timezone_id="America/Lima",
             accept_downloads=True,  # el ticket va con inline=0: puede bajar como descarga
-            viewport={"width": 1440, "height": 900},  # forzar layout de escritorio
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-            ),
+            viewport={"width": 1366, "height": 768},  # forzar layout de escritorio
+            extra_http_headers={"Accept-Language": "es-PE,es;q=0.9,en;q=0.8"},
         )
-        if STORAGE_STATE:
-            try:
-                opciones["storage_state"] = json.loads(STORAGE_STATE)
-                self.sesion_guardada = True
-            except Exception as e:
-                print("SHALOM_STORAGE_STATE no es JSON válido, se ignora:",
-                      type(e).__name__)
+        ua = self._user_agent()
+        if ua:
+            opciones["user_agent"] = ua
+        estado = self._leer_storage_state()
+        if estado:
+            opciones["storage_state"] = estado
+            self.sesion_guardada = True
         self.context = self.browser.new_context(**opciones)
-        # El iframe del ticket llama print() al cargar, lo que abre el diálogo
-        # nativo y congela el navegador. Se anula en todos los frames.
-        self.context.add_init_script("window.print = () => {};")
+        self.context.add_init_script(_ESCUDO_JS)
         self.page = self.context.new_page()
         self.login()
         return self
@@ -260,52 +483,93 @@ class ShalomPro:
         except Exception:
             return []
 
-    def login(self, intentos=3):
-        """Entra al portal, reintentando: el login falla de vez en cuando.
+    def _texto_pantalla(self, limite=400):
+        """Lo que se ve en pantalla, para saber por que no dejo entrar."""
+        try:
+            return _limpiar(self.page.inner_text("body"))[:limite]
+        except Exception:
+            return ""
 
-        Visto en produccion: dos corridas seguidas murieron con "no llego a
-        /home" y la pantalla capturada era el formulario limpio, sin mensaje de
-        error — o sea, credenciales bien y rechazo del lado del servidor.
+    def login(self, intentos=3):
+        """Entra al portal. Prefiere la sesion guardada; el formulario es plan B.
+
+        El formulario pasa por reCAPTCHA v3: sin puzzle, solo una nota segun lo
+        humano que parezca el navegador. Desde los runners de GitHub esa nota es
+        baja y el portal contesta "Verificacion de seguridad fallida", asi que
+        el camino bueno es SHALOM_STORAGE_STATE (una sesion abierta a mano) y
+        este de aqui es el que se usa cuando aquel falta o ha caducado.
         """
-        # Con sesion guardada normalmente no hace falta ni mirar el formulario.
         if self.sesion_guardada:
-            self.page.goto(BASE + "/home", wait_until="networkidle", timeout=60000)
+            try:
+                self.page.goto(BASE + "/home", wait_until="networkidle",
+                               timeout=60000)
+            except Exception as e:
+                print("No se pudo abrir /home con la sesión guardada:",
+                      type(e).__name__)
             if "/login" not in self.page.url:
-                print("Sesion guardada valida: no hizo falta iniciar sesion.")
+                print("Sesión guardada válida: no hizo falta iniciar sesión.")
                 return
-            print("La sesion guardada caduco; se intenta con usuario y clave.")
+            self.motivo_sin_sesion = "la sesión guardada ya caducó"
+            print("La sesión guardada caducó; se intenta con usuario y clave.")
+        else:
+            print(f"Sin sesión guardada ({self.motivo_sin_sesion}). Toca "
+                  f"iniciar sesión a pelo, que es justo lo que reCAPTCHA "
+                  f"rechaza casi siempre desde un runner.")
 
         if not EMAIL or not PASSWORD:
-            raise RuntimeError(
-                "Faltan SHALOM_EMAIL / SHALOM_PASSWORD en el entorno"
-                + (" y la sesion guardada ya no vale." if self.sesion_guardada
-                   else "."))
+            raise ErrorLogin(
+                "Faltan los secrets SHALOM_EMAIL / SHALOM_PASSWORD y no hay "
+                "sesión guardada que valga.",
+                "sin_credenciales", pista=self.motivo_sin_sesion)
 
+        ultimo_texto = ""
         for intento in range(1, intentos + 1):
             try:
                 if self._intentar_login():
                     if intento > 1:
                         print(f"Login correcto al intento {intento}.")
+                    self.uso_formulario = True
                     return
+                ultimo_texto = self._texto_pantalla() or ultimo_texto
+                print(f"Login intento {intento}: se quedó en /login "
+                      f"({clasificar_fallo_login(ultimo_texto)}).")
             except Exception as e:
                 print(f"Login intento {intento}: {type(e).__name__}")
             if intento < intentos:
-                self.page.wait_for_timeout(5000 * intento)
+                # Espera creciente y con ruido: reintentar al segundo exacto es
+                # otra senal de bot.
+                self.page.wait_for_timeout(
+                    5000 * intento + random.randint(0, 2500))
 
         self.captura("login")
-        texto = ""
-        try:
-            texto = _limpiar(self.page.inner_text("body"))[:300]
-        except Exception:
-            pass
-        raise RuntimeError(
-            f"El login no llego a /home tras {intentos} intentos (url actual: "
-            f"{self.page.url}). Puede ser credenciales o que reCAPTCHA v3 haya "
-            f"dado score bajo desde esta IP (si ves 'Verificacion de seguridad fallida' es justo eso). Renueva la sesion con guardar_sesion.py y actualiza el secret SHALOM_STORAGE_STATE. Texto en pantalla: {texto}")
+        motivo = clasificar_fallo_login(ultimo_texto)
+        explicacion = {
+            "recaptcha": (
+                "el portal respondió «Verificación de seguridad fallida», que "
+                "es reCAPTCHA puntuando bajo al navegador automático — no son "
+                "las credenciales"),
+            "credenciales": "el portal dice que el correo o la clave no valen",
+            "bloqueada": "el portal dice que la cuenta está bloqueada",
+        }.get(motivo, "el portal se quedó en /login sin decir por qué")
+
+        raise ErrorLogin(
+            f"No se pudo entrar a ShalomPRO tras {intentos} intentos: "
+            f"{explicacion}.",
+            motivo, pista=self.motivo_sin_sesion)
 
     def _intentar_login(self):
         """Un intento. True si acabo dentro, False si se quedo en /login."""
         page = self.page
+
+        # Pasar antes por la portada: reCAPTCHA v3 tambien puntua el rastro de
+        # navegacion, y aterrizar en /login sin venir de ningun sitio es lo que
+        # hace un script, no una persona.
+        try:
+            page.goto(BASE + "/", wait_until="domcontentloaded", timeout=60000)
+            page.wait_for_timeout(random.randint(900, 2000))
+        except Exception:
+            pass
+
         page.goto(LOGIN_URL, wait_until="networkidle", timeout=60000)
 
         # Ya podriamos venir logueados (sesion reutilizada): el portal redirige.
@@ -316,13 +580,31 @@ class ShalomPro:
             'input[type="email"], input[placeholder*="orreo" i]').first
         clave = page.locator('input[type="password"]').first
         correo.wait_for(state="visible", timeout=30000)
-        correo.fill(EMAIL)
-        clave.fill(PASSWORD)
 
-        # reCAPTCHA v3 (invisible, por score) genera su token de forma asincrona
-        # al cargar la pagina. Si se pulsa antes de que este listo, el servidor
-        # rechaza el intento y nos quedamos en /login sin ningun mensaje: esa es
-        # la causa mas probable de los fallos intermitentes.
+        # Mover el raton y escribir tecla a tecla genera los eventos que
+        # reCAPTCHA v3 espera de una persona; un fill() no genera ninguno.
+        try:
+            page.mouse.move(random.randint(200, 1000), random.randint(150, 600))
+        except Exception:
+            pass
+        correo.click()
+        _teclear(correo, EMAIL)
+        page.wait_for_timeout(random.randint(300, 900))
+        clave.click()
+        _teclear(clave, PASSWORD)
+
+        # "Recuerdame" alarga muchisimo la cookie de sesion, y es la que luego
+        # se guarda en el secret para no tener que volver a pasar por aqui.
+        try:
+            casilla = page.locator('input[type="checkbox"]').first
+            if casilla.count() and not casilla.is_checked():
+                casilla.check(timeout=3000)
+        except Exception:
+            pass
+
+        # reCAPTCHA v3 genera su token de forma asincrona al cargar la pagina.
+        # Si se pulsa antes de que este listo, el servidor rechaza el intento y
+        # nos quedamos en /login sin ningun mensaje.
         try:
             page.wait_for_function(
                 "() => window.grecaptcha && "
@@ -331,17 +613,22 @@ class ShalomPro:
             )
         except Exception:
             pass  # si no aparece, se intenta igual: peor es no intentarlo
-        page.wait_for_timeout(1500)
+        page.wait_for_timeout(random.randint(1200, 2600))
 
         page.get_by_role(
             "button", name=re.compile("Iniciar sesion|Iniciar sesión", re.I)
         ).first.click()
 
-        try:
-            page.wait_for_url(re.compile(r"/home"), timeout=45000)
-            return True
-        except Exception:
-            return False
+        # El rechazo llega como aviso en la propia pagina, sin cambiar de URL:
+        # esperar los 45 s enteros por un /home que no va a venir solo alarga la
+        # corrida. Se vigila lo que pase primero.
+        for _ in range(45):
+            if "/login" not in page.url:
+                return True
+            if clasificar_fallo_login(self._texto_pantalla(600)) != "desconocido":
+                return False
+            page.wait_for_timeout(1000)
+        return "/login" not in page.url
 
     def listar(self):
         """Envíos activos, SIN datos personales (seguro para logs y disco)."""

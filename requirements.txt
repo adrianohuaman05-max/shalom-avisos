@@ -1,3 +1,7 @@
-playwright==1.48.0
+# Playwright al dia a proposito: reCAPTCHA v3 puntua la huella del navegador y
+# un Chromium de hace dos anos ya es de por si una senal de automatizacion. El
+# navegador que se usa de verdad es el Chrome de marca (canal "chrome"); este
+# Chromium es el plan B.
+playwright==1.62.0
 requests==2.32.3
 pynacl

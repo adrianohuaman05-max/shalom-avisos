@@ -16,7 +16,7 @@ import sys
 
 import mensajes
 import revisar
-from shalompro import _parsear_drawer, normalizar_estado
+from shalompro import _parsear_drawer, clasificar_fallo_login, normalizar_estado
 
 fallos = []
 
@@ -172,6 +172,38 @@ revisar.cerrar_desaparecidos(orders, vistos={"A"})
 check("el visto sigue activo", orders[0].get("cerrado"), None)
 check("el ausente se cierra", orders[1]["cerrado"], True)
 check("y pasa a Entregado", orders[1]["estado"], "Entregado")
+
+print("\n=== Por que no dejo entrar el portal ===")
+# El texto real que devolvio el portal en la caida de agosto de 2026. Que se
+# reconozca es lo que separa "renueva la sesion" de "revisa tu contrasena": los
+# dos fallos se veian igual y mandaban a mirar donde no era.
+PANTALLA_RECAPTCHA = (
+    "Iniciar sesión Ingresa tus datos para registrar tus envíos online. "
+    "Verificación de seguridad fallida. Intenta de nuevo. Recuérdame "
+    "Olvidé mi contraseña Iniciar sesión")
+check("reconoce el rechazo de reCAPTCHA",
+      clasificar_fallo_login(PANTALLA_RECAPTCHA), "recaptcha")
+check("y no lo confunde con la clave",
+      clasificar_fallo_login("Credenciales incorrectas"), "credenciales")
+check("cuenta bloqueada",
+      clasificar_fallo_login("Su cuenta ha sido bloqueada"), "bloqueada")
+check("el formulario limpio no dice nada",
+      clasificar_fallo_login("Iniciar sesión Recuérdame"), "desconocido")
+
+print("\n=== Cada fallo lleva su instruccion ===")
+for motivo in ("recaptcha", "credenciales", "bloqueada", "sin_credenciales"):
+    err = type("E", (Exception,), {})()
+    err.motivo, err.pista = motivo, ""
+    check(f"hay arreglo para '{motivo}'", bool(revisar.arreglo_de(err)), True)
+sin_motivo = RuntimeError("algo raro")
+check("un error cualquiera no inventa arreglo", revisar.arreglo_de(sin_motivo), "")
+
+print("\n=== Las horas caidas salen del cron de verdad ===")
+# Antes multiplicaba por 2 h cuando el cron sale cada 30 min: 23 fallos se
+# anunciaban como "46 horas" en vez de las ~12 reales.
+check("30 min por corrida", revisar.MINUTOS_ENTRE_CORRIDAS, 30)
+check("23 fallos son ~12 h",
+      round(23 * revisar.MINUTOS_ENTRE_CORRIDAS / 60), 12)
 
 print("\n" + "=" * 55)
 print(f"FALLOS: {len(fallos)}" + (f" -> {fallos}" if fallos else " (todo OK)"))
