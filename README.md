@@ -172,8 +172,16 @@ puede descargar cualquiera.
   el cuerpo encriptado. Sin ellas responde `401 Missing headers`.
 - El login del portal usa **reCAPTCHA v3** (por score, sin puzzle). Al principio
   un Chromium headless lo pasaba desde GitHub, luego solo ~1 de cada 3 veces, y
-  desde el 21-08-2026 ninguna. Por eso el camino bueno es `SHALOM_STORAGE_STATE`
-  y el login automático es el plan B.
+  desde el 21-08-2026 ninguna. Comprobado el 22-08-2026 con Chrome de marca, con
+  ventana y sin mentir en la huella: sigue rechazando. **Desde una IP de GitHub
+  el formulario ya no pasa**, así que `SHALOM_STORAGE_STATE` no es el plan B, es
+  el único camino; el login automático solo queda por si algún día vuelve a
+  colar.
+- Por lo mismo, un rechazo de reCAPTCHA **no se reintenta dentro de la misma
+  corrida**: la nota sale de la IP y de la huella, y ninguna cambia en diez
+  segundos (se vio 3 de 3 con el mismo rechazo). Insistir solo sumaría logins
+  fallidos contra la cuenta. La corrida siguiente cae en otro runner y esa sí
+  es una oportunidad nueva.
 - Lo que sube esa nota, y por qué está puesto así en el código:
   **Chrome de marca** (canal `chrome`) en vez del Chromium de Playwright;
   **con ventana** sobre Xvfb en vez de headless; **sin mentir en el user-agent**

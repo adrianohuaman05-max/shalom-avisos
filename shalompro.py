@@ -531,8 +531,18 @@ class ShalomPro:
                     self.uso_formulario = True
                     return
                 ultimo_texto = self._texto_pantalla() or ultimo_texto
-                print(f"Login intento {intento}: se quedó en /login "
-                      f"({clasificar_fallo_login(ultimo_texto)}).")
+                fallo = clasificar_fallo_login(ultimo_texto)
+                print(f"Login intento {intento}: se quedó en /login ({fallo}).")
+                # Reintentar un rechazo de reCAPTCHA en la misma corrida no
+                # sirve de nada: la nota sale de la IP y de la huella del
+                # navegador, y ninguna de las dos cambia en 10 segundos. Se
+                # comprobo: 3 de 3 intentos, el mismo rechazo. Insistir solo
+                # suma logins fallidos contra la cuenta de Shalom, que es lo
+                # ultimo que interesa. La siguiente corrida cae en otro runner
+                # y ahi si es un intento nuevo de verdad.
+                if fallo in ("recaptcha", "credenciales", "bloqueada"):
+                    print("Es un rechazo firme; no se insiste en esta corrida.")
+                    break
             except Exception as e:
                 print(f"Login intento {intento}: {type(e).__name__}")
             if intento < intentos:
@@ -552,10 +562,8 @@ class ShalomPro:
             "bloqueada": "el portal dice que la cuenta está bloqueada",
         }.get(motivo, "el portal se quedó en /login sin decir por qué")
 
-        raise ErrorLogin(
-            f"No se pudo entrar a ShalomPRO tras {intentos} intentos: "
-            f"{explicacion}.",
-            motivo, pista=self.motivo_sin_sesion)
+        raise ErrorLogin(f"No se pudo entrar a ShalomPRO: {explicacion}.",
+                         motivo, pista=self.motivo_sin_sesion)
 
     def _intentar_login(self):
         """Un intento. True si acabo dentro, False si se quedo en /login."""
