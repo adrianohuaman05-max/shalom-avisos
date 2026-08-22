@@ -25,8 +25,10 @@ SECRETS = [
     ("SHALOM_STORAGE_STATE", False,
      "sesión ya iniciada; es el ÚNICO camino fiable, porque reCAPTCHA rechaza "
      "el login automático desde los runners"),
-    ("GH_SECRETS_TOKEN", False,
-     "deja que el bot renueve solo SHALOM_STORAGE_STATE y no caduque nunca"),
+    ("GH_SECRETS_TOKEN", True,
+     "renueva SHALOM_STORAGE_STATE antes de que venza. NO es opcional: Shalom "
+     "no emite cookie de 'Recuérdame', así que la sesión dura un par de horas "
+     "y sin este token hay que rehacerla a mano cada vez"),
 ]
 
 problemas = []
@@ -93,12 +95,23 @@ def revisar_sesion():
             cuando = f"caduca en {dias:.1f} días"
         print(f"    · {c.get('name', '?')} — {cuando}")
 
-    if all((c.get("expires") or 0) <= ahora for c in cookies
-           if (c.get("expires") or 0) > 0):
-        problemas.append("todas las cookies guardadas están caducadas")
-    if not any(str(c.get("name", "")).startswith("remember_") for c in cookies):
-        print("  Aviso: no hay cookie de 'Recuérdame'. Durará poco.")
-        avisos.append("la sesión guardada no marcó 'Recuérdame'")
+    plazos = [c.get("expires") for c in cookies if (c.get("expires") or 0) > 0]
+    if not plazos:
+        return
+    # Manda la mas corta: en cuanto una muere, la sesion se rompe entera.
+    quedan = (min(plazos) - ahora) / 3600.0
+    if quedan <= 0:
+        print(f"  CADUCADA hace {-quedan:.1f} h. Hay que rehacerla.")
+        problemas.append("la sesión guardada ya caducó")
+    elif not os.environ.get("GH_SECRETS_TOKEN", "").strip():
+        print(f"  Le quedan {quedan:.1f} h y no hay GH_SECRETS_TOKEN que la "
+              f"renueve.")
+        print("  Cuando venza, el bot se queda fuera otra vez.")
+        problemas.append(
+            f"la sesión vence en {quedan:.1f} h y nada la va a renovar")
+    else:
+        print(f"  Le quedan {quedan:.1f} h, y el bot la renovará solo antes "
+              f"de que venza.")
 
 
 def revisar_portal():

@@ -25,6 +25,7 @@ Uso:
 """
 import datetime as dt
 import sys
+import time
 
 import mensajes
 import renovacion
@@ -270,33 +271,53 @@ def reavisar(ordenes):
 
 
 HORAS_ENTRE_RENOVACIONES = 12
+HORAS_MARGEN_CADUCIDAD = 3
+
+
+def horas_hasta_caducar(estado):
+    """Horas hasta que caduque la PRIMERA cookie de shalom, o None si ninguna
+    tiene fecha. Manda la mas corta: en cuanto una muere, la sesion se rompe."""
+    plazos = [c.get("expires") or 0 for c in (estado.get("cookies") or [])
+              if "shalom" in (c.get("domain") or "")]
+    plazos = [p for p in plazos if p > 0]
+    return (min(plazos) - time.time()) / 3600.0 if plazos else None
 
 
 def renovar_sesion_si_toca(pro, state):
     """Guarda las cookies frescas en el secret para que la sesion no caduque.
 
-    Se limita a una vez cada HORAS_ENTRE_RENOVACIONES: el portal rota la cookie
-    en cada visita, asi que sin limite se escribiria el secret ~12 veces al dia
-    sin ninguna ganancia.
+    El ritmo no puede ser un numero fijo. Shalom NO emite cookie de "Recuerdame"
+    aunque se marque la casilla (comprobado: solo manda enviashalom_session y
+    XSRF-TOKEN), asi que lo unico que sostiene la sesion es la cookie de sesion
+    de Laravel, que dura un par de horas. El navegador la recibe fresca en cada
+    visita, pero en el secret sigue la copia vieja: si se renovara solo cada 12 h
+    esa copia ya estaria caducada mucho antes, Playwright la descartaria al
+    cargarla y volveriamos al formulario. Por eso manda la caducidad real de las
+    cookies y no el reloj.
     """
     if not renovacion.disponible():
-        print("Sin GH_SECRETS_TOKEN: la sesión no se renueva sola y algún día "
-              "habrá que rehacerla a mano con guardar_sesion.py.")
+        print("Sin GH_SECRETS_TOKEN la sesión NO se renueva: cuando caduque la "
+              "cookie habrá que rehacerla a mano con guardar_sesion.py.")
         return
-    # Entrar por el formulario es lo raro: reCAPTCHA lo rechaza casi siempre.
-    # Cuando por fin cuela, esa sesion se guarda YA, sin esperar turno — es
-    # justo la que evita tener que volver a pasar por ahi.
-    desde = horas_desde(state.get("ultima_renovacion_sesion"))
-    if (not pro.uso_formulario and desde is not None
-            and desde < HORAS_ENTRE_RENOVACIONES):
-        return
-    if pro.uso_formulario:
-        print("Se entró por el formulario: se guarda esta sesión de inmediato.")
     try:
         estado = pro.context.storage_state()
     except Exception as e:
         print("No se pudo leer la sesion del navegador:", type(e).__name__)
         return
+
+    quedan = horas_hasta_caducar(estado)
+    desde = horas_desde(state.get("ultima_renovacion_sesion"))
+
+    if quedan is not None and quedan < HORAS_MARGEN_CADUCIDAD:
+        print(f"La sesión guardada caduca en {quedan:.1f} h: se renueva ya.")
+    elif pro.uso_formulario:
+        # Entrar por el formulario es lo raro: reCAPTCHA lo rechaza casi
+        # siempre. Cuando por fin cuela, esa sesion se guarda YA — es justo la
+        # que evita tener que volver a pasar por ahi.
+        print("Se entró por el formulario: se guarda esta sesión de inmediato.")
+    elif desde is not None and desde < HORAS_ENTRE_RENOVACIONES:
+        return
+
     if renovacion.guardar_sesion(estado):
         state["ultima_renovacion_sesion"] = now().isoformat()
 

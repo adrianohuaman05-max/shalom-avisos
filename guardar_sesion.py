@@ -19,8 +19,12 @@ Cómo se usa (Windows, macOS o Linux):
     python guardar_sesion.py
 
 Se abre Chrome con un perfil aparte, así que no toca tu Chrome de siempre ni tus
-otras sesiones. Inicia sesión **marcando "Recuérdame"**, y cuando veas la
-pantalla principal vuelve aquí y pulsa Enter.
+otras sesiones. Inicia sesión y, cuando veas la pantalla principal, vuelve aquí
+y pulsa Enter.
+
+La casilla "Recuérdame" da igual: Shalom no emite la cookie correspondiente
+aunque se marque. La sesión dura un par de horas y quien la mantiene viva es la
+renovación automática del bot (secret GH_SECRETS_TOKEN, paso 6 del README).
 
 La contraseña se escribe en el navegador: este script no la pide, no la lee y no
 la guarda.
@@ -117,9 +121,8 @@ def main():
     print()
     print("=" * 68)
     print("  1. Inicia sesión en la ventana que se abrió")
-    print("  2. MARCA la casilla 'Recuérdame' (si no, la sesión dura poco)")
-    print("  3. Espera a ver la pantalla principal de ShalomPRO")
-    print("  4. Vuelve aquí y pulsa Enter (NO cierres el navegador)")
+    print("  2. Espera a ver la pantalla principal de ShalomPRO")
+    print("  3. Vuelve aquí y pulsa Enter (NO cierres el navegador)")
     print()
     print("  Es un navegador normal: reCAPTCHA no deberia rechazarte.")
     print("=" * 68)
@@ -144,7 +147,11 @@ def main():
             cookies = [c for c in estado.get("cookies", [])
                        if "shalom" in c.get("domain", "")]
             estado["cookies"] = cookies
-            recuerdame = [c for c in cookies if c["name"].startswith("remember_")]
+            # Ojo: Shalom no emite cookie de "Recuerdame" aunque se marque la
+            # casilla, asi que la sesion dura lo que dure la de Laravel — un par
+            # de horas. Quien la mantiene viva de verdad es GH_SECRETS_TOKEN,
+            # que deja al bot reguardarse las cookies frescas antes de que
+            # venzan. Sin ese token esto hay que repetirlo cada dos por tres.
 
             # Una sola línea: el cuadro de secrets de GitHub acepta saltos, pero
             # copiar de una línea evita cortar el JSON por accidente.
@@ -155,12 +162,11 @@ def main():
             print("=" * 68)
             print("Sesión guardada en: %s" % SALIDA)
             print("Cookies de shalom: %d" % len(cookies))
-            if recuerdame:
-                print("Incluye la cookie de 'Recuérdame': la sesión durará mucho.")
-            else:
-                print("AVISO: no hay cookie de 'Recuérdame'. ¿Marcaste la casilla?")
-                print("Sin ella caduca antes; la renovación automática del bot")
-                print("deberia mantenerla viva igual, pero es mejor tenerla.")
+            print()
+            print("OJO: esta sesión caduca en un par de horas por sí sola.")
+            print("Para que no haya que repetir esto, el repo necesita el")
+            print("secret GH_SECRETS_TOKEN: con él el bot se reguarda las")
+            print("cookies frescas antes de que venzan. Ver el README, paso 6.")
             print()
             print("Ahora, en el repo de GitHub:")
             print("  Settings -> Secrets and variables -> Actions")

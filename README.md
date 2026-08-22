@@ -57,7 +57,7 @@ En el repo: **Settings → Secrets and variables → Actions → New repository 
 | `SHALOM_EMAIL`         | tu correo de Shalom Pro                  | sí            |
 | `SHALOM_PASSWORD`      | tu contraseña de Shalom Pro              | sí            |
 | `SHALOM_STORAGE_STATE` | tu sesión ya iniciada (ver paso 5)        | **sí, en la práctica** |
-| `GH_SECRETS_TOKEN`     | token para que el bot renueve su sesión   | muy recomendable |
+| `GH_SECRETS_TOKEN`     | token para que el bot renueve su sesión   | **sí** (ver paso 6) |
 
 > ⚠️ Nunca pongas estas claves dentro del código ni las compartas en el chat.
 > Solo van aquí, en Secrets.
@@ -79,19 +79,27 @@ pip install playwright
 python guardar_sesion.py
 ```
 
-Se abre un Chrome con un perfil aparte (no toca el tuyo). Inicia sesión
-**marcando "Recuérdame"**, espera a ver la pantalla principal y vuelve a la
-consola a pulsar Enter. Genera `sesion.json`: pega **todo** su contenido en el
-secret `SHALOM_STORAGE_STATE` y luego borra el archivo.
+Se abre un Chrome con un perfil aparte (no toca el tuyo). Inicia sesión, espera
+a ver la pantalla principal y vuelve a la consola a pulsar Enter. Genera
+`sesion.json`: pega **todo** su contenido en el secret `SHALOM_STORAGE_STATE` y
+luego borra el archivo.
+
+> La casilla **"Recuérdame" no sirve de nada** aquí: Shalom no emite la cookie
+> correspondiente aunque se marque. Comprobado — las únicas cookies que manda
+> son `enviashalom_session` y `XSRF-TOKEN`. Por eso el paso 6 no es opcional.
 
 > Ese archivo vale como tu sesión abierta. No lo subas al repo ni lo pases por
 > chat. `.gitignore` ya lo cubre.
 
-### 6) Que la sesión no caduque nunca (`GH_SECRETS_TOKEN`)
+### 6) Que la sesión no caduque (`GH_SECRETS_TOKEN`) — obligatorio
 
-Cada vez que el bot entra bien, el portal le refresca las cookies. Si puede
-guardarlas de vuelta en el secret, la sesión se renueva sola y no hay que
-repetir el paso 5 nunca más. Para eso necesita un token propio:
+La sesión del paso 5 **dura un par de horas**, porque lo único que la sostiene
+es la cookie de sesión de Laravel. El navegador la recibe fresca en cada visita,
+pero en el secret sigue la copia vieja: en cuanto esa copia vence, el bot vuelve
+al formulario y a los rechazos de reCAPTCHA.
+
+Este token lo arregla: deja que el bot se reguarde las cookies frescas antes de
+que venzan. Sin él, el paso 5 hay que repetirlo a mano cada dos por tres.
 
 Foto de perfil → **Settings** → **Developer settings** → **Personal access
 tokens** → **Fine-grained tokens** → **Generate new token**
@@ -101,8 +109,8 @@ tokens** → **Fine-grained tokens** → **Generate new token**
 | Repository access | **Only select repositories** → `shalom-avisos` |
 | Permissions → Repository → **Secrets** | **Read and write** |
 
-Guárdalo en el secret `GH_SECRETS_TOKEN`. Sin él el bot funciona igual, solo
-que algún día la sesión caducará y habrá que repetir el paso 5 a mano.
+Guárdalo en el secret `GH_SECRETS_TOKEN`. Ojo: el permiso es **Secrets**, no
+"Actions" — están juntos en la lista pero son cosas distintas.
 
 ### 7) Encender y probar
 1. Ve a la pestaña **Actions** del repo y activa los workflows si te lo pide.
@@ -139,7 +147,8 @@ no deja entrar— por qué motivo. No toca nada ni escribe a ningún cliente.
 |---|---|---|
 | `no hay sesión guardada` | El secret `SHALOM_STORAGE_STATE` está vacío. El bot depende del login automático, que el portal rechaza casi siempre. | Paso 5 de la instalación. |
 | `Verificación de seguridad fallida` / motivo `recaptcha` | reCAPTCHA da por robot al navegador del bot. **No es tu contraseña.** | Paso 5: renovar la sesión. |
-| `todas las cookies están caducadas` | La sesión guardada venció. | Paso 5 otra vez; y monta el paso 6 para que no vuelva a pasar. |
+| `la sesión ya caducó` | La sesión guardada venció. | Paso 5 otra vez; y monta el paso 6, que es lo que evita que se repita. |
+| `la sesión vence en N h y nada la va a renovar` | Falta `GH_SECRETS_TOKEN`. | Paso 6, antes de que venza. |
 | motivo `credenciales` | El portal dice que el correo o la clave no valen. | Entra a mano a pro.shalom.pe y actualiza `SHALOM_EMAIL` / `SHALOM_PASSWORD`. |
 | motivo `bloqueada` | La cuenta está bloqueada. | Desbloquéala en el portal; el bot solo lee. |
 
@@ -177,6 +186,13 @@ puede descargar cualquiera.
   el formulario ya no pasa**, así que `SHALOM_STORAGE_STATE` no es el plan B, es
   el único camino; el login automático solo queda por si algún día vuelve a
   colar.
+- La casilla **"Recuérdame" del portal no emite ninguna cookie**: se marque o
+  no, las únicas que llegan son `enviashalom_session` y `XSRF-TOKEN`. O sea que
+  no hay sesión de larga duración que valga, y la renovación automática del
+  secret (paso 6) no es una comodidad sino el mecanismo que sostiene todo.
+  Por eso se renueva mirando **la caducidad real de las cookies**, no cada N
+  horas fijas: con un plazo fijo de 12 h la copia del secret vencía mucho antes
+  de que le tocara turno.
 - Por lo mismo, un rechazo de reCAPTCHA **no se reintenta dentro de la misma
   corrida**: la nota sale de la IP y de la huella, y ninguna cambia en diez
   segundos (se vio 3 de 3 con el mismo rechazo). Insistir solo sumaría logins

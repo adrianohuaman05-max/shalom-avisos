@@ -383,6 +383,14 @@ class ShalomPro:
         limpio = (ua or "").replace("HeadlessChrome", "Chrome")
         return limpio if limpio != ua else None
 
+    @staticmethod
+    def _horas_hasta_caducar(cookies):
+        """Horas hasta que caduque la primera cookie, o None si ninguna tiene
+        fecha. Manda la mas corta: en cuanto una muere, la sesion se rompe."""
+        plazos = [c.get("expires") or 0 for c in cookies]
+        plazos = [p for p in plazos if p > 0]
+        return (min(plazos) - time.time()) / 3600.0 if plazos else None
+
     def _leer_storage_state(self):
         """Cookies de la sesion guardada, o None dejando anotado el porque.
 
@@ -414,8 +422,16 @@ class ShalomPro:
         if vencidas:
             print(f"Aviso: ya caducaron {len(vencidas)} de ellas "
                   f"({', '.join(vencidas)}); puede que no sirva.")
-        if not any(str(c.get("name", "")).startswith("remember_") for c in cookies):
-            print("Aviso: no hay cookie de 'Recuérdame'; la sesión durará poco.")
+        # Shalom NO emite cookie de "Recuerdame" aunque se marque la casilla
+        # (comprobado). Asi que la sesion vive lo que viva enviashalom_session,
+        # un par de horas, y quien la mantiene viva es la renovacion automatica
+        # del secret. Sin GH_SECRETS_TOKEN esto caduca si o si.
+        horas = self._horas_hasta_caducar(cookies)
+        if horas is not None:
+            print(f"Caduca en {horas:.1f} h" + (
+                "." if os.environ.get("GH_SECRETS_TOKEN") else
+                " y NO hay GH_SECRETS_TOKEN para renovarla: cuando venza, "
+                "el bot se queda fuera."))
         return estado
 
     def __enter__(self):
