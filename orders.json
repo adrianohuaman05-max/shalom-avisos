@@ -369,7 +369,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
-    "last_checked": "2026-08-23T14:52:30.465860+00:00"
+    "last_checked": "2026-08-23T15:27:02.963488+00:00"
   },
   {
     "orden": "92519100",
@@ -393,7 +393,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-23T14:52:30.465848+00:00"
+    "last_checked": "2026-08-23T15:27:02.963475+00:00"
   },
   {
     "orden": "92674365",
@@ -417,6 +417,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-22T15:25:14.606588+00:00",
-    "last_checked": "2026-08-23T14:52:30.450453+00:00"
+    "last_checked": "2026-08-23T15:27:02.947916+00:00"
+  },
+  {
+    "orden": "93041042",
+    "codigo": "KK9N",
+    "estado": "En origen",
+    "fecha_envio": "23-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-23T15:26:58.537846+00:00",
+    "last_checked": "2026-08-23T15:26:58.537866+00:00"
   }
 ]
