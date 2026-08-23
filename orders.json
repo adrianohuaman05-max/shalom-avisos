@@ -362,11 +362,11 @@
   {
     "orden": "92519260",
     "codigo": "7T7M",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "19-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-19T21:43:38.575736+00:00",
     "last_checked": "2026-08-23T20:52:25.621590+00:00"
@@ -393,7 +393,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-23T20:52:25.621579+00:00"
+    "last_checked": "2026-08-23T21:25:25.133772+00:00"
   },
   {
     "orden": "92674365",
@@ -417,7 +417,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-22T15:25:14.606588+00:00",
-    "last_checked": "2026-08-23T20:52:25.603033+00:00"
+    "last_checked": "2026-08-23T21:25:25.119562+00:00"
   },
   {
     "orden": "93041042",
@@ -429,6 +429,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-23T15:26:58.537846+00:00",
-    "last_checked": "2026-08-23T20:52:25.603011+00:00"
+    "last_checked": "2026-08-23T21:25:25.119538+00:00"
   }
 ]
