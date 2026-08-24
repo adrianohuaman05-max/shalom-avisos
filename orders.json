@@ -393,7 +393,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-20T17:33:36.479220+00:00",
-    "last_checked": "2026-08-24T13:56:34.975810+00:00"
+    "last_checked": "2026-08-24T14:49:18.326451+00:00"
   },
   {
     "orden": "92674365",
@@ -417,18 +417,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-22T15:25:14.606588+00:00",
-    "last_checked": "2026-08-24T13:56:34.961407+00:00"
+    "last_checked": "2026-08-24T14:49:18.326411+00:00"
   },
   {
     "orden": "93041042",
     "codigo": "KK9N",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "23-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-23T15:26:58.537846+00:00",
-    "last_checked": "2026-08-24T13:56:34.961387+00:00"
+    "last_checked": "2026-08-24T14:49:18.309094+00:00"
   }
 ]
