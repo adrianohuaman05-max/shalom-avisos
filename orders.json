@@ -417,16 +417,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-22T15:25:14.606588+00:00",
-    "last_checked": "2026-08-25T17:35:54.936797+00:00"
+    "last_checked": "2026-08-25T18:44:19.983887+00:00"
   },
   {
     "orden": "93041042",
     "codigo": "KK9N",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "23-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-23T15:26:58.537846+00:00",
     "last_checked": "2026-08-25T17:35:54.244387+00:00"
