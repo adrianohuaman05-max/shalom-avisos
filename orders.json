@@ -410,11 +410,11 @@
   {
     "orden": "92908835",
     "codigo": "KCMJ",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "22-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-22T15:25:14.606588+00:00",
     "last_checked": "2026-08-25T22:31:43.764331+00:00"
