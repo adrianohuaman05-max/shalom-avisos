@@ -430,5 +430,17 @@
     "demora_avisada": false,
     "registrado": "2026-08-23T15:26:58.537846+00:00",
     "last_checked": "2026-08-25T17:35:54.244387+00:00"
+  },
+  {
+    "orden": "93353652",
+    "codigo": "HJW7",
+    "estado": "En tránsito",
+    "fecha_envio": "26-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-26T16:01:32.575456+00:00",
+    "last_checked": "2026-08-26T16:01:32.575477+00:00"
   }
 ]
