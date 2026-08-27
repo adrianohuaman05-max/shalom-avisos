@@ -434,13 +434,25 @@
   {
     "orden": "93353652",
     "codigo": "HJW7",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "26-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-26T16:01:32.575456+00:00",
     "last_checked": "2026-08-27T11:02:10.075874+00:00"
+  },
+  {
+    "orden": "93536682",
+    "codigo": "CDKM",
+    "estado": "En origen",
+    "fecha_envio": "27-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-27T21:06:24.514826+00:00",
+    "last_checked": "2026-08-27T21:06:24.514843+00:00"
   }
 ]
