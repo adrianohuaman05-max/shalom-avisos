@@ -446,13 +446,37 @@
   {
     "orden": "93536682",
     "codigo": "CDKM",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "27-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-27T21:06:24.514826+00:00",
-    "last_checked": "2026-08-28T05:33:47.797320+00:00"
+    "last_checked": "2026-08-28T18:23:10.452437+00:00"
+  },
+  {
+    "orden": "93670783",
+    "codigo": "H9CM",
+    "estado": "En tránsito",
+    "fecha_envio": "28-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-28T18:23:03.462335+00:00",
+    "last_checked": "2026-08-28T18:23:03.462353+00:00"
+  },
+  {
+    "orden": "93672442",
+    "codigo": "P3D7",
+    "estado": "En tránsito",
+    "fecha_envio": "28-08-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-08-28T18:23:06.997681+00:00",
+    "last_checked": "2026-08-28T18:23:06.997689+00:00"
   }
 ]
