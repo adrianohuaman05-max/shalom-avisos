@@ -446,13 +446,13 @@
   {
     "orden": "93536682",
     "codigo": "CDKM",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "27-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-27T21:06:24.514826+00:00",
-    "last_checked": "2026-08-27T21:06:24.514843+00:00"
+    "last_checked": "2026-08-28T05:33:47.797320+00:00"
   }
 ]
