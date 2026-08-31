@@ -465,7 +465,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-28T18:23:03.462335+00:00",
-    "last_checked": "2026-08-31T08:23:26.945782+00:00"
+    "last_checked": "2026-08-31T16:19:49.852422+00:00"
   },
   {
     "orden": "93672442",
@@ -477,19 +477,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-28T18:23:06.997681+00:00",
-    "last_checked": "2026-08-31T08:23:26.945786+00:00"
+    "last_checked": "2026-08-31T16:19:49.852427+00:00"
   },
   {
     "orden": "93769132",
     "codigo": "TM3P",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "28-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-29T01:51:39.260250+00:00",
-    "last_checked": "2026-08-31T08:23:26.919995+00:00"
+    "last_checked": "2026-08-31T16:19:49.290701+00:00"
   },
   {
     "orden": "93769553",
@@ -501,18 +501,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-29T01:51:42.975303+00:00",
-    "last_checked": "2026-08-31T08:23:26.945772+00:00"
+    "last_checked": "2026-08-31T16:19:49.852401+00:00"
   },
   {
     "orden": "93935328",
     "codigo": "TCM3",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-08-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-30T18:00:51.559368+00:00",
-    "last_checked": "2026-08-31T08:23:26.919971+00:00"
+    "last_checked": "2026-08-31T16:19:49.273671+00:00"
   }
 ]
