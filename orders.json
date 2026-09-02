@@ -477,7 +477,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-28T18:23:06.997681+00:00",
-    "last_checked": "2026-09-02T16:32:20.370572+00:00"
+    "last_checked": "2026-09-02T17:01:38.412362+00:00"
   },
   {
     "orden": "93769132",
@@ -506,13 +506,13 @@
   {
     "orden": "93935328",
     "codigo": "TCM3",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "30-08-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-08-30T18:00:51.559368+00:00",
-    "last_checked": "2026-09-02T16:32:20.351853+00:00"
+    "last_checked": "2026-09-02T17:01:37.299508+00:00"
   }
 ]
