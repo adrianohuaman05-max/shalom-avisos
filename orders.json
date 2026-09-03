@@ -470,11 +470,11 @@
   {
     "orden": "93672442",
     "codigo": "P3D7",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "28-08-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-08-28T18:23:06.997681+00:00",
     "last_checked": "2026-09-03T22:31:31.155530+00:00"
@@ -525,6 +525,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-02T23:31:40.582261+00:00",
-    "last_checked": "2026-09-03T22:31:31.155505+00:00"
+    "last_checked": "2026-09-03T23:01:30.806885+00:00"
   }
 ]
