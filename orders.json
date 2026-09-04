@@ -525,18 +525,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-02T23:31:40.582261+00:00",
-    "last_checked": "2026-09-04T16:31:27.509359+00:00"
+    "last_checked": "2026-09-04T16:59:36.101985+00:00"
   },
   {
     "orden": "94563362",
     "codigo": "TDHK",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "04-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-04T16:01:35.675887+00:00",
-    "last_checked": "2026-09-04T16:31:27.509338+00:00"
+    "last_checked": "2026-09-04T16:59:36.095635+00:00"
   }
 ]
