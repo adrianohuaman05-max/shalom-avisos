@@ -549,19 +549,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:00.149111+00:00",
-    "last_checked": "2026-09-05T23:01:43.233541+00:00"
+    "last_checked": "2026-09-05T23:31:38.213459+00:00"
   },
   {
     "orden": "94683198",
     "codigo": "7H3D",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "04-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-05T23:01:43.233566+00:00"
+    "last_checked": "2026-09-05T23:31:38.213489+00:00"
   },
   {
     "orden": "94672142",
@@ -573,6 +573,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:08.058671+00:00",
-    "last_checked": "2026-09-05T23:01:43.247060+00:00"
+    "last_checked": "2026-09-05T23:31:38.733353+00:00"
   }
 ]
