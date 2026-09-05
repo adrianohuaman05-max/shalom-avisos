@@ -530,11 +530,11 @@
   {
     "orden": "94563362",
     "codigo": "TDHK",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "04-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-04T16:01:35.675887+00:00",
     "last_checked": "2026-09-05T22:31:38.923397+00:00"
@@ -549,7 +549,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:00.149111+00:00",
-    "last_checked": "2026-09-05T22:31:38.386840+00:00"
+    "last_checked": "2026-09-05T23:01:43.233541+00:00"
   },
   {
     "orden": "94683198",
@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-05T22:31:38.916636+00:00"
+    "last_checked": "2026-09-05T23:01:43.233566+00:00"
   },
   {
     "orden": "94672142",
@@ -573,6 +573,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:08.058671+00:00",
-    "last_checked": "2026-09-05T22:31:38.923360+00:00"
+    "last_checked": "2026-09-05T23:01:43.247060+00:00"
   }
 ]
