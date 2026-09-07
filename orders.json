@@ -549,7 +549,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:00.149111+00:00",
-    "last_checked": "2026-09-07T15:31:48.680065+00:00"
+    "last_checked": "2026-09-07T16:01:51.599813+00:00"
   },
   {
     "orden": "94683198",
@@ -561,30 +561,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-07T15:31:48.680074+00:00"
+    "last_checked": "2026-09-07T16:01:51.599828+00:00"
   },
   {
     "orden": "94672142",
     "codigo": "W9JN",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "04-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:08.058671+00:00",
-    "last_checked": "2026-09-07T15:31:48.680081+00:00"
+    "last_checked": "2026-09-07T16:01:51.599842+00:00"
   },
   {
     "orden": "94847512",
     "codigo": "WJJP",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "06-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-06T17:01:37.916317+00:00",
-    "last_checked": "2026-09-07T15:31:48.680042+00:00"
+    "last_checked": "2026-09-07T16:01:51.584112+00:00"
   }
 ]
