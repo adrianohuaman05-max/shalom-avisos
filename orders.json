@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-08T15:01:37.010581+00:00"
+    "last_checked": "2026-09-08T15:32:19.851039+00:00"
   },
   {
     "orden": "94672142",
@@ -578,11 +578,11 @@
   {
     "orden": "94847512",
     "codigo": "WJJP",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "06-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-06T17:01:37.916317+00:00",
     "last_checked": "2026-09-08T15:01:37.010558+00:00"
