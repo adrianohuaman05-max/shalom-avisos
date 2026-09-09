@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-09T18:32:01.044006+00:00"
+    "last_checked": "2026-09-09T19:02:05.582295+00:00"
   },
   {
     "orden": "94672142",
@@ -590,14 +590,14 @@
   {
     "orden": "95155148",
     "codigo": "9NWN",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "08-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-09T01:02:16.045524+00:00",
-    "last_checked": "2026-09-09T18:32:00.988896+00:00"
+    "last_checked": "2026-09-09T19:02:04.263978+00:00"
   },
   {
     "orden": "95167742",
@@ -609,6 +609,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-09T01:02:20.941962+00:00",
-    "last_checked": "2026-09-09T18:32:01.043967+00:00"
+    "last_checked": "2026-09-09T19:02:05.563243+00:00"
   }
 ]
