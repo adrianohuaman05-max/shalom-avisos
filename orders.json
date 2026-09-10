@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-10T01:31:05.140786+00:00"
+    "last_checked": "2026-09-10T02:01:16.194243+00:00"
   },
   {
     "orden": "94672142",
@@ -597,19 +597,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-09T01:02:16.045524+00:00",
-    "last_checked": "2026-09-10T01:31:05.140750+00:00"
+    "last_checked": "2026-09-10T02:01:15.661646+00:00"
   },
   {
     "orden": "95167742",
     "codigo": "TPJT",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "08-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-09T01:02:20.941962+00:00",
-    "last_checked": "2026-09-10T01:31:05.140762+00:00"
+    "last_checked": "2026-09-10T02:01:15.661663+00:00"
   },
   {
     "orden": "95156187",
@@ -621,6 +621,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-10T01:31:05.132073+00:00"
+    "last_checked": "2026-09-10T02:01:15.644789+00:00"
   }
 ]
