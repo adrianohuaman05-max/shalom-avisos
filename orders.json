@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-11T13:31:19.987583+00:00"
+    "last_checked": "2026-09-11T14:01:20.602316+00:00"
   },
   {
     "orden": "94672142",
@@ -602,11 +602,11 @@
   {
     "orden": "95167742",
     "codigo": "TPJT",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "08-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-09T01:02:20.941962+00:00",
     "last_checked": "2026-09-11T13:31:19.987577+00:00"
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-11T13:31:19.987568+00:00"
+    "last_checked": "2026-09-11T14:01:20.602288+00:00"
   },
   {
     "orden": "95343788",
@@ -633,7 +633,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:06.582530+00:00",
-    "last_checked": "2026-09-11T13:31:19.987505+00:00"
+    "last_checked": "2026-09-11T14:01:20.602231+00:00"
   },
   {
     "orden": "95343774",
@@ -645,7 +645,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:12.615482+00:00",
-    "last_checked": "2026-09-11T13:31:19.987543+00:00"
+    "last_checked": "2026-09-11T14:01:20.602265+00:00"
   },
   {
     "orden": "95408490",
@@ -657,7 +657,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-11T00:28:25.563190+00:00",
-    "last_checked": "2026-09-11T13:31:19.982084+00:00"
+    "last_checked": "2026-09-11T14:01:20.587765+00:00"
   },
   {
     "orden": "95407884",
@@ -669,6 +669,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-11T00:28:29.744573+00:00",
-    "last_checked": "2026-09-11T13:31:19.987487+00:00"
+    "last_checked": "2026-09-11T14:01:20.602217+00:00"
   }
 ]
