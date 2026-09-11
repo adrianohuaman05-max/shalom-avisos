@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-11T18:01:27.824406+00:00"
+    "last_checked": "2026-09-11T18:31:22.158776+00:00"
   },
   {
     "orden": "94672142",
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-11T18:01:27.824398+00:00"
+    "last_checked": "2026-09-11T18:31:22.158767+00:00"
   },
   {
     "orden": "95343788",
@@ -633,7 +633,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:06.582530+00:00",
-    "last_checked": "2026-09-11T18:01:27.824335+00:00"
+    "last_checked": "2026-09-11T18:31:22.151884+00:00"
   },
   {
     "orden": "95343774",
@@ -645,19 +645,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:12.615482+00:00",
-    "last_checked": "2026-09-11T18:01:27.824374+00:00"
+    "last_checked": "2026-09-11T18:31:22.158731+00:00"
   },
   {
     "orden": "95408490",
     "codigo": "WPNW",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "10-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-11T00:28:25.563190+00:00",
-    "last_checked": "2026-09-11T18:01:27.806857+00:00"
+    "last_checked": "2026-09-11T18:31:21.439638+00:00"
   },
   {
     "orden": "95407884",
