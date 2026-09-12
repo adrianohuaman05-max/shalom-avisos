@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-12T14:31:34.521387+00:00"
+    "last_checked": "2026-09-12T15:01:52.281538+00:00"
   },
   {
     "orden": "94672142",
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-12T14:31:34.521379+00:00"
+    "last_checked": "2026-09-12T15:01:52.281527+00:00"
   },
   {
     "orden": "95343788",
@@ -633,7 +633,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:06.582530+00:00",
-    "last_checked": "2026-09-12T14:31:34.521331+00:00"
+    "last_checked": "2026-09-12T15:01:52.262744+00:00"
   },
   {
     "orden": "95343774",
@@ -645,7 +645,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:12.615482+00:00",
-    "last_checked": "2026-09-12T14:31:34.521347+00:00"
+    "last_checked": "2026-09-12T15:01:52.262768+00:00"
   },
   {
     "orden": "95408490",
@@ -674,13 +674,13 @@
   {
     "orden": "95591796",
     "codigo": "NNKN",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "11-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-12T00:31:48.885155+00:00",
-    "last_checked": "2026-09-12T14:31:34.514537+00:00"
+    "last_checked": "2026-09-12T15:01:51.442157+00:00"
   }
 ]
