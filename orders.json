@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-14T15:02:39.744654+00:00"
+    "last_checked": "2026-09-14T15:31:39.909881+00:00"
   },
   {
     "orden": "94672142",
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-14T15:02:39.744648+00:00"
+    "last_checked": "2026-09-14T15:31:39.909874+00:00"
   },
   {
     "orden": "95343788",
@@ -633,7 +633,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T16:31:06.582530+00:00",
-    "last_checked": "2026-09-14T15:02:39.744642+00:00"
+    "last_checked": "2026-09-14T15:31:39.909865+00:00"
   },
   {
     "orden": "95343774",
@@ -681,18 +681,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-12T00:31:48.885155+00:00",
-    "last_checked": "2026-09-14T15:02:39.744635+00:00"
+    "last_checked": "2026-09-14T15:31:39.909851+00:00"
   },
   {
     "orden": "95755687",
     "codigo": "9JPD",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "13-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-13T17:31:33.263007+00:00",
-    "last_checked": "2026-09-14T15:02:39.744611+00:00"
+    "last_checked": "2026-09-14T15:31:39.885146+00:00"
   }
 ]
