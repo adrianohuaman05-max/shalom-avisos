@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-16T00:31:32.024546+00:00"
+    "last_checked": "2026-09-16T01:01:43.233438+00:00"
   },
   {
     "orden": "94672142",
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-16T00:31:32.024536+00:00"
+    "last_checked": "2026-09-16T01:01:43.233431+00:00"
   },
   {
     "orden": "95343788",
@@ -693,42 +693,42 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-13T17:31:33.263007+00:00",
-    "last_checked": "2026-09-16T00:31:32.010998+00:00"
+    "last_checked": "2026-09-16T01:01:43.233412+00:00"
   },
   {
     "orden": "95928383",
     "codigo": "PCD7",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "15-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:41.488469+00:00",
-    "last_checked": "2026-09-16T00:31:32.010960+00:00"
+    "last_checked": "2026-09-16T01:01:43.218214+00:00"
   },
   {
     "orden": "95928311",
     "codigo": "CKH7",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "15-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:45.299244+00:00",
-    "last_checked": "2026-09-16T00:31:32.010986+00:00"
+    "last_checked": "2026-09-16T01:01:43.233349+00:00"
   },
   {
     "orden": "95928248",
     "codigo": "3KPC",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "15-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:48.819833+00:00",
-    "last_checked": "2026-09-16T00:31:32.010993+00:00"
+    "last_checked": "2026-09-16T01:01:43.233390+00:00"
   }
 ]
