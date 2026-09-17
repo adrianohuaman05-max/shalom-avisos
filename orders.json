@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-17T14:32:08.516103+00:00"
+    "last_checked": "2026-09-17T15:01:36.307609+00:00"
   },
   {
     "orden": "94672142",
@@ -621,7 +621,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
-    "last_checked": "2026-09-17T14:32:08.516097+00:00"
+    "last_checked": "2026-09-17T15:01:36.307589+00:00"
   },
   {
     "orden": "95343788",
@@ -705,7 +705,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:41.488469+00:00",
-    "last_checked": "2026-09-17T14:32:08.516037+00:00"
+    "last_checked": "2026-09-17T15:01:35.789624+00:00"
   },
   {
     "orden": "95928311",
@@ -717,19 +717,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:45.299244+00:00",
-    "last_checked": "2026-09-17T14:32:08.516065+00:00"
+    "last_checked": "2026-09-17T15:01:35.789662+00:00"
   },
   {
     "orden": "95928248",
     "codigo": "3KPC",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "15-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:48.819833+00:00",
-    "last_checked": "2026-09-17T14:32:08.516083+00:00"
+    "last_checked": "2026-09-17T15:01:35.789689+00:00"
   },
   {
     "orden": "96082097",
@@ -741,7 +741,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-16T16:02:03.404427+00:00",
-    "last_checked": "2026-09-17T14:32:08.498985+00:00"
+    "last_checked": "2026-09-17T15:01:35.783022+00:00"
   },
   {
     "orden": "96191721",
@@ -753,7 +753,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-17T01:01:36.493635+00:00",
-    "last_checked": "2026-09-17T14:32:08.498946+00:00"
+    "last_checked": "2026-09-17T15:01:35.782983+00:00"
   },
   {
     "orden": "96190939",
@@ -765,6 +765,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-17T01:01:41.794918+00:00",
-    "last_checked": "2026-09-17T14:32:08.498977+00:00"
+    "last_checked": "2026-09-17T15:01:35.783012+00:00"
   }
 ]
