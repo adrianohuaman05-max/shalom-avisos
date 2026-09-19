@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-19T17:02:22.584149+00:00"
+    "last_checked": "2026-09-19T17:32:01.840687+00:00"
   },
   {
     "orden": "94672142",
@@ -710,14 +710,14 @@
   {
     "orden": "95928311",
     "codigo": "CKH7",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "15-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:45.299244+00:00",
-    "last_checked": "2026-09-19T17:02:22.584127+00:00"
+    "last_checked": "2026-09-19T17:32:01.213883+00:00"
   },
   {
     "orden": "95928248",
@@ -765,7 +765,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-17T01:01:41.794918+00:00",
-    "last_checked": "2026-09-19T17:02:22.584071+00:00"
+    "last_checked": "2026-09-19T17:32:01.213824+00:00"
   },
   {
     "orden": "96290830",
@@ -777,7 +777,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:55.193664+00:00",
-    "last_checked": "2026-09-19T17:02:22.584109+00:00"
+    "last_checked": "2026-09-19T17:32:01.213860+00:00"
   },
   {
     "orden": "96290467",
@@ -789,7 +789,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-19T17:02:22.584119+00:00"
+    "last_checked": "2026-09-19T17:32:01.213870+00:00"
   },
   {
     "orden": "96429786",
@@ -801,6 +801,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T20:02:20.158881+00:00",
-    "last_checked": "2026-09-19T17:02:22.570294+00:00"
+    "last_checked": "2026-09-19T17:32:01.207323+00:00"
   }
 ]
