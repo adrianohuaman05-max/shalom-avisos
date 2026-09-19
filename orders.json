@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-19T00:32:17.566255+00:00"
+    "last_checked": "2026-09-19T01:02:24.086057+00:00"
   },
   {
     "orden": "94672142",
@@ -614,11 +614,11 @@
   {
     "orden": "95156187",
     "codigo": "MPMW",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "09-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-10T01:01:05.049413+00:00",
     "last_checked": "2026-09-19T00:32:17.566249+00:00"
@@ -717,7 +717,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-15T17:31:45.299244+00:00",
-    "last_checked": "2026-09-19T00:32:17.566224+00:00"
+    "last_checked": "2026-09-19T01:02:24.086035+00:00"
   },
   {
     "orden": "95928248",
@@ -765,7 +765,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-17T01:01:41.794918+00:00",
-    "last_checked": "2026-09-19T00:32:17.429993+00:00"
+    "last_checked": "2026-09-19T01:02:24.085977+00:00"
   },
   {
     "orden": "96290830",
@@ -777,7 +777,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:55.193664+00:00",
-    "last_checked": "2026-09-19T00:32:17.566202+00:00"
+    "last_checked": "2026-09-19T01:02:24.086017+00:00"
   },
   {
     "orden": "96290467",
@@ -789,18 +789,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-19T00:32:17.566216+00:00"
+    "last_checked": "2026-09-19T01:02:24.086026+00:00"
   },
   {
     "orden": "96429786",
     "codigo": "WW9K",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "18-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T20:02:20.158881+00:00",
-    "last_checked": "2026-09-19T00:32:17.429966+00:00"
+    "last_checked": "2026-09-19T01:02:24.079408+00:00"
   }
 ]
