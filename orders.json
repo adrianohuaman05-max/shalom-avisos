@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-20T16:24:43.109542+00:00"
+    "last_checked": "2026-09-20T16:32:07.155814+00:00"
   },
   {
     "orden": "94672142",
@@ -770,11 +770,11 @@
   {
     "orden": "96290830",
     "codigo": "NNKK",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "17-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:55.193664+00:00",
     "last_checked": "2026-09-20T16:24:43.109532+00:00"
@@ -789,7 +789,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-20T16:24:43.109537+00:00"
+    "last_checked": "2026-09-20T16:32:07.155806+00:00"
   },
   {
     "orden": "96429786",
@@ -801,7 +801,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T20:02:20.158881+00:00",
-    "last_checked": "2026-09-20T16:24:43.109520+00:00"
+    "last_checked": "2026-09-20T16:32:07.155791+00:00"
   },
   {
     "orden": "96643868",
@@ -813,6 +813,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-20T00:31:57.390449+00:00",
-    "last_checked": "2026-09-20T16:24:43.104648+00:00"
+    "last_checked": "2026-09-20T16:32:07.107895+00:00"
   }
 ]
