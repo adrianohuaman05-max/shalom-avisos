@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-20T00:32:01.277730+00:00"
+    "last_checked": "2026-09-20T01:02:18.095139+00:00"
   },
   {
     "orden": "94672142",
@@ -777,7 +777,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:55.193664+00:00",
-    "last_checked": "2026-09-20T00:32:01.277680+00:00"
+    "last_checked": "2026-09-20T01:02:18.095124+00:00"
   },
   {
     "orden": "96290467",
@@ -789,7 +789,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-20T00:32:01.277690+00:00"
+    "last_checked": "2026-09-20T01:02:18.095133+00:00"
   },
   {
     "orden": "96429786",
@@ -801,18 +801,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T20:02:20.158881+00:00",
-    "last_checked": "2026-09-20T00:32:01.277657+00:00"
+    "last_checked": "2026-09-20T01:02:18.095110+00:00"
   },
   {
     "orden": "96643868",
     "codigo": "H3WM",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "19-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-20T00:31:57.390449+00:00",
-    "last_checked": "2026-09-20T00:31:57.390469+00:00"
+    "last_checked": "2026-09-20T01:02:18.080371+00:00"
   }
 ]
