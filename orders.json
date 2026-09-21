@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-21T20:02:15.255440+00:00"
+    "last_checked": "2026-09-21T20:32:10.753880+00:00"
   },
   {
     "orden": "94672142",
@@ -789,16 +789,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-21T20:02:15.255432+00:00"
+    "last_checked": "2026-09-21T20:32:10.753868+00:00"
   },
   {
     "orden": "96429786",
     "codigo": "WW9K",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "18-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-18T20:02:20.158881+00:00",
     "last_checked": "2026-09-21T20:02:15.255418+00:00"
@@ -813,6 +813,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-20T00:31:57.390449+00:00",
-    "last_checked": "2026-09-21T20:02:15.248623+00:00"
+    "last_checked": "2026-09-21T20:32:10.733108+00:00"
   }
 ]
