@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-21T23:02:25.549780+00:00"
+    "last_checked": "2026-09-21T23:32:04.947092+00:00"
   },
   {
     "orden": "94672142",
@@ -789,7 +789,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-18T00:31:58.832040+00:00",
-    "last_checked": "2026-09-21T23:02:25.549766+00:00"
+    "last_checked": "2026-09-21T23:32:04.947079+00:00"
   },
   {
     "orden": "96429786",
@@ -813,6 +813,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-20T00:31:57.390449+00:00",
-    "last_checked": "2026-09-21T23:02:25.531235+00:00"
+    "last_checked": "2026-09-21T23:32:04.940434+00:00"
+  },
+  {
+    "orden": "96762205",
+    "codigo": "NW7K",
+    "estado": "En origen",
+    "fecha_envio": "21-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-21T23:31:58.735752+00:00",
+    "last_checked": "2026-09-21T23:31:58.735773+00:00"
+  },
+  {
+    "orden": "96763808",
+    "codigo": "WTHD",
+    "estado": "En origen",
+    "fecha_envio": "21-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-21T23:32:01.985742+00:00",
+    "last_checked": "2026-09-21T23:32:01.985755+00:00"
   }
 ]
