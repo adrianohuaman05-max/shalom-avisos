@@ -554,11 +554,11 @@
   {
     "orden": "94683198",
     "codigo": "7H3D",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "04-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
     "last_checked": "2026-09-23T04:31:53.968383+00:00"
@@ -818,11 +818,11 @@
   {
     "orden": "96762205",
     "codigo": "NW7K",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "21-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-21T23:31:58.735752+00:00",
     "last_checked": "2026-09-23T04:31:53.968355+00:00"
@@ -830,11 +830,11 @@
   {
     "orden": "96763808",
     "codigo": "WTHD",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "21-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-21T23:32:01.985742+00:00",
     "last_checked": "2026-09-23T04:31:53.968371+00:00"
@@ -842,11 +842,11 @@
   {
     "orden": "96956920",
     "codigo": "7TDK",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "22-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:01.111060+00:00",
     "last_checked": "2026-09-23T04:31:53.955485+00:00"
@@ -854,11 +854,11 @@
   {
     "orden": "96954959",
     "codigo": "9H3H",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "22-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:09.638517+00:00",
     "last_checked": "2026-09-23T04:31:53.968276+00:00"
@@ -866,11 +866,11 @@
   {
     "orden": "96956057",
     "codigo": "H3TJ",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "22-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
     "last_checked": "2026-09-23T04:31:53.968316+00:00"
@@ -878,11 +878,11 @@
   {
     "orden": "96957629",
     "codigo": "7DTK",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "22-09-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:16.813825+00:00",
     "last_checked": "2026-09-23T04:31:53.968339+00:00"
