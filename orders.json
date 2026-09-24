@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-24T20:01:19.994916+00:00"
+    "last_checked": "2026-09-24T20:31:32.479733+00:00"
   },
   {
     "orden": "94672142",
@@ -837,7 +837,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-21T23:32:01.985742+00:00",
-    "last_checked": "2026-09-24T20:01:19.994905+00:00"
+    "last_checked": "2026-09-24T20:31:32.479728+00:00"
   },
   {
     "orden": "96956920",
@@ -849,7 +849,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:01.111060+00:00",
-    "last_checked": "2026-09-24T20:01:19.994863+00:00"
+    "last_checked": "2026-09-24T20:31:32.479708+00:00"
   },
   {
     "orden": "96954959",
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-24T20:01:19.994878+00:00"
+    "last_checked": "2026-09-24T20:31:32.479715+00:00"
   },
   {
     "orden": "96957629",
@@ -885,7 +885,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:16.813825+00:00",
-    "last_checked": "2026-09-24T20:01:19.994892+00:00"
+    "last_checked": "2026-09-24T20:31:32.479722+00:00"
   },
   {
     "orden": "97148471",
@@ -897,7 +897,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:21.543404+00:00",
-    "last_checked": "2026-09-24T20:01:19.994790+00:00"
+    "last_checked": "2026-09-24T20:31:32.479665+00:00"
   },
   {
     "orden": "97152484",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-09-24T20:01:19.994831+00:00"
+    "last_checked": "2026-09-24T20:31:32.479693+00:00"
   },
   {
     "orden": "97152392",
@@ -921,6 +921,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:29.238063+00:00",
-    "last_checked": "2026-09-24T20:01:19.994848+00:00"
+    "last_checked": "2026-09-24T20:31:32.479701+00:00"
   }
 ]
