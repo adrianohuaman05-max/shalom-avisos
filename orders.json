@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-24T16:01:38.475421+00:00"
+    "last_checked": "2026-09-24T16:31:34.934595+00:00"
   },
   {
     "orden": "94672142",
@@ -825,7 +825,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-21T23:31:58.735752+00:00",
-    "last_checked": "2026-09-24T16:01:38.475406+00:00"
+    "last_checked": "2026-09-24T16:31:34.934583+00:00"
   },
   {
     "orden": "96763808",
@@ -837,7 +837,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-21T23:32:01.985742+00:00",
-    "last_checked": "2026-09-24T16:01:38.475415+00:00"
+    "last_checked": "2026-09-24T16:31:34.934589+00:00"
   },
   {
     "orden": "96956920",
@@ -849,7 +849,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:01.111060+00:00",
-    "last_checked": "2026-09-24T16:01:38.475357+00:00"
+    "last_checked": "2026-09-24T16:31:34.934541+00:00"
   },
   {
     "orden": "96954959",
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-24T16:01:38.475387+00:00"
+    "last_checked": "2026-09-24T16:31:34.934568+00:00"
   },
   {
     "orden": "96957629",
@@ -885,6 +885,42 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:16.813825+00:00",
-    "last_checked": "2026-09-24T16:01:38.475398+00:00"
+    "last_checked": "2026-09-24T16:31:34.934576+00:00"
+  },
+  {
+    "orden": "97148471",
+    "codigo": "T7JK",
+    "estado": "En origen",
+    "fecha_envio": "24-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-24T16:31:21.543404+00:00",
+    "last_checked": "2026-09-24T16:31:21.543421+00:00"
+  },
+  {
+    "orden": "97152484",
+    "codigo": "WHM9",
+    "estado": "En origen",
+    "fecha_envio": "24-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-24T16:31:25.947300+00:00",
+    "last_checked": "2026-09-24T16:31:25.947315+00:00"
+  },
+  {
+    "orden": "97152392",
+    "codigo": "C33P",
+    "estado": "En origen",
+    "fecha_envio": "24-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-24T16:31:29.238063+00:00",
+    "last_checked": "2026-09-24T16:31:29.238078+00:00"
   }
 ]
