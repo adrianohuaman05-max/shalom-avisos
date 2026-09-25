@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-24T23:31:17.904122+00:00"
+    "last_checked": "2026-09-25T00:01:37.697655+00:00"
   },
   {
     "orden": "94672142",
@@ -842,11 +842,11 @@
   {
     "orden": "96956920",
     "codigo": "7TDK",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "22-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:01.111060+00:00",
     "last_checked": "2026-09-24T23:31:17.904107+00:00"
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-24T23:31:17.904113+00:00"
+    "last_checked": "2026-09-25T00:01:37.697640+00:00"
   },
   {
     "orden": "96957629",
@@ -885,7 +885,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:16.813825+00:00",
-    "last_checked": "2026-09-24T23:31:17.904118+00:00"
+    "last_checked": "2026-09-25T00:01:37.697649+00:00"
   },
   {
     "orden": "97148471",
@@ -897,7 +897,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:21.543404+00:00",
-    "last_checked": "2026-09-24T23:31:17.904072+00:00"
+    "last_checked": "2026-09-25T00:01:37.697591+00:00"
   },
   {
     "orden": "97152484",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-09-24T23:31:17.904095+00:00"
+    "last_checked": "2026-09-25T00:01:37.697621+00:00"
   },
   {
     "orden": "97152392",
@@ -921,6 +921,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:29.238063+00:00",
-    "last_checked": "2026-09-24T23:31:17.904102+00:00"
+    "last_checked": "2026-09-25T00:01:37.697631+00:00"
   }
 ]
