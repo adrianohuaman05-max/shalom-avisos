@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-25T22:31:17.228903+00:00"
+    "last_checked": "2026-09-25T23:01:19.244487+00:00"
   },
   {
     "orden": "94672142",
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-25T22:31:17.228885+00:00"
+    "last_checked": "2026-09-25T23:01:19.244473+00:00"
   },
   {
     "orden": "96957629",
@@ -885,7 +885,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:16.813825+00:00",
-    "last_checked": "2026-09-25T22:31:17.228895+00:00"
+    "last_checked": "2026-09-25T23:01:19.244482+00:00"
   },
   {
     "orden": "97148471",
@@ -897,7 +897,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:21.543404+00:00",
-    "last_checked": "2026-09-25T22:31:17.222046+00:00"
+    "last_checked": "2026-09-25T23:01:19.237638+00:00"
   },
   {
     "orden": "97152484",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-09-25T22:31:17.222079+00:00"
+    "last_checked": "2026-09-25T23:01:19.237669+00:00"
   },
   {
     "orden": "97152392",
@@ -921,6 +921,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:29.238063+00:00",
-    "last_checked": "2026-09-25T22:31:17.228869+00:00"
+    "last_checked": "2026-09-25T23:01:19.244460+00:00"
+  },
+  {
+    "orden": "97373100",
+    "codigo": "TM73",
+    "estado": "En origen",
+    "fecha_envio": "25-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-25T23:01:15.436726+00:00",
+    "last_checked": "2026-09-25T23:01:15.436744+00:00"
   }
 ]
