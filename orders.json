@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-27T00:31:16.870999+00:00"
+    "last_checked": "2026-09-27T01:01:52.627969+00:00"
   },
   {
     "orden": "94672142",
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-27T00:31:16.870993+00:00"
+    "last_checked": "2026-09-27T01:01:52.627963+00:00"
   },
   {
     "orden": "96957629",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-09-27T00:31:16.870976+00:00"
+    "last_checked": "2026-09-27T01:01:52.627948+00:00"
   },
   {
     "orden": "97152392",
@@ -921,7 +921,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:29.238063+00:00",
-    "last_checked": "2026-09-27T00:31:16.870985+00:00"
+    "last_checked": "2026-09-27T01:01:52.627956+00:00"
   },
   {
     "orden": "97373100",
@@ -933,18 +933,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-25T23:01:15.436726+00:00",
-    "last_checked": "2026-09-27T00:31:16.870965+00:00"
+    "last_checked": "2026-09-27T01:01:52.627934+00:00"
   },
   {
     "orden": "97511763",
     "codigo": "3P9K",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "26-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-26T23:01:25.277599+00:00",
-    "last_checked": "2026-09-27T00:31:16.870937+00:00"
+    "last_checked": "2026-09-27T01:01:52.566081+00:00"
+  },
+  {
+    "orden": "97529340",
+    "codigo": "3K39",
+    "estado": "En origen",
+    "fecha_envio": "26-09-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-09-27T01:01:46.432242+00:00",
+    "last_checked": "2026-09-27T01:01:46.432260+00:00"
   }
 ]
