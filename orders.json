@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-09-29T04:01:23.218028+00:00"
+    "last_checked": "2026-09-29T04:31:27.146414+00:00"
   },
   {
     "orden": "94672142",
@@ -873,7 +873,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-23T01:02:13.816664+00:00",
-    "last_checked": "2026-09-29T04:01:23.218022+00:00"
+    "last_checked": "2026-09-29T04:31:27.146407+00:00"
   },
   {
     "orden": "96957629",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-09-29T04:01:23.218007+00:00"
+    "last_checked": "2026-09-29T04:31:27.146384+00:00"
   },
   {
     "orden": "97152392",
@@ -921,7 +921,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:29.238063+00:00",
-    "last_checked": "2026-09-29T04:01:23.218015+00:00"
+    "last_checked": "2026-09-29T04:31:27.146398+00:00"
   },
   {
     "orden": "97373100",
@@ -945,18 +945,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-26T23:01:25.277599+00:00",
-    "last_checked": "2026-09-29T04:01:23.217977+00:00"
+    "last_checked": "2026-09-29T04:31:27.138733+00:00"
   },
   {
     "orden": "97529340",
     "codigo": "3K39",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "26-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-27T01:01:46.432242+00:00",
-    "last_checked": "2026-09-29T04:01:23.199887+00:00"
+    "last_checked": "2026-09-29T04:31:23.842285+00:00"
   }
 ]
