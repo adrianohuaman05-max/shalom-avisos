@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-01T00:31:45.616358+00:00"
+    "last_checked": "2026-10-01T01:01:31.357551+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-01T00:31:45.616349+00:00"
+    "last_checked": "2026-10-01T01:01:31.357547+00:00"
   },
   {
     "orden": "97152392",
@@ -957,54 +957,54 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-27T01:01:46.432242+00:00",
-    "last_checked": "2026-10-01T00:31:45.616325+00:00"
+    "last_checked": "2026-10-01T01:01:31.357541+00:00"
   },
   {
     "orden": "98010138",
     "codigo": "33CT",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-01T00:31:25.506181+00:00"
+    "last_checked": "2026-10-01T01:01:31.341629+00:00"
   },
   {
     "orden": "98009452",
     "codigo": "TJNP",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:31.869219+00:00",
-    "last_checked": "2026-10-01T00:31:31.869234+00:00"
+    "last_checked": "2026-10-01T01:01:31.357488+00:00"
   },
   {
     "orden": "97942465",
     "codigo": "DNHC",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:36.248694+00:00",
-    "last_checked": "2026-10-01T00:31:36.248708+00:00"
+    "last_checked": "2026-10-01T01:01:31.357515+00:00"
   },
   {
     "orden": "97942152",
     "codigo": "C3MC",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-09-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:39.980452+00:00",
-    "last_checked": "2026-10-01T00:31:39.980467+00:00"
+    "last_checked": "2026-10-01T01:01:31.357530+00:00"
   }
 ]
