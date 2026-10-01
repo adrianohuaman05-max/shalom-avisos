@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-01T16:33:17.982642+00:00"
+    "last_checked": "2026-10-01T17:11:11.332200+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-01T16:33:17.982613+00:00"
+    "last_checked": "2026-10-01T17:11:11.332192+00:00"
   },
   {
     "orden": "97152392",
@@ -969,16 +969,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-01T16:33:17.968785+00:00"
+    "last_checked": "2026-10-01T17:11:11.325516+00:00"
   },
   {
     "orden": "98009452",
     "codigo": "TJNP",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "30-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:31.869219+00:00",
     "last_checked": "2026-10-01T16:33:17.982539+00:00"
@@ -993,7 +993,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:36.248694+00:00",
-    "last_checked": "2026-10-01T16:33:17.982553+00:00"
+    "last_checked": "2026-10-01T17:11:11.332126+00:00"
   },
   {
     "orden": "97942152",
@@ -1005,6 +1005,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:39.980452+00:00",
-    "last_checked": "2026-10-01T16:33:17.982587+00:00"
+    "last_checked": "2026-10-01T17:11:11.332165+00:00"
+  },
+  {
+    "orden": "98048583",
+    "codigo": "9WTK",
+    "estado": "En origen",
+    "fecha_envio": "01-10-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-10-01T17:11:06.770570+00:00",
+    "last_checked": "2026-10-01T17:11:06.770588+00:00"
   }
 ]
