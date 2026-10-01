@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-01T18:31:18.611777+00:00"
+    "last_checked": "2026-10-01T19:02:07.376151+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-01T18:31:18.611770+00:00"
+    "last_checked": "2026-10-01T19:02:07.376126+00:00"
   },
   {
     "orden": "97152392",
@@ -969,7 +969,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-01T18:31:18.606269+00:00"
+    "last_checked": "2026-10-01T19:02:06.725687+00:00"
   },
   {
     "orden": "98009452",
@@ -993,19 +993,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:36.248694+00:00",
-    "last_checked": "2026-10-01T18:31:18.611720+00:00"
+    "last_checked": "2026-10-01T19:02:06.739925+00:00"
   },
   {
     "orden": "97942152",
     "codigo": "C3MC",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "30-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:39.980452+00:00",
-    "last_checked": "2026-10-01T18:31:18.611752+00:00"
+    "last_checked": "2026-10-01T19:02:06.739971+00:00"
   },
   {
     "orden": "98048583",
@@ -1017,6 +1017,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T17:11:06.770570+00:00",
-    "last_checked": "2026-10-01T18:31:18.606240+00:00"
+    "last_checked": "2026-10-01T19:02:06.725651+00:00"
   }
 ]
