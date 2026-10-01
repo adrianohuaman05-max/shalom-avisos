@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-01T15:01:30.782210+00:00"
+    "last_checked": "2026-10-01T15:23:46.209443+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-01T15:01:30.782202+00:00"
+    "last_checked": "2026-10-01T15:23:46.209437+00:00"
   },
   {
     "orden": "97152392",
@@ -969,19 +969,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-01T15:01:30.757004+00:00"
+    "last_checked": "2026-10-01T15:23:41.633854+00:00"
   },
   {
     "orden": "98009452",
     "codigo": "TJNP",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "30-09-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:31.869219+00:00",
-    "last_checked": "2026-10-01T15:01:30.782118+00:00"
+    "last_checked": "2026-10-01T15:23:41.679150+00:00"
   },
   {
     "orden": "97942465",
@@ -993,7 +993,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:36.248694+00:00",
-    "last_checked": "2026-10-01T15:01:30.782156+00:00"
+    "last_checked": "2026-10-01T15:23:46.209333+00:00"
   },
   {
     "orden": "97942152",
@@ -1005,6 +1005,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:39.980452+00:00",
-    "last_checked": "2026-10-01T15:01:30.782181+00:00"
+    "last_checked": "2026-10-01T15:23:46.209414+00:00"
   }
 ]
