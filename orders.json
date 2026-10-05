@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-05T16:31:31.922174+00:00"
+    "last_checked": "2026-10-05T16:58:02.723478+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-05T16:31:31.922169+00:00"
+    "last_checked": "2026-10-05T16:58:02.723473+00:00"
   },
   {
     "orden": "97152392",
@@ -969,7 +969,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-05T16:31:31.922161+00:00"
+    "last_checked": "2026-10-05T16:58:02.723465+00:00"
   },
   {
     "orden": "98009452",
@@ -1041,19 +1041,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-02T18:31:19.560907+00:00",
-    "last_checked": "2026-10-05T16:31:31.922151+00:00"
+    "last_checked": "2026-10-05T16:58:02.723444+00:00"
   },
   {
     "orden": "98324739",
     "codigo": "HCMM",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "03-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-03T16:01:32.040433+00:00",
-    "last_checked": "2026-10-05T16:31:31.922117+00:00"
+    "last_checked": "2026-10-05T16:58:02.084311+00:00"
   },
   {
     "orden": "98403382",
@@ -1065,18 +1065,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-03T23:01:10.957347+00:00",
-    "last_checked": "2026-10-05T16:31:31.787327+00:00"
+    "last_checked": "2026-10-05T16:58:02.084268+00:00"
   },
   {
     "orden": "98480395",
     "codigo": "DHDT",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "05-10-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T14:31:55.619904+00:00",
-    "last_checked": "2026-10-05T16:31:31.787298+00:00"
+    "last_checked": "2026-10-05T16:58:02.077688+00:00"
   }
 ]
