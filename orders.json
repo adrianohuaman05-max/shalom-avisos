@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-05T17:01:55.734728+00:00"
+    "last_checked": "2026-10-05T17:31:28.068701+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-05T17:01:55.734722+00:00"
+    "last_checked": "2026-10-05T17:31:28.068690+00:00"
   },
   {
     "orden": "97152392",
@@ -969,7 +969,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-01T00:31:25.506161+00:00",
-    "last_checked": "2026-10-05T17:01:55.734713+00:00"
+    "last_checked": "2026-10-05T17:31:28.068675+00:00"
   },
   {
     "orden": "98009452",
@@ -1041,7 +1041,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-02T18:31:19.560907+00:00",
-    "last_checked": "2026-10-05T17:01:55.734703+00:00"
+    "last_checked": "2026-10-05T17:31:28.068659+00:00"
   },
   {
     "orden": "98324739",
@@ -1053,7 +1053,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-03T16:01:32.040433+00:00",
-    "last_checked": "2026-10-05T17:01:55.734692+00:00"
+    "last_checked": "2026-10-05T17:31:28.068641+00:00"
   },
   {
     "orden": "98403382",
@@ -1065,7 +1065,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-03T23:01:10.957347+00:00",
-    "last_checked": "2026-10-05T17:01:55.734650+00:00"
+    "last_checked": "2026-10-05T17:31:28.068579+00:00"
   },
   {
     "orden": "98480395",
@@ -1077,6 +1077,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T14:31:55.619904+00:00",
-    "last_checked": "2026-10-05T17:01:55.720842+00:00"
+    "last_checked": "2026-10-05T17:31:27.923509+00:00"
+  },
+  {
+    "orden": "98503456",
+    "codigo": "NDW7",
+    "estado": "En origen",
+    "fecha_envio": "05-10-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-10-05T17:31:21.529780+00:00",
+    "last_checked": "2026-10-05T17:31:21.529802+00:00"
+  },
+  {
+    "orden": "98503627",
+    "codigo": "D9JM",
+    "estado": "En origen",
+    "fecha_envio": "05-10-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-10-05T17:31:24.941143+00:00",
+    "last_checked": "2026-10-05T17:31:24.941158+00:00"
   }
 ]
