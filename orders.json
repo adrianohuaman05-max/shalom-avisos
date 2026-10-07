@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-07T16:31:20.614148+00:00"
+    "last_checked": "2026-10-07T17:31:41.559892+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-07T16:31:20.614143+00:00"
+    "last_checked": "2026-10-07T17:31:41.559883+00:00"
   },
   {
     "orden": "97152392",
@@ -1077,7 +1077,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T14:31:55.619904+00:00",
-    "last_checked": "2026-10-07T16:31:20.614135+00:00"
+    "last_checked": "2026-10-07T17:31:41.559858+00:00"
   },
   {
     "orden": "98503456",
@@ -1089,19 +1089,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:21.529780+00:00",
-    "last_checked": "2026-10-07T16:31:20.614099+00:00"
+    "last_checked": "2026-10-07T17:31:41.014947+00:00"
   },
   {
     "orden": "98503627",
     "codigo": "D9JM",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "05-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:24.941143+00:00",
-    "last_checked": "2026-10-07T16:31:20.614119+00:00"
+    "last_checked": "2026-10-07T17:31:41.014977+00:00"
   },
   {
     "orden": "98530812",
@@ -1113,7 +1113,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T21:02:02.180073+00:00",
-    "last_checked": "2026-10-07T16:31:20.614067+00:00"
+    "last_checked": "2026-10-07T17:31:41.014908+00:00"
   },
   {
     "orden": "98763430",
@@ -1125,6 +1125,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-07T00:31:25.054236+00:00",
-    "last_checked": "2026-10-07T16:31:20.586147+00:00"
+    "last_checked": "2026-10-07T17:31:41.008115+00:00"
   }
 ]
