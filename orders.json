@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-07T18:31:45.705933+00:00"
+    "last_checked": "2026-10-07T19:03:15.216629+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-07T18:31:45.705926+00:00"
+    "last_checked": "2026-10-07T19:03:15.216622+00:00"
   },
   {
     "orden": "97152392",
@@ -1070,11 +1070,11 @@
   {
     "orden": "98480395",
     "codigo": "DHDT",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "05-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-05T14:31:55.619904+00:00",
     "last_checked": "2026-10-07T18:31:45.705918+00:00"
@@ -1089,7 +1089,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:21.529780+00:00",
-    "last_checked": "2026-10-07T18:31:45.705880+00:00"
+    "last_checked": "2026-10-07T19:03:15.216584+00:00"
   },
   {
     "orden": "98503627",
@@ -1101,7 +1101,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:24.941143+00:00",
-    "last_checked": "2026-10-07T18:31:45.705907+00:00"
+    "last_checked": "2026-10-07T19:03:15.216612+00:00"
   },
   {
     "orden": "98530812",
@@ -1113,7 +1113,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T21:02:02.180073+00:00",
-    "last_checked": "2026-10-07T18:31:45.705838+00:00"
+    "last_checked": "2026-10-07T19:03:15.216543+00:00"
   },
   {
     "orden": "98763430",
@@ -1125,6 +1125,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-07T00:31:25.054236+00:00",
-    "last_checked": "2026-10-07T18:31:45.688169+00:00"
+    "last_checked": "2026-10-07T19:03:15.199945+00:00"
   }
 ]
