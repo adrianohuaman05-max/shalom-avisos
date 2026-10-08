@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-07T19:33:03.407384+00:00"
+    "last_checked": "2026-10-08T02:02:27.228984+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-07T19:33:03.407378+00:00"
+    "last_checked": "2026-10-08T02:02:27.228964+00:00"
   },
   {
     "orden": "97152392",
@@ -1082,11 +1082,11 @@
   {
     "orden": "98503456",
     "codigo": "NDW7",
-    "estado": "En tránsito",
+    "estado": "Entregado",
     "fecha_envio": "05-10-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:21.529780+00:00",
     "last_checked": "2026-10-07T19:33:03.407345+00:00"
@@ -1094,11 +1094,11 @@
   {
     "orden": "98503627",
     "codigo": "D9JM",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "05-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-05T17:31:24.941143+00:00",
     "last_checked": "2026-10-07T19:33:03.407369+00:00"
@@ -1106,14 +1106,14 @@
   {
     "orden": "98530812",
     "codigo": "WH7N",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "05-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-05T21:02:02.180073+00:00",
-    "last_checked": "2026-10-07T19:33:03.407305+00:00"
+    "last_checked": "2026-10-08T02:02:26.699784+00:00"
   },
   {
     "orden": "98763430",
@@ -1125,6 +1125,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-07T00:31:25.054236+00:00",
-    "last_checked": "2026-10-07T19:33:03.388297+00:00"
+    "last_checked": "2026-10-08T02:02:26.692544+00:00"
   }
 ]
