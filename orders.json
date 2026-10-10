@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-10T15:01:22.226262+00:00"
+    "last_checked": "2026-10-10T15:31:10.158750+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-10T15:01:22.226249+00:00"
+    "last_checked": "2026-10-10T15:31:10.158734+00:00"
   },
   {
     "orden": "97152392",
@@ -1130,13 +1130,13 @@
   {
     "orden": "99180349",
     "codigo": "T377",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "09-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-10T01:03:07.270024+00:00",
-    "last_checked": "2026-10-10T15:01:22.218956+00:00"
+    "last_checked": "2026-10-10T15:31:09.576373+00:00"
   }
 ]
