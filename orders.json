@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-10T16:01:10.926665+00:00"
+    "last_checked": "2026-10-10T16:31:21.488988+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-10T16:01:10.926657+00:00"
+    "last_checked": "2026-10-10T16:31:21.488980+00:00"
   },
   {
     "orden": "97152392",
@@ -1137,6 +1137,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-10T01:03:07.270024+00:00",
-    "last_checked": "2026-10-10T16:01:10.926633+00:00"
+    "last_checked": "2026-10-10T16:31:21.488956+00:00"
+  },
+  {
+    "orden": "99223856",
+    "codigo": "DTCD",
+    "estado": "En origen",
+    "fecha_envio": "10-10-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-10-10T16:31:16.593087+00:00",
+    "last_checked": "2026-10-10T16:31:16.593109+00:00"
   }
 ]
