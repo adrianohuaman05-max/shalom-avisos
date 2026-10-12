@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-12T16:01:29.485744+00:00"
+    "last_checked": "2026-10-12T16:31:06.198016+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-12T16:01:29.485708+00:00"
+    "last_checked": "2026-10-12T16:31:06.198011+00:00"
   },
   {
     "orden": "97152392",
@@ -1149,18 +1149,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-10T16:31:16.593087+00:00",
-    "last_checked": "2026-10-12T16:01:29.470355+00:00"
+    "last_checked": "2026-10-12T16:31:06.197987+00:00"
   },
   {
     "orden": "99314632",
     "codigo": "JK3C",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "10-10-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-11T01:01:13.146857+00:00",
-    "last_checked": "2026-10-12T16:01:29.470320+00:00"
+    "last_checked": "2026-10-12T16:31:06.193521+00:00"
   }
 ]
