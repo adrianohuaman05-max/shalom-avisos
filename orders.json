@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-14T19:32:06.325034+00:00"
+    "last_checked": "2026-10-14T20:05:33.548422+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-14T19:32:06.325028+00:00"
+    "last_checked": "2026-10-14T20:05:33.548413+00:00"
   },
   {
     "orden": "97152392",
@@ -1161,19 +1161,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-11T01:01:13.146857+00:00",
-    "last_checked": "2026-10-14T19:32:06.325011+00:00"
+    "last_checked": "2026-10-14T20:05:33.548374+00:00"
   },
   {
     "orden": "99391865",
     "codigo": "NJMD",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "12-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T01:01:11.646558+00:00",
-    "last_checked": "2026-10-14T19:32:06.310340+00:00"
+    "last_checked": "2026-10-14T20:05:32.908765+00:00"
   },
   {
     "orden": "99391434",
@@ -1185,7 +1185,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T01:01:17.947692+00:00",
-    "last_checked": "2026-10-14T19:32:06.324961+00:00"
+    "last_checked": "2026-10-14T20:05:33.530067+00:00"
   },
   {
     "orden": "99523985",
@@ -1197,7 +1197,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T18:01:20.133284+00:00",
-    "last_checked": "2026-10-14T19:32:06.324974+00:00"
+    "last_checked": "2026-10-14T20:05:33.530096+00:00"
   },
   {
     "orden": "99524009",
@@ -1209,6 +1209,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T18:01:25.202926+00:00",
-    "last_checked": "2026-10-14T19:32:06.324984+00:00"
+    "last_checked": "2026-10-14T20:05:33.530110+00:00"
   }
 ]
