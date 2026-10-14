@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-14T17:31:52.620738+00:00"
+    "last_checked": "2026-10-14T18:02:16.064711+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-14T17:31:52.620732+00:00"
+    "last_checked": "2026-10-14T18:02:16.064702+00:00"
   },
   {
     "orden": "97152392",
@@ -1161,7 +1161,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-11T01:01:13.146857+00:00",
-    "last_checked": "2026-10-14T17:31:52.620716+00:00"
+    "last_checked": "2026-10-14T18:02:16.064673+00:00"
   },
   {
     "orden": "99391865",
@@ -1173,31 +1173,31 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T01:01:11.646558+00:00",
-    "last_checked": "2026-10-14T17:31:52.615115+00:00"
+    "last_checked": "2026-10-14T18:02:01.147769+00:00"
   },
   {
     "orden": "99391434",
     "codigo": "JJNW",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "12-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T01:01:17.947692+00:00",
-    "last_checked": "2026-10-14T17:31:52.620646+00:00"
+    "last_checked": "2026-10-14T18:02:01.200016+00:00"
   },
   {
     "orden": "99523985",
     "codigo": "HJK9",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T18:01:20.133284+00:00",
-    "last_checked": "2026-10-14T17:31:52.620679+00:00"
+    "last_checked": "2026-10-14T18:02:15.410131+00:00"
   },
   {
     "orden": "99524009",
@@ -1209,6 +1209,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-13T18:01:25.202926+00:00",
-    "last_checked": "2026-10-14T17:31:52.620700+00:00"
+    "last_checked": "2026-10-14T18:02:16.064590+00:00"
   }
 ]
