@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-17T21:38:59.402763+00:00"
+    "last_checked": "2026-10-17T22:01:33.765122+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-17T21:38:59.402755+00:00"
+    "last_checked": "2026-10-17T22:01:33.765115+00:00"
   },
   {
     "orden": "97152392",
@@ -1221,7 +1221,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-15T01:01:40.554502+00:00",
-    "last_checked": "2026-10-17T21:38:59.402746+00:00"
+    "last_checked": "2026-10-17T22:01:33.765102+00:00"
   },
   {
     "orden": "99831613",
@@ -1250,11 +1250,11 @@
   {
     "orden": "99900567",
     "codigo": "NWMP",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "15-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-16T01:01:38.394101+00:00",
     "last_checked": "2026-10-17T21:38:59.402730+00:00"
@@ -1269,6 +1269,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-17T01:02:00.315016+00:00",
-    "last_checked": "2026-10-17T21:38:59.388035+00:00"
+    "last_checked": "2026-10-17T22:01:33.749469+00:00"
   }
 ]
