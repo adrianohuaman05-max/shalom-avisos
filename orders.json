@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-17T00:31:36.173455+00:00"
+    "last_checked": "2026-10-17T01:02:08.159503+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-17T00:31:36.173442+00:00"
+    "last_checked": "2026-10-17T01:02:08.159491+00:00"
   },
   {
     "orden": "97152392",
@@ -1221,7 +1221,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-15T01:01:40.554502+00:00",
-    "last_checked": "2026-10-17T00:31:36.167375+00:00"
+    "last_checked": "2026-10-17T01:02:08.134809+00:00"
   },
   {
     "orden": "99831613",
@@ -1257,6 +1257,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-16T01:01:38.394101+00:00",
-    "last_checked": "2026-10-17T00:31:36.167347+00:00"
+    "last_checked": "2026-10-17T01:02:08.134784+00:00"
+  },
+  {
+    "orden": "100096106",
+    "codigo": "PKW3",
+    "estado": "En origen",
+    "fecha_envio": "16-10-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-10-17T01:02:00.315016+00:00",
+    "last_checked": "2026-10-17T01:02:00.315030+00:00"
   }
 ]
