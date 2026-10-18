@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-18T16:01:35.181100+00:00"
+    "last_checked": "2026-10-18T16:31:28.827127+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-18T16:01:35.181093+00:00"
+    "last_checked": "2026-10-18T16:31:28.827118+00:00"
   },
   {
     "orden": "97152392",
@@ -1214,11 +1214,11 @@
   {
     "orden": "99787160",
     "codigo": "MMHC",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "14-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-15T01:01:40.554502+00:00",
     "last_checked": "2026-10-18T16:01:35.181082+00:00"
@@ -1269,7 +1269,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-17T01:02:00.315016+00:00",
-    "last_checked": "2026-10-18T16:01:34.095024+00:00"
+    "last_checked": "2026-10-18T16:31:28.811827+00:00"
   },
   {
     "orden": "100220313",
@@ -1281,7 +1281,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-18T01:01:23.013116+00:00",
-    "last_checked": "2026-10-18T16:01:35.159416+00:00"
+    "last_checked": "2026-10-18T16:31:28.811856+00:00"
   },
   {
     "orden": "100220817",
@@ -1293,6 +1293,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-18T01:01:30.043219+00:00",
-    "last_checked": "2026-10-18T16:01:35.181043+00:00"
+    "last_checked": "2026-10-18T16:31:28.827076+00:00"
   }
 ]
