@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-19T16:02:15.503589+00:00"
+    "last_checked": "2026-10-19T16:31:33.069495+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-19T16:02:15.503581+00:00"
+    "last_checked": "2026-10-19T16:31:33.069470+00:00"
   },
   {
     "orden": "97152392",
@@ -1269,7 +1269,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-17T01:02:00.315016+00:00",
-    "last_checked": "2026-10-19T16:02:15.503523+00:00"
+    "last_checked": "2026-10-19T16:31:32.431624+00:00"
   },
   {
     "orden": "100220313",
@@ -1281,19 +1281,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-18T01:01:23.013116+00:00",
-    "last_checked": "2026-10-19T16:02:15.503535+00:00"
+    "last_checked": "2026-10-19T16:31:32.431634+00:00"
   },
   {
     "orden": "100220817",
     "codigo": "7M3N",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "17-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-18T01:01:30.043219+00:00",
-    "last_checked": "2026-10-19T16:02:15.503546+00:00"
+    "last_checked": "2026-10-19T16:31:32.431648+00:00"
   },
   {
     "orden": "100245234",
@@ -1305,7 +1305,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-18T17:01:23.977124+00:00",
-    "last_checked": "2026-10-19T16:02:15.452177+00:00"
+    "last_checked": "2026-10-19T16:31:32.416273+00:00"
   },
   {
     "orden": "100283462",
@@ -1317,6 +1317,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-19T15:31:58.044906+00:00",
-    "last_checked": "2026-10-19T16:02:15.503505+00:00"
+    "last_checked": "2026-10-19T16:31:32.431608+00:00"
   }
 ]
