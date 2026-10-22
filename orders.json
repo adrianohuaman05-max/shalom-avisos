@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-22T11:32:35.708952+00:00"
+    "last_checked": "2026-10-22T18:02:43.816396+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-22T11:32:35.708947+00:00"
+    "last_checked": "2026-10-22T18:02:43.816389+00:00"
   },
   {
     "orden": "97152392",
@@ -1269,7 +1269,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-17T01:02:00.315016+00:00",
-    "last_checked": "2026-10-22T11:32:35.708939+00:00"
+    "last_checked": "2026-10-22T18:02:43.816380+00:00"
   },
   {
     "orden": "100220313",
@@ -1317,19 +1317,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-19T15:31:58.044906+00:00",
-    "last_checked": "2026-10-22T11:32:35.708931+00:00"
+    "last_checked": "2026-10-22T18:02:43.816356+00:00"
   },
   {
     "orden": "100430677",
     "codigo": "WMNT",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "20-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-20T17:31:24.859158+00:00",
-    "last_checked": "2026-10-22T11:32:35.708914+00:00"
+    "last_checked": "2026-10-22T18:02:43.312210+00:00"
   },
   {
     "orden": "100590291",
@@ -1341,19 +1341,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:26.765302+00:00",
-    "last_checked": "2026-10-22T11:32:35.703460+00:00"
+    "last_checked": "2026-10-22T18:02:42.204280+00:00"
   },
   {
     "orden": "100589917",
     "codigo": "9THC",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "21-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:30.955043+00:00",
-    "last_checked": "2026-10-22T11:32:35.703486+00:00"
+    "last_checked": "2026-10-22T18:02:42.204310+00:00"
   },
   {
     "orden": "100590195",
@@ -1365,18 +1365,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:35.283141+00:00",
-    "last_checked": "2026-10-22T11:32:35.708862+00:00"
+    "last_checked": "2026-10-22T18:02:42.783908+00:00"
   },
   {
     "orden": "100590011",
     "codigo": "HMJD",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "21-10-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:38.730014+00:00",
-    "last_checked": "2026-10-22T11:32:35.708893+00:00"
+    "last_checked": "2026-10-22T18:02:42.790815+00:00"
   }
 ]
