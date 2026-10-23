@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-23T19:31:03.364981+00:00"
+    "last_checked": "2026-10-23T20:01:07.557593+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-23T19:31:03.364973+00:00"
+    "last_checked": "2026-10-23T20:01:07.557589+00:00"
   },
   {
     "orden": "97152392",
@@ -1334,11 +1334,11 @@
   {
     "orden": "100590291",
     "codigo": "3M3C",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "21-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:26.765302+00:00",
     "last_checked": "2026-10-23T19:31:03.364923+00:00"
@@ -1353,7 +1353,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:30.955043+00:00",
-    "last_checked": "2026-10-23T19:31:03.364952+00:00"
+    "last_checked": "2026-10-23T20:01:07.557554+00:00"
   },
   {
     "orden": "100590195",
@@ -1365,7 +1365,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-21T14:31:35.283141+00:00",
-    "last_checked": "2026-10-23T19:31:03.364964+00:00"
+    "last_checked": "2026-10-23T20:01:07.557582+00:00"
   },
   {
     "orden": "100590011",
