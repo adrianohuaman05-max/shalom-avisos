@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-26T18:01:27.336600+00:00"
+    "last_checked": "2026-10-26T18:43:30.209964+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-26T18:01:27.336585+00:00"
+    "last_checked": "2026-10-26T18:43:30.209952+00:00"
   },
   {
     "orden": "97152392",
@@ -1389,7 +1389,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-24T16:54:20.651575+00:00",
-    "last_checked": "2026-10-26T18:01:27.322408+00:00"
+    "last_checked": "2026-10-26T18:43:30.196304+00:00"
   },
   {
     "orden": "101241242",
@@ -1401,6 +1401,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-26T16:35:22.326112+00:00",
-    "last_checked": "2026-10-26T18:01:27.322379+00:00"
+    "last_checked": "2026-10-26T18:43:30.196280+00:00"
   }
 ]
