@@ -554,14 +554,14 @@
   {
     "orden": "94683198",
     "codigo": "7H3D",
-    "estado": "Entregado",
+    "estado": "En tránsito",
     "fecha_envio": "04-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": true,
+    "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-30T05:31:21.371589+00:00"
+    "last_checked": "2026-10-30T06:31:10.780349+00:00"
   },
   {
     "orden": "94672142",
@@ -902,14 +902,14 @@
   {
     "orden": "97152484",
     "codigo": "WHM9",
-    "estado": "Entregado",
+    "estado": "En destino",
     "fecha_envio": "24-09-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": true,
+    "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-30T05:31:21.371581+00:00"
+    "last_checked": "2026-10-30T06:31:10.780340+00:00"
   },
   {
     "orden": "97152392",
@@ -1382,14 +1382,14 @@
   {
     "orden": "101076771",
     "codigo": "KH79",
-    "estado": "Entregado",
+    "estado": "En destino",
     "fecha_envio": "24-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": true,
+    "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-24T16:54:20.651575+00:00",
-    "last_checked": "2026-10-30T05:31:21.371570+00:00"
+    "last_checked": "2026-10-30T06:31:10.780327+00:00"
   },
   {
     "orden": "101241242",
@@ -1406,13 +1406,13 @@
   {
     "orden": "101402653",
     "codigo": "3H9M",
-    "estado": "Entregado",
+    "estado": "En destino",
     "fecha_envio": "27-10-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": true,
+    "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-27T17:31:22.864397+00:00",
-    "last_checked": "2026-10-30T05:31:21.371539+00:00"
+    "last_checked": "2026-10-30T06:31:10.780292+00:00"
   }
 ]
