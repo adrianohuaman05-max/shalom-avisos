@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-10-31T01:01:15.376710+00:00"
+    "last_checked": "2026-10-31T01:31:11.987435+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-10-31T01:01:15.376698+00:00"
+    "last_checked": "2026-10-31T01:31:11.987430+00:00"
   },
   {
     "orden": "97152392",
@@ -1389,7 +1389,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-24T16:54:20.651575+00:00",
-    "last_checked": "2026-10-31T01:01:15.376680+00:00"
+    "last_checked": "2026-10-31T01:31:11.987422+00:00"
   },
   {
     "orden": "101241242",
@@ -1413,30 +1413,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-27T17:31:22.864397+00:00",
-    "last_checked": "2026-10-31T01:01:15.376646+00:00"
+    "last_checked": "2026-10-31T01:31:11.987411+00:00"
   },
   {
     "orden": "101944957",
     "codigo": "PWDN",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-10-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-31T01:01:05.113651+00:00",
-    "last_checked": "2026-10-31T01:01:05.113668+00:00"
+    "last_checked": "2026-10-31T01:31:11.970216+00:00"
   },
   {
     "orden": "101968257",
     "codigo": "P93J",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "30-10-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-31T01:01:11.008267+00:00",
-    "last_checked": "2026-10-31T01:01:11.008282+00:00"
+    "last_checked": "2026-10-31T01:31:11.987376+00:00"
   }
 ]
