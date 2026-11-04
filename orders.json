@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-04T14:01:00.386846+00:00"
+    "last_checked": "2026-11-04T14:31:25.422376+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-04T14:01:00.386839+00:00"
+    "last_checked": "2026-11-04T14:31:25.422368+00:00"
   },
   {
     "orden": "97152392",
@@ -1425,7 +1425,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-10-31T01:01:05.113651+00:00",
-    "last_checked": "2026-11-04T14:01:00.386830+00:00"
+    "last_checked": "2026-11-04T14:31:25.422360+00:00"
   },
   {
     "orden": "101968257",
@@ -1449,16 +1449,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-02T16:01:49.855686+00:00",
-    "last_checked": "2026-11-04T14:01:00.386777+00:00"
+    "last_checked": "2026-11-04T14:31:25.422318+00:00"
   },
   {
     "orden": "102153952",
     "codigo": "TK3W",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "02-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-02T16:01:53.796969+00:00",
     "last_checked": "2026-11-04T14:01:00.386805+00:00"
@@ -1473,6 +1473,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-02T16:01:56.904175+00:00",
-    "last_checked": "2026-11-04T14:01:00.386818+00:00"
+    "last_checked": "2026-11-04T14:31:25.422347+00:00"
   }
 ]
