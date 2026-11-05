@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-05T13:31:27.436572+00:00"
+    "last_checked": "2026-11-05T14:01:04.021294+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-05T13:31:27.436563+00:00"
+    "last_checked": "2026-11-05T14:01:04.021266+00:00"
   },
   {
     "orden": "97152392",
@@ -1466,11 +1466,11 @@
   {
     "orden": "102154702",
     "codigo": "K9NJ",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "02-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-02T16:01:56.904175+00:00",
     "last_checked": "2026-11-05T13:31:27.436540+00:00"
