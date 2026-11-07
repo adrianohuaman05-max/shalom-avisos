@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-07T19:32:01.507645+00:00"
+    "last_checked": "2026-11-07T20:01:48.226576+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-07T19:32:01.507638+00:00"
+    "last_checked": "2026-11-07T20:01:48.226568+00:00"
   },
   {
     "orden": "97152392",
@@ -1485,19 +1485,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-06T00:54:31.891009+00:00",
-    "last_checked": "2026-11-07T19:32:01.507629+00:00"
+    "last_checked": "2026-11-07T20:01:48.226557+00:00"
   },
   {
     "orden": "102877164",
     "codigo": "MNKW",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "06-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-07T01:01:44.231940+00:00",
-    "last_checked": "2026-11-07T19:32:01.386564+00:00"
+    "last_checked": "2026-11-07T20:01:47.527390+00:00"
   },
   {
     "orden": "102876861",
@@ -1509,6 +1509,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-07T01:01:50.781011+00:00",
-    "last_checked": "2026-11-07T19:32:01.507608+00:00"
+    "last_checked": "2026-11-07T20:01:48.226529+00:00"
   }
 ]
