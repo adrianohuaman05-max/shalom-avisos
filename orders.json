@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-07T16:01:47.490933+00:00"
+    "last_checked": "2026-11-07T16:31:50.366887+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-07T16:01:47.490926+00:00"
+    "last_checked": "2026-11-07T16:31:50.366864+00:00"
   },
   {
     "orden": "97152392",
@@ -1478,14 +1478,14 @@
   {
     "orden": "102709989",
     "codigo": "MH7M",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "05-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-06T00:54:31.891009+00:00",
-    "last_checked": "2026-11-07T16:01:47.490904+00:00"
+    "last_checked": "2026-11-07T16:31:49.795351+00:00"
   },
   {
     "orden": "102877164",
@@ -1497,7 +1497,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-07T01:01:44.231940+00:00",
-    "last_checked": "2026-11-07T16:01:47.484225+00:00"
+    "last_checked": "2026-11-07T16:31:49.665814+00:00"
   },
   {
     "orden": "102876861",
@@ -1509,6 +1509,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-07T01:01:50.781011+00:00",
-    "last_checked": "2026-11-07T16:01:47.490865+00:00"
+    "last_checked": "2026-11-07T16:31:49.795294+00:00"
   }
 ]
