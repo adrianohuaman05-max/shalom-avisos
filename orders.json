@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-08T01:01:52.458405+00:00"
+    "last_checked": "2026-11-08T01:31:39.486385+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-08T01:01:52.458397+00:00"
+    "last_checked": "2026-11-08T01:31:39.486359+00:00"
   },
   {
     "orden": "97152392",
@@ -1502,11 +1502,11 @@
   {
     "orden": "102876861",
     "codigo": "MM33",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "06-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-07T01:01:50.781011+00:00",
     "last_checked": "2026-11-08T01:01:52.458368+00:00"
