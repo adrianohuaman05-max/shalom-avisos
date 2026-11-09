@@ -730,6 +730,12 @@ class ShalomPro:
         self._cerrar_detalle()
         return datos
 
+    def crear_envio(self, datos, enviar=True):
+        """Registra un envío nuevo. Ver shalompro_registro.py (el formulario
+        va aparte: es largo y solo lo usa el registro automático)."""
+        import shalompro_registro
+        return shalompro_registro.crear_envio(self, datos, enviar=enviar)
+
     def ticket_pdf(self, orden):
         """Bytes del ticket en PDF, o None si no se pudo.
 

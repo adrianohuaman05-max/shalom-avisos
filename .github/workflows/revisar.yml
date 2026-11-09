@@ -63,6 +63,11 @@ jobs:
           # el bot renueve su propia sesion y no caduque nunca.
           GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          # Registro automatico de envios por Shalom (envios_shalom.py): la
+          # URL del Apps Script del taller y la clave propia del bot. Sin
+          # estos dos secrets esa parte queda apagada y todo sigue como antes.
+          REGISTRO_URL: ${{ secrets.REGISTRO_URL }}
+          REGISTRO_CLAVE: ${{ secrets.REGISTRO_CLAVE }}
           # Con ventana (sobre Xvfb) y con Chrome de marca: las dos cosas suben
           # la nota de reCAPTCHA v3, que es lo que decide si deja entrar.
           SHALOM_HEADLESS: "0"

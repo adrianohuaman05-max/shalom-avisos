@@ -27,6 +27,7 @@ import datetime as dt
 import sys
 import time
 
+import envios_shalom
 import mensajes
 import renovacion
 import storage
@@ -188,11 +189,24 @@ def avisar_demora(pedido):
     return True
 
 
-def procesar_comandos(orders, state):
-    """Atiende /listar y /ayuda. Ya no se registran pedidos por aquí: los trae
-    el portal. Se mantiene solo para poder consultar el estado desde el celular."""
-    for u in tg.get_updates(offset=state.get("telegram_offset", 0)):
+def procesar_comandos(orders, state, espera=0):
+    """Atiende /listar, /ayuda y los botones de los envíos por Shalom.
+
+    Es el UNICO lector de getUpdates del bot: Telegram entrega cada
+    novedad una vez y la da por leida al avanzar el offset, asi que un
+    segundo lector se quedaria con la mitad de los toques. Con espera > 0
+    aguarda hasta esos segundos a que llegue algo (para el ✅ de la mañana).
+    """
+    updates = tg.get_updates(offset=state.get("telegram_offset", 0), timeout=espera)
+    for u in updates:
         state["telegram_offset"] = u["update_id"] + 1
+        cb = u.get("callback_query")
+        if cb:
+            try:
+                envios_shalom.atender_boton(cb, state, _ctx_envios())
+            except Exception as err:
+                print("Fallo al atender un boton:", type(err).__name__)
+            continue
         msg = u.get("message") or u.get("edited_message")
         if not msg:
             continue
@@ -268,6 +282,59 @@ def reavisar(ordenes):
                 enviados += 1
     print(f"Reenviados {enviados} de {len(ordenes)}.")
     return 0 if enviados else 1
+
+
+# ── Envios por Shalom que se registran solos (envios_shalom.py) ─────────
+# Minutos que la corrida de la mañana se queda esperando el ✅ despues de
+# proponer. Sin esto, tocar ✅ a las 8:05 crearia la orden recien en la
+# corrida de las 8:30. Solo se espera si esta corrida propuso algo: el
+# resto del dia, un toque se atiende en la siguiente revision.
+MINUTOS_ESPERANDO_OK = 15
+HORAS_ENTRE_AVISOS_ENVIOS = 6
+_ctx = None
+
+
+def _ctx_envios():
+    global _ctx
+    if _ctx is None:
+        _ctx = envios_shalom.Contexto()
+    return _ctx
+
+
+def registrar_envios_del_dia(pro, orders, state):
+    """Propone los envios de hoy, crea los que tienen ✅ y espera un rato.
+
+    Un fallo aqui no puede tumbar el seguimiento: los avisos de llegada son
+    lo que ya funcionaba. Se avisa por Telegram, como mucho cada 6 h.
+    """
+    ctx = _ctx_envios()
+    if not ctx.api.disponible():
+        return
+    try:
+        envios_shalom.olvidar_viejos(state, ctx)
+        envios_shalom.revisar_atascados(state, ctx)
+        propuestos = envios_shalom.proponer(state, ctx)
+        envios_shalom.crear_confirmados(pro, state, ctx, orders)
+        if propuestos:
+            esperar_ok(pro, orders, state, ctx)
+    except Exception as err:
+        print("Fallo en el registro de envios:", type(err).__name__, str(err)[:200])
+        ultimo = horas_desde(state.get("envios_ultimo_fallo"))
+        if ultimo is None or ultimo >= HORAS_ENTRE_AVISOS_ENVIOS:
+            tg.send_message(
+                "⚠️ <b>No pude revisar los envíos por Shalom de hoy</b>\n\n"
+                f"<code>{str(err)[:300]}</code>\n\n"
+                "Lo reintento en la próxima revisión. Si se repite, regístralos a mano.")
+            state["envios_ultimo_fallo"] = now().isoformat()
+
+
+def esperar_ok(pro, orders, state, ctx):
+    """Se queda escuchando los botones mientras quede algo por confirmar."""
+    limite = time.time() + MINUTOS_ESPERANDO_OK * 60
+    print(f"Esperando el ✅ hasta {MINUTOS_ESPERANDO_OK} min...")
+    while time.time() < limite and envios_shalom.hay_por_confirmar(state, ctx):
+        procesar_comandos(orders, state, espera=25)
+        envios_shalom.crear_confirmados(pro, state, ctx, orders)
 
 
 HORAS_ENTRE_RENOVACIONES = 12
@@ -398,6 +465,8 @@ def _revisar():
                     pedido["demora_avisada"] = True
 
         cerrar_desaparecidos(orders, vistos)
+        if not sin_avisos:
+            registrar_envios_del_dia(pro, orders, state)
         renovar_sesion_si_toca(pro, state)
 
     registrar_resultado(state, ok=True)

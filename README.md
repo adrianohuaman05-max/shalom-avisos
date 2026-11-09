@@ -157,6 +157,63 @@ traceback.
 
 ---
 
+## Registro automático de envíos (con ✅)
+
+Además de avisar cuando llegan, el bot puede **registrar los envíos en Shalom
+Pro** el día que salen, sin dictar nada:
+
+1. En el panel del taller → **Cotizar**, el cliente tiene guardado "envío por
+   Shalom" con la **agencia elegida de la lista** y **DNI** de quien recoge
+   y **celular** (Shalom lo pide). Nombre con los dos apellidos, por si Shalom
+   no conoce el DNI.
+2. Cargas su pedido con la fecha del día que sale.
+3. Apenas el bot lo ve (revisa cada media hora, de 7:00 a 22:00 de Lima) te
+   llega a Telegram un resumen por envío de **hoy o de mañana**: cliente,
+   galletas, agencia, quién recoge, clave para recoger (una por día, la misma
+   para todos los envíos de esa fecha) y **caja sugerida**. Si la caja no es
+   esa, tocas la correcta. Después eliges:
+   - **✅ Registrar ahora**: para lo que sale hoy (a las 4 o 6 de la tarde).
+   - **⏰ Mañana 8:00**: queda aprobado y se registra solo a las 8:00. Es lo
+     que conviene para lo de mañana: Shalom da 24 h para dejar la caja.
+4. Solo con uno de esos toques el bot crea la orden y te responde con
+   **orden, código y clave**, el mensaje para el cliente listo para WhatsApp
+   y el ticket.
+5. El seguimiento de siempre avisa cuando llega.
+
+**Nunca registra dos veces**: antes de tocar Shalom pide permiso al registro
+del taller, que lo da una sola vez por pedido. Si algo se corta a la mitad,
+te escribe "no sé si quedó creado": revisas en Shalom Pro y, solo si no
+está, tocas 🔁.
+
+**La caja aprende**: cada ✅ queda anotado (cuántas galletas → qué caja) y la
+próxima sugerencia sale de ahí. Arranca con tu regla: de 200 a 300 en L, 150
+en M.
+
+### Encenderlo (una vez)
+
+1. En el Sheets del taller: menú **PowerCookies → Envíos Shalom: ver o crear
+   la clave del bot**. Copia la clave que muestra.
+2. En este repo: **Settings → Secrets and variables → Actions**, crea:
+
+| Nombre            | Valor                                                     |
+|-------------------|-----------------------------------------------------------|
+| `REGISTRO_URL`    | la URL `/exec` del Apps Script (la misma del panel)       |
+| `REGISTRO_CLAVE`  | la clave del paso 1                                       |
+
+Sin esos dos secrets esta parte queda apagada y el bot hace lo de siempre.
+Opcional: `SHALOM_ORIGEN` si un día dejas las cajas en otra agencia (por
+defecto PARCONA).
+
+Archivos: `envios_shalom.py` (el flujo), `registro_api.py` (habla con el
+Apps Script), `shalompro_registro.py` (el formulario de Shalom Pro),
+`test_envios.py` (pruebas, sin red: `python test_envios.py`).
+
+**Privacidad**: en `state.json` solo queda un id opaco por envío (un hash, sin
+el nombre), su estado y la caja. Nombre, DNI, celular y clave se piden al
+registro en el momento y solo viajan a tu Telegram.
+
+---
+
 ## Privacidad
 
 Este repo es **público**, así que `orders.json` guarda **solo** datos de
