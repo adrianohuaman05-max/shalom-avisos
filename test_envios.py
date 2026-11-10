@@ -226,6 +226,23 @@ check("y queda ok en la memoria", (local["estado"], local["orden"]), ("ok", "900
 es.atender_boton(toque("env:ok:a1b2c3d4e5f6"), state, ctx)
 check("un ✅ viejo dice que ya está registrado", tg.respuestas[-1], "Ya está registrado (orden 90000001).")
 
+# Para el aviso de "Shalom ya recibió la caja" (revisar.avisar_entrega), que
+# llega horas después y necesita otra vez la clave y el nombre del cliente.
+check("la orden queda pendiente de avisar cuando Shalom la reciba",
+      orders[0]["entrega_avisada"], False)
+del_panel = es.buscar_por_orden(state, ctx, "90000001")
+check("por el número de orden se recupera el envío del panel",
+      (del_panel["cliente"], del_panel["clave"]), ("Cliente Prueba", "4821"))
+check("y da el mismo mensaje para el cliente que el aviso de registro",
+      es.mensajes.wa_link("900000000", es.mensaje_para_cliente(del_panel, "90000001", "AB11")) in aviso, True)
+check("una orden que no salió del panel no encuentra nada",
+      es.buscar_por_orden(state, ctx, "12345678"), None)
+check("ni una orden vacía", es.buscar_por_orden(state, ctx, ""), None)
+api.disponible = lambda: False
+check("sin registro configurado tampoco, y no lo llama",
+      es.buscar_por_orden(state, ctx, "90000001"), None)
+del api.disponible
+
 # otra corrida (o el estado perdido) que vuelve a confirmar: el registro manda
 state2, ctx2, tg2, _ = mundo([envio()])
 ctx2.api = api

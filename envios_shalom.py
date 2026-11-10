@@ -471,10 +471,38 @@ def datos_para_shalom(e, caja):
     }
 
 
+def mensaje_para_cliente(e, orden, codigo):
+    """El "ya envié tu pedido" con orden, código y clave, listo para WhatsApp.
+
+    Lo usan el aviso de registro y el de "Shalom ya lo recibió" (revisar.py):
+    tiene que ser el mismo texto en los dos."""
+    return mensajes.mensaje_registro(
+        (e.get("recibe") or {}).get("nombre", ""), orden, codigo,
+        e.get("agencia", "")).replace(mensajes.HUECO_CLAVE, e.get("clave", ""))
+
+
+def buscar_por_orden(state, ctx, orden):
+    """El envío del panel que se registró con este número de orden, o None.
+
+    Sirve para volver a tener la clave y el nombre del cliente horas después
+    de registrar, cuando Shalom recibe la caja: en state.json solo quedó el id
+    opaco y la fecha, así que los datos se le vuelven a pedir al registro.
+    Trae datos personales: no escribirlo a disco ni a los logs.
+    """
+    if not ctx.api.disponible():
+        return None
+    orden = str(orden or "")
+    for id_envio, local in memoria(state).items():
+        if not orden or str(local.get("orden") or "") != orden or not local.get("fecha"):
+            continue
+        for e in ctx.api.envios(local["fecha"]):
+            if e.get("id") == id_envio:
+                return e
+    return None
+
+
 def avisar_creado(e, res, caja, ctx):
-    texto_cliente = mensajes.mensaje_registro(
-        (e.get("recibe") or {}).get("nombre", ""), res.get("orden", ""),
-        res.get("codigo", ""), e.get("agencia", "")).replace(mensajes.HUECO_CLAVE, e.get("clave", ""))
+    texto_cliente = mensaje_para_cliente(e, res.get("orden", ""), res.get("codigo", ""))
     link = mensajes.wa_link((e.get("recibe") or {}).get("cel", ""), texto_cliente)
     ctx.tg.send_message(
         f"✅ <b>Registrado en Shalom</b>\n\n"
@@ -509,7 +537,12 @@ def _mandar_ticket(pro, res, ctx):
 
 def _apuntar_en_seguimiento(orders, res, fecha):
     """La orden nueva entra ya avisada al seguimiento: así revisar.py no manda
-    otro "pedido registrado" (este ya llevó la clave, que el otro no sabe)."""
+    otro "pedido registrado" (este ya llevó la clave, que el otro no sabe).
+
+    Lo que sí queda pendiente es avisar cuando Shalom reciba la caja
+    (entrega_avisada). Se apunta aquí y no al verla "En origen" en el portal
+    porque a veces la orden recién creada tarda en salir en el seguimiento y,
+    si la caja se deja en seguida, aparece ya directamente "En tránsito"."""
     orden = str(res.get("orden") or "")
     if not orden or any(str(o.get("orden")) == orden for o in orders):
         return
@@ -517,7 +550,8 @@ def _apuntar_en_seguimiento(orders, res, fecha):
     orders.append({
         "orden": orden, "codigo": res.get("codigo", ""), "estado": "En origen",
         "fecha_envio": "-".join(reversed(fecha.split("-"))),
-        "avisado": False, "registro_avisado": True, "cerrado": False,
+        "avisado": False, "registro_avisado": True, "entrega_avisada": False,
+        "cerrado": False,
         "demora_avisada": False, "registrado": ahora, "last_checked": ahora,
     })
 

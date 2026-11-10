@@ -15,6 +15,7 @@ import datetime as dt
 import json
 import sys
 
+import envios_shalom
 import mensajes
 import revisar
 import variantes
@@ -316,6 +317,162 @@ check("el anotado repite su versión", texto_de(3) in enviados_tg[0], True)
 check("el antiguo recibe la de siempre",
       texto_de(0, "En reparto") in enviados_tg[1], True)
 revisar.ShalomPro, revisar.storage.load_orders = portal_real, cargar_real
+
+print("\n=== Aviso de que Shalom ya recibió la caja ===")
+# Un envío registrado por internet sale "En origen" con la caja aún en casa.
+# El aviso para decirle al cliente "ya envié" tiene que esperar a que Shalom
+# la tenga, y eso se ve cuando el portal lo pasa a "En tránsito".
+class RegistroFalso:
+    """El registro del taller: devuelve el envío del panel con su clave."""
+    def __init__(self, envios, vivo=True):
+        self._envios, self.vivo = envios, vivo
+    def disponible(self):
+        return True
+    def envios(self, fecha):
+        if not self.vivo:
+            raise RuntimeError("caído")
+        return [e for e in self._envios if e["fecha"] == fecha]
+
+DEL_PANEL = {"id": "abc123abc123", "fecha": "2026-11-12", "cliente": "Apodo <Panel>",
+             "agencia": "CHALA", "destino": "CHALA · AREQUIPA", "clave": "4821",
+             "recibe": {"nombre": "Persona Inventada", "cel": "900000000"}}
+ESTADO_BOT = {"envios": {"abc123abc123": {"estado": "ok", "fecha": "2026-11-12",
+                                          "orden": "5001"}}}
+ctx_real = revisar._ctx
+revisar._ctx = envios_shalom.Contexto(api=RegistroFalso([DEL_PANEL]))
+
+del enviados_tg[:]
+check("un envío del panel se avisa",
+      revisar.avisar_entrega(PortalFalso(), {"orden": "5001", "codigo": "K9W7"}, ESTADO_BOT), True)
+txt_panel = envios_shalom.mensaje_para_cliente(DEL_PANEL, "5001", "K9W7")
+check("con el nombre que tiene en el panel, la orden y el destino",
+      all(x in enviados_tg[0] for x in ("Shalom ya recibió", "Apodo &lt;Panel&gt;",
+                                        "5001", "K9W7", "CHALA · AREQUIPA")), True)
+check("el mensaje lleva la clave puesta, sin hueco",
+      ("Clave: 4821" in txt_panel, mensajes.HUECO_CLAVE in enviados_tg[0],
+       "Completa la clave" in enviados_tg[0]), (True, False, False))
+check("y el link va al celular del panel con ese mismo mensaje",
+      mensajes.wa_link("900000000", txt_panel) in enviados_tg[0], True)
+
+del enviados_tg[:]
+check("uno registrado a mano se avisa con lo que diga el portal",
+      revisar.avisar_entrega(PortalFalso(), {"orden": "5002", "codigo": "ZZ99"}, ESTADO_BOT), True)
+check("con la clave en blanco y el recordatorio de completarla",
+      (mensajes.HUECO_CLAVE in enviados_tg[0], "Completa la clave" in enviados_tg[0],
+       "wa.me/51987654321" in enviados_tg[0]), (True, True, True))
+
+del enviados_tg[:]
+revisar._ctx = envios_shalom.Contexto(api=RegistroFalso([DEL_PANEL], vivo=False))
+check("si el registro del taller no contesta, sale igual por el portal",
+      (revisar.avisar_entrega(PortalFalso(), {"orden": "5001", "codigo": "K9W7"}, ESTADO_BOT),
+       mensajes.HUECO_CLAVE in enviados_tg[0]), (True, True))
+
+class PortalSinDetalle(PortalFalso):
+    def detalle(self, orden):
+        return None
+del enviados_tg[:]
+check("sin detalle no avisa y queda para la próxima corrida",
+      (revisar.avisar_entrega(PortalSinDetalle(), {"orden": "5002"}, ESTADO_BOT), enviados_tg),
+      (False, []))
+revisar._ctx = ctx_real
+
+print("\n=== El aviso sale una vez, al pasar de 'En origen' a 'En tránsito' ===")
+class PortalCon(PortalFalso):
+    """El seguimiento del portal con los estados que se le digan."""
+    uso_formulario = False
+    def __init__(self, estados):
+        self.estados = estados
+    def listar(self):
+        return [{"orden": o, "codigo": "C" + o, "estado": e, "fecha": "12-11-2026"}
+                for o, e in self.estados.items()]
+    def ticket_pdf(self, orden):
+        return None
+
+disco = {"orders": [], "state": {"telegram_offset": 0}}
+reales = (revisar.storage.load_orders, revisar.storage.load_state,
+          revisar.storage.save_orders, revisar.storage.save_state,
+          revisar.tg.get_updates, revisar.renovar_sesion_si_toca, sys.argv)
+revisar.storage.load_orders = lambda: json.loads(json.dumps(disco["orders"]))
+revisar.storage.load_state = lambda: json.loads(json.dumps(disco["state"]))
+revisar.storage.save_orders = lambda o: disco.__setitem__("orders", o)
+revisar.storage.save_state = lambda s: disco.__setitem__("state", s)
+revisar.tg.get_updates = lambda **kw: []
+revisar.renovar_sesion_si_toca = lambda pro, state: None
+sys.argv = ["revisar.py"]
+
+def corrida(estados):
+    """Una revisión entera. Devuelve los títulos de lo que llegó a Telegram."""
+    del enviados_tg[:]
+    revisar.ShalomPro = lambda headless=True: PortalCon(estados)
+    revisar._revisar()
+    return [m.split("\n")[0] for m in enviados_tg]
+
+def pedido_de(orden):
+    return next(o for o in disco["orders"] if o["orden"] == orden)
+
+RECIBIDO = "🚚 <b>Shalom ya recibió el envío</b>"
+LLEGO = "🎉 <b>¡Pedido listo para recoger!</b>"
+
+# "A" lo creó el bot desde el panel (así lo apunta envios_shalom); "V" es de
+# antes de este aviso y ya iba en camino: no trae el campo.
+envios_shalom._apuntar_en_seguimiento(disco["orders"], {"orden": "A", "codigo": "CA"}, "2026-11-12")
+disco["orders"].append({"orden": "V", "codigo": "CV", "estado": "En tránsito",
+                        "avisado": False, "registro_avisado": True, "cerrado": False,
+                        "demora_avisada": True, "fecha_envio": "12-11-2026"})
+
+check("registrado pero aún en casa: no avisa nada",
+      corrida({"A": "En origen", "V": "En tránsito"}), [])
+check("y sigue pendiente", pedido_de("A")["entrega_avisada"], False)
+check("Shalom lo recibe: avisa", corrida({"A": "En tránsito", "V": "En tránsito"}), [RECIBIDO])
+check("queda anotado", pedido_de("A")["entrega_avisada"], True)
+check("en la corrida siguiente no repite", corrida({"A": "En tránsito", "V": "En tránsito"}), [])
+check("uno que ya iba en camino antes de este aviso no recibe nada a destiempo",
+      "entrega_avisada" in pedido_de("V"), False)
+check("al llegar sale el aviso de llegada de siempre, y solo ese",
+      corrida({"A": "En destino", "V": "En tránsito"}), [LLEGO])
+
+# Recién creado, a veces no sale en el seguimiento y el bot lo da por cerrado.
+envios_shalom._apuntar_en_seguimiento(disco["orders"], {"orden": "B", "codigo": "CB"}, "2026-11-12")
+corrida({"V": "En tránsito"})
+check("uno recién creado que aún no sale en el portal sigue pendiente",
+      (pedido_de("B")["cerrado"], pedido_de("B")["entrega_avisada"]), (True, False))
+check("si reaparece ya en tránsito (se dejó la caja en seguida), avisa",
+      corrida({"B": "En tránsito", "V": "En tránsito"}), [RECIBIDO])
+
+check("uno registrado a mano por internet: primero el aviso de registro",
+      corrida({"C": "En origen", "V": "En tránsito"}), ["📦 <b>Pedido registrado</b>"])
+check("y al recibirlo Shalom, el aviso nuevo", corrida({"C": "En tránsito"}), [RECIBIDO])
+
+check("uno dejado en el mostrador se descubre ya en tránsito: solo el de registro",
+      corrida({"D": "En tránsito"}), ["📦 <b>Pedido registrado</b>"])
+check("y no queda nada pendiente", pedido_de("D")["entrega_avisada"], True)
+check("ni vuelve a avisar", corrida({"D": "En tránsito"}), [])
+
+# De antes de este aviso, pero todavía en casa: el bot lo ve "En origen".
+disco["orders"].append({"orden": "E", "codigo": "CE", "estado": "En origen",
+                        "avisado": False, "registro_avisado": True, "cerrado": False,
+                        "demora_avisada": False, "fecha_envio": "12-11-2026"})
+corrida({"E": "En origen"})
+check("uno antiguo que sigue en casa también se avisa cuando Shalom lo recibe",
+      corrida({"E": "En tránsito"}), [RECIBIDO])
+
+envios_shalom._apuntar_en_seguimiento(disco["orders"], {"orden": "F", "codigo": "CF"}, "2026-11-12")
+check("si llega sin que se le viera en camino, basta el aviso de llegada",
+      (corrida({"F": "En destino"}), pedido_de("F")["entrega_avisada"]), ([LLEGO], True))
+
+envios_shalom._apuntar_en_seguimiento(disco["orders"], {"orden": "G", "codigo": "CG"}, "2026-11-12")
+sys.argv = ["revisar.py", "--sin-avisos"]
+check("--sin-avisos no manda este aviso", corrida({"G": "En tránsito"}), [])
+sys.argv = ["revisar.py"]
+
+check("nada de esto deja datos del cliente en disco",
+      any(x in json.dumps(disco, ensure_ascii=False)
+          for x in (d["destinatario"], d["telefono"], d["dni"])), False)
+
+(revisar.storage.load_orders, revisar.storage.load_state,
+ revisar.storage.save_orders, revisar.storage.save_state,
+ revisar.tg.get_updates, revisar.renovar_sesion_si_toca, sys.argv) = reales
+revisar.ShalomPro = portal_real
 revisar.tg.send_message = enviar_real
 
 print("\n=== Aviso de registro (el que sustituye a la foto del ticket) ===")

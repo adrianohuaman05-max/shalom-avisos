@@ -24,6 +24,7 @@ Uso:
   python revisar.py --sin-avisos    # solo sincroniza estados, sin avisar a nadie
 """
 import datetime as dt
+import html
 import sys
 import time
 
@@ -37,6 +38,11 @@ from shalompro import ShalomPro
 
 DEMORA_DIAS = 5            # avisar demora si sigue en tránsito tras estos días
 AVISAR_EN = ("En destino", "En reparto")
+
+# Un envío registrado por internet sale en el portal "En origen" desde el
+# primer minuto, con la caja todavía en casa. Pasa a "En tránsito" cuando
+# Shalom ya la tiene: ese cambio es el aviso de "ya está entregado a Shalom".
+EN_ORIGEN = "En origen"
 
 # Campos con datos personales que las versiones viejas guardaban en orders.json.
 CAMPOS_PERSONALES = ("cliente", "telefono", "destino")
@@ -104,6 +110,9 @@ def nuevo_registro(envio):
         "fecha_envio": envio.get("fecha", ""),
         "avisado": False,
         "registro_avisado": False,
+        # Solo hay algo que avisar si todavía no lo tiene Shalom. Uno que se
+        # descubre ya "En tránsito" se dejó en el mostrador: no hay espera.
+        "entrega_avisada": envio["estado"] != EN_ORIGEN,
         "cerrado": False,
         "demora_avisada": False,
         "registrado": now().isoformat(),
@@ -147,6 +156,68 @@ def avisar_registro(pro, pedido):
         print(f"[{pedido['orden']}] aviso de registro + ticket enviados.")
     else:
         print(f"[{pedido['orden']}] aviso de registro enviado (sin ticket).")
+    return True
+
+
+def avisar_entrega(pro, pedido, state):
+    """Shalom ya tiene la caja: es el momento de decirle al cliente "ya envié".
+
+    El mensaje para el cliente llega también al registrar, pero ahí la caja
+    sigue en casa (Shalom da 24 h para dejarla) y mandarlo sería adelantarse.
+    Este aviso lo vuelve a traer cuando ya es verdad.
+
+    Si el envío salió del panel, se le pide de nuevo al registro: así el texto
+    es idéntico al del aviso de registro, con la clave puesta. Si no (se
+    registró a mano en Shalom Pro, o el registro no contesta), sale del portal
+    con la clave en blanco, como el aviso de "pedido registrado".
+    """
+    orden = pedido["orden"]
+    codigo = pedido.get("codigo", "")
+
+    e = None
+    try:
+        e = envios_shalom.buscar_por_orden(state, _ctx_envios(), orden)
+    except Exception as err:
+        print(f"[{orden}] el registro del taller no contestó "
+              f"({type(err).__name__}); el aviso sale con lo que diga el portal.")
+
+    if e:
+        cliente = e.get("cliente", "")
+        destino = envios_shalom.lugar_agencia(e)
+        texto = envios_shalom.mensaje_para_cliente(e, orden, codigo)
+        celular = (e.get("recibe") or {}).get("cel", "")
+        falta_clave = not e.get("clave")
+    else:
+        d = pro.detalle(orden)
+        if not d:
+            print(f"[{orden}] Shalom ya lo recibió pero no se pudo leer el "
+                  f"detalle; se reintentará en la próxima corrida.")
+            return False
+        cliente = d.get("destinatario", "")
+        codigo = d.get("codigo") or codigo
+        destino = mensajes.agencia(d.get("destino", ""), d.get("destino_ubigeo", ""))
+        texto = mensajes.mensaje_registro(
+            d.get("destinatario", ""), orden, codigo,
+            d.get("destino", ""), d.get("destino_ubigeo", ""))
+        celular = d.get("telefono", "")
+        falta_clave = True
+
+    def esc(t):
+        return html.escape(str(t or "—"), quote=False)
+
+    tg.send_message(
+        f"🚚 <b>Shalom ya recibió el envío</b>\n\n"
+        f"Cliente: <b>{esc(cliente)}</b>\n"
+        f"Orden: <b>{esc(orden)}</b> · Código: <b>{esc(codigo)}</b>\n"
+        f"Destino: {esc(destino)}\n\n"
+        f"Ya no está «En origen»: va en camino. Ahora sí puedes avisarle.\n\n"
+        f"Mensaje: <i>{esc(texto)}</i>\n\n"
+        + ("⚠️ Completa la clave antes de enviarlo.\n" if falta_clave else "")
+        + (f"👉 Toca para enviárselo por WhatsApp:\n{mensajes.wa_link(celular, texto)}"
+           if celular else "Sin celular guardado: cópialo y mándaselo tú.")
+    )
+    # El log es público: solo el número de orden, nada del cliente.
+    print(f"[{orden}] aviso de 'Shalom ya lo recibió' enviado.")
     return True
 
 
@@ -469,11 +540,26 @@ def _revisar():
                     "fecha_envio", "")
                 pedido["cerrado"] = False
                 pedido["last_checked"] = now().isoformat()
+                # Los pedidos de antes de este aviso no traen el campo. Verlo
+                # "En origen" es lo que lo deja pendiente; a uno que ya iba
+                # en camino no se le avisa a destiempo.
+                if envio["estado"] == EN_ORIGEN:
+                    pedido.setdefault("entrega_avisada", False)
 
             if sin_avisos:
                 continue
 
             estado = pedido["estado"]
+
+            # Shalom ya tiene la caja. `is False` por lo mismo que abajo: sin
+            # el campo, no hay nada pendiente.
+            if pedido.get("entrega_avisada") is False and estado != EN_ORIGEN:
+                if estado != "En tránsito":
+                    # Llegó sin que se le viera en camino: el aviso de llegada
+                    # ya dice lo que importa, este sobraría.
+                    pedido["entrega_avisada"] = True
+                elif avisar_entrega(pro, pedido, state):
+                    pedido["entrega_avisada"] = True
 
             # Reintento si el aviso de registro falló (sin detalle, ticket caído).
             # Ojo al `is False`: los pedidos de antes de esta función no tienen

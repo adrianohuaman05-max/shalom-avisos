@@ -197,7 +197,20 @@ Pro** el día que salen, sin dictar nada:
 4. Solo con uno de esos toques el bot crea la orden y te responde con
    **orden, código y clave**, el mensaje para el cliente listo para WhatsApp
    y el ticket.
-5. El seguimiento de siempre avisa cuando llega.
+5. Cuando **Shalom ya recibió la caja** llega otro aviso, «🚚 Shalom ya
+   recibió el envío», con ese mismo mensaje y su link de WhatsApp. Es el
+   momento de mandárselo al cliente: al registrar, la caja todavía está en
+   casa y decirle "ya envié tu pedido" sería adelantarse.
+6. El seguimiento de siempre avisa cuando llega.
+
+**Cómo sabe el bot que ya la dejaste.** No lo sabe en el instante: lo ve en
+Shalom Pro. Un envío registrado por internet sale ahí «En origen» desde el
+primer minuto y pasa a «En tránsito» cuando la agencia ya lo tiene. El aviso
+sale en la primera revisión (cada 30 min) que ve ese cambio; hasta ahora
+Shalom lo ha marcado casi siempre hacia las 8 de la noche del mismo día o a
+media mañana del siguiente. Sale una sola vez por envío, y también para los
+que registres a mano en Shalom Pro (esos con la clave en blanco, porque el
+portal no la tiene).
 
 **Nunca registra dos veces**: antes de tocar Shalom pide permiso al registro
 del taller, que lo da una sola vez por pedido. Si algo se corta a la mitad,
@@ -225,7 +238,9 @@ defecto PARCONA).
 
 Archivos: `envios_shalom.py` (el flujo), `registro_api.py` (habla con el
 Apps Script), `shalompro_registro.py` (el formulario de Shalom Pro),
-`test_envios.py` (pruebas, sin red: `python test_envios.py`).
+`test_envios.py` (pruebas, sin red: `python test_envios.py`). El aviso de
+"Shalom ya recibió el envío" está en `revisar.py` (`avisar_entrega`), junto al
+resto del seguimiento, y se prueba en `test_avisos.py`.
 
 **Privacidad**: en `state.json` solo queda un id opaco por envío (un hash, sin
 el nombre), su estado y la caja. Nombre, DNI, celular y clave se piden al
