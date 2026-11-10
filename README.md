@@ -26,6 +26,25 @@ detalle de cada envío— el **celular del destinatario**.
 4. Si un pedido lleva +5 días en tránsito, también te avisa para reclamar.
 5. Cuando el pedido desaparece del seguimiento, se da por entregado y se cierra.
 
+### El mensaje de llegada no es siempre el mismo
+
+Hay **6 versiones** del aviso para recoger en agencia y **4** del de reparto a
+domicilio. Todas dicen lo mismo (dónde está el pedido, que lleve su DNI) con
+otras palabras.
+
+- A un cliente que vuelve a comprar le toca **la siguiente** a la que recibió
+  la vez anterior: no se repite hasta haber pasado por todas.
+- Reenviar un aviso (`reavisar`) repite **el mismo texto** de la primera vez y
+  no le gasta el turno al cliente.
+- Para cambiar un texto, quitar uno o añadir más: las dos listas del principio
+  de `mensajes.py` (`LLEGADA_AGENCIA` y `LLEGADA_REPARTO`). No hay que tocar
+  nada más. La primera de cada lista es el mensaje original: déjala en su sitio.
+
+No hay que configurar nada: el bot recuerda qué versión recibió cada cliente en
+un secret propio, `AVISOS_VARIANTES`, que crea y actualiza solo con el
+`GH_SECRETS_TOKEN` del paso 6. Sin ese token los textos siguen variando, pero
+al azar, así que alguna vez puede repetirse el de la compra anterior.
+
 ---
 
 ## Instalación (una sola vez, ~10 min desde el celular o PC)
@@ -224,6 +243,12 @@ se leen del portal en el momento del aviso, viajan al chat privado de Telegram y
 Por lo mismo, los logs enmascaran cualquier dato personal y las capturas de
 error se limitan a la pantalla de login: los artifacts de un repo público los
 puede descargar cualquiera.
+
+Qué versión del aviso recibió cada cliente **tampoco va al repo**: aunque no
+lleve el celular, en el historial se vería qué pedidos son de la misma persona.
+Se guarda en el secret `AVISOS_VARIANTES` (cifrado, solo lo lee el bot) y ni
+ahí hay celulares, solo un resumen de cada uno. En `orders.json` queda
+únicamente el número de versión de cada pedido (`"variante": 3`).
 
 > ⚠️ Las versiones anteriores sí guardaban nombre y teléfono en `orders.json`.
 > El código actual los borra en la primera ejecución, pero **siguen visibles en

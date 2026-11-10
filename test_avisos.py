@@ -12,10 +12,12 @@ datos del destinatario —nombre, DNI, celular y número de orden— son inventa
 en un test no entran datos de clientes.
 """
 import datetime as dt
+import json
 import sys
 
 import mensajes
 import revisar
+import variantes
 from shalompro import _parsear_drawer, clasificar_fallo_login, normalizar_estado
 
 fallos = []
@@ -134,6 +136,187 @@ check("no cuela el distrito", "Rupa Rupa" not in txt_ag, True)
 check("reparto no manda a la agencia", "agencia" not in txt_rep.lower(), True)
 check("reparto habla de dirección", "dirección" in txt_rep, True)
 check("link al número correcto", link.startswith("https://wa.me/51987654321?text="), True)
+
+print("\n=== Versiones del aviso: todas dicen lo que hay que decir ===")
+# La 0 es el mensaje de antes de que hubiera versiones. Tiene que seguir igual
+# letra por letra: es la que se repite al reavisar pedidos antiguos.
+check("la 0 de agencia es el mensaje de siempre", txt_ag,
+      "Hola Luis 👋 Tu pedido ya llegó a la agencia Shalom de Tingo Maria Co "
+      "Buenos Aires y está listo para recoger. Recuerda llevar tu DNI. "
+      "¡Gracias por tu compra! 🙌")
+check("la 0 de reparto es el mensaje de siempre", txt_rep,
+      "Hola Luis 👋 Tu pedido ya está en reparto y va camino a tu dirección. "
+      "Ten a la mano tu DNI para recibirlo. ¡Gracias por tu compra! 🙌")
+
+for estado in ("En destino", "En reparto"):
+    cuantas = len(mensajes.variantes_de(estado))
+    textos = [mensajes.mensaje_cliente(d["destinatario"], d["destino"],
+                                       d["destino_ubigeo"], estado, v)
+              for v in range(cuantas)]
+    anonimos = [mensajes.mensaje_cliente("", d["destino"], d["destino_ubigeo"],
+                                         estado, v) for v in range(cuantas)]
+    for t in textos:
+        print(f"  {t}")
+    check(f"{estado}: hay varias", cuantas > 1, True)
+    check(f"{estado}: ninguna repetida", len(set(textos)), cuantas)
+    check(f"{estado}: todas saludan por el nombre",
+          all("Hola Luis" in t for t in textos), True)
+    check(f"{estado}: todas piden DNI", all("DNI" in t for t in textos), True)
+    check(f"{estado}: ninguna deja un hueco sin rellenar",
+          any("{" in t or "}" in t for t in textos + anonimos), False)
+    check(f"{estado}: sin nombre el saludo no queda cojo",
+          any("Hola ," in t or "Hola !" in t or "  " in t for t in anonimos), False)
+    if estado == "En destino":
+        check("agencia: todas nombran el destino",
+              all("la agencia Shalom de Tingo Maria Co Buenos Aires" in t
+                  for t in textos), True)
+        check("agencia: ninguna cuela el distrito",
+              any("Rupa Rupa" in t for t in textos), False)
+    else:
+        check("reparto: ninguna manda a la agencia",
+              any("agencia" in t.lower() for t in textos), False)
+        check("reparto: todas hablan de la dirección",
+              all("dirección" in t for t in textos), True)
+
+check("pasarse de largo da la vuelta",
+      mensajes.mensaje_cliente("Ana", "Chala", "", "En destino",
+                               len(mensajes.LLEGADA_AGENCIA)),
+      mensajes.mensaje_cliente("Ana", "Chala", "", "En destino", 0))
+check("sin destino no dice 'de la agencia'",
+      "la agencia Shalom y está" in mensajes.mensaje_cliente("Ana", "", ""), True)
+
+print("\n=== A un cliente que vuelve no le toca la misma versión ===")
+N = len(mensajes.LLEGADA_AGENCIA)
+mem = variantes.Memoria("", persistente=True)
+turnos = [mem.elegir("987654321", str(5000 + i), N) for i in range(N)]
+check("en N pedidos recibe las N versiones", sorted(turnos), list(range(N)))
+check("el pedido N+1 no repite el anterior",
+      mem.elegir("987654321", "6000", N) != turnos[-1], True)
+ultimo = mem.datos[variantes.id_cliente("987654321")]
+check("el mismo celular escrito con 51 es el mismo cliente",
+      mem.elegir("51987654321", "6001", N), (ultimo + 1) % N)
+check("y con espacios también",
+      mem.elegir("987 654 321", "6002", N), (ultimo + 2) % N)
+nuevo = variantes.id_cliente("911111111")
+check("un cliente nuevo parte de su pedido y de quién es",
+      mem.elegir("911111111", "7000", N), variantes.por_orden(f"7000/{nuevo}", N))
+check("con el mismo número de orden, otro cliente nuevo no saca siempre la misma",
+      len({variantes.Memoria("", persistente=True).elegir(str(900000000 + i), "7000", N)
+           for i in range(40)}) > 1, True)
+check("que no altera el turno del otro",
+      mem.elegir("987654321", "6003", N), (ultimo + 3) % N)
+check("reparto tiene menos versiones y no se sale",
+      mem.elegir("987654321", "6004", len(mensajes.LLEGADA_REPARTO))
+      < len(mensajes.LLEGADA_REPARTO), True)
+
+guardado = json.dumps(mem.datos)
+check("la memoria no lleva el celular",
+      "987654321" in guardado or "911111111" in guardado, False)
+otra_corrida = variantes.Memoria(guardado, persistente=True)
+sigue = mem.datos[variantes.id_cliente("911111111")]
+check("la corrida siguiente retoma donde quedó",
+      otra_corrida.elegir("911111111", "7001", N), (sigue + 1) % N)
+
+sin_donde = variantes.Memoria("", persistente=False)
+check("sin dónde guardar: sale del número de orden",
+      [sin_donde.elegir("987654321", o, N) for o in ("1", "2", "3")],
+      [variantes.por_orden(o, N) for o in ("1", "2", "3")])
+check("y no anota nada", (sin_donde.datos, sin_donde.cambiada), ({}, False))
+check("sin celular tampoco anota",
+      (variantes.Memoria("", persistente=True).elegir("", "9", N),
+       variantes.id_cliente("")), (variantes.por_orden("9", N), ""))
+check("un secret estropeado no revienta",
+      variantes.Memoria("{esto no es json", persistente=True).datos, {})
+check("ni uno con otra forma",
+      variantes.Memoria("[1, 2]", persistente=True).datos, {})
+
+tope = variantes.MAX_CLIENTES
+variantes.MAX_CLIENTES = 3
+llena = variantes.Memoria("", persistente=True)
+for i in range(5):
+    llena.elegir(f"90000000{i}", "1", N)
+variantes.MAX_CLIENTES = tope
+check("con la memoria llena salen los más antiguos", list(llena.datos),
+      [variantes.id_cliente(f"90000000{i}") for i in (2, 3, 4)])
+
+print("\n=== La memoria se guarda en el secret, no en el repo ===")
+subidas = []
+guardar_real = variantes.renovacion.guardar_secret
+variantes.renovacion.guardar_secret = lambda n, v: subidas.append((n, v)) or True
+check("sin cambios no se sube nada",
+      (variantes.Memoria("", persistente=True).guardar(), subidas), (True, []))
+mem.guardar()
+check("con cambios se sube una vez, al secret AVISOS_VARIANTES",
+      [n for n, _ in subidas], ["AVISOS_VARIANTES"])
+check("lo subido es la memoria", json.loads(subidas[0][1]), mem.datos)
+mem.guardar()
+check("y no se vuelve a subir si no cambió", len(subidas), 1)
+variantes.renovacion.guardar_secret = lambda n, v: False
+mem.elegir("987654321", "6005", N)
+check("si GitHub no lo acepta, lo dice", mem.guardar(), False)
+check("y queda pendiente", mem.cambiada, True)
+variantes.renovacion.guardar_secret = guardar_real
+
+print("\n=== El aviso usa la versión que toca ===")
+class PortalFalso:
+    """Devuelve siempre el mismo destinatario: un cliente que vuelve."""
+    def __enter__(self):
+        return self
+    def __exit__(self, *a):
+        return False
+    def listar(self):
+        return [{"orden": "111", "estado": "En destino"},
+                {"orden": "222", "estado": "En reparto"},
+                {"orden": "333", "estado": "En tránsito"}]
+    def detalle(self, orden):
+        return dict(d, orden=orden)
+
+enviados_tg = []
+enviar_real = revisar.tg.send_message
+revisar.tg.send_message = lambda texto, **kw: enviados_tg.append(texto)
+
+def texto_de(variante, estado="En destino"):
+    return mensajes.mensaje_cliente(d["destinatario"], d["destino"],
+                                    d["destino_ubigeo"], estado, variante)
+
+mem2 = variantes.Memoria("", persistente=True)
+p1, p2 = {"orden": "8001"}, {"orden": "8002"}
+revisar.avisar_llegada(PortalFalso(), p1, "En destino", mem2)
+revisar.avisar_llegada(PortalFalso(), p2, "En destino", mem2)
+check("el pedido anota su versión", p1["variante"],
+      variantes.por_orden(f"8001/{variantes.id_cliente(d['telefono'])}", N))
+check("el segundo pedido del cliente lleva otra", p2["variante"], (p1["variante"] + 1) % N)
+check("y es el texto que sale a Telegram",
+      (texto_de(p1["variante"]) in enviados_tg[0],
+       texto_de(p2["variante"]) in enviados_tg[1]), (True, True))
+check("con su link de WhatsApp",
+      mensajes.wa_link(d["telefono"], texto_de(p2["variante"])) in enviados_tg[1], True)
+
+antes = dict(mem2.datos)
+del enviados_tg[:]
+revisar.avisar_llegada(PortalFalso(), dict(p1), "En destino", mem2)
+check("reavisar repite el mismo texto", texto_de(p1["variante"]) in enviados_tg[0], True)
+check("y no le gasta el turno al cliente", mem2.datos, antes)
+
+sin_memoria = {"orden": "8003"}
+revisar.avisar_llegada(PortalFalso(), sin_memoria, "En destino")
+check("sin memoria sale del número de orden",
+      sin_memoria["variante"], variantes.por_orden("8003", N))
+
+# --reavisar entero: el pedido con versión anotada la repite; el de antes de
+# que hubiera versiones (sin anotar) recibe el mensaje de siempre.
+del enviados_tg[:]
+portal_real, cargar_real = revisar.ShalomPro, revisar.storage.load_orders
+revisar.ShalomPro = lambda headless=True: PortalFalso()
+revisar.storage.load_orders = lambda: [{"orden": "111", "variante": 3},
+                                       {"orden": "222"}]
+check("--reavisar manda los dos que ya llegaron",
+      (revisar.reavisar(["111", "222", "333"]), len(enviados_tg)), (0, 2))
+check("el anotado repite su versión", texto_de(3) in enviados_tg[0], True)
+check("el antiguo recibe la de siempre",
+      texto_de(0, "En reparto") in enviados_tg[1], True)
+revisar.ShalomPro, revisar.storage.load_orders = portal_real, cargar_real
+revisar.tg.send_message = enviar_real
 
 print("\n=== Aviso de registro (el que sustituye a la foto del ticket) ===")
 reg = mensajes.mensaje_registro(d["destinatario"], d["orden"], d["codigo"],

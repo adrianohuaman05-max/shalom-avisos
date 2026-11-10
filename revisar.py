@@ -32,6 +32,7 @@ import mensajes
 import renovacion
 import storage
 import telegram_bot as tg
+import variantes
 from shalompro import ShalomPro
 
 DEMORA_DIAS = 5            # avisar demora si sigue en tránsito tras estos días
@@ -149,17 +150,35 @@ def avisar_registro(pro, pedido):
     return True
 
 
-def avisar_llegada(pro, pedido, estado):
-    """Pide el detalle (trae el celular) y manda el aviso a Telegram."""
+def avisar_llegada(pro, pedido, estado, memoria=None):
+    """Pide el detalle (trae el celular) y manda el aviso a Telegram.
+
+    El texto tiene varias versiones. Si el pedido ya trae anotada la suya es
+    un reaviso y se repite esa misma: el cliente pide "el mensaje otra vez",
+    no uno nuevo, y reenviar no debe gastarle el turno. Si no, `memoria` da la
+    que le toca a ese cliente, distinta de la de su pedido anterior.
+    """
     d = pro.detalle(pedido["orden"])
     if not d:
         print(f"[{pedido['orden']}] llegó a '{estado}' pero no se pudo leer el "
               f"detalle; se reintentará en la próxima corrida.")
         return False
 
+    if "variante" in pedido:
+        variante = pedido["variante"]
+    else:
+        cuantas = len(mensajes.variantes_de(estado))
+        if memoria is not None:
+            variante = memoria.elegir(d.get("telefono", ""), pedido["orden"],
+                                      cuantas)
+        else:
+            variante = variantes.por_orden(pedido["orden"], cuantas)
+        # Solo el número de versión: no dice nada del cliente.
+        pedido["variante"] = variante
+
     texto = mensajes.mensaje_cliente(
         d.get("destinatario", ""), d.get("destino", ""),
-        d.get("destino_ubigeo", ""), estado)
+        d.get("destino_ubigeo", ""), estado, variante)
     link = mensajes.wa_link(d.get("telefono", ""), texto)
 
     titulo = ("🚚 <b>¡Pedido en reparto!</b>" if estado == "En reparto"
@@ -267,6 +286,10 @@ def reavisar(ordenes):
     """
     print(f"Reenviando aviso de: {', '.join(ordenes)}")
     enviados = 0
+    # Solo se lee, para repetir la misma versión del texto que se mandó la
+    # primera vez. Los pedidos de antes de que hubiera versiones no la tienen
+    # anotada: recibieron el mensaje de siempre, que es la 0.
+    orders = storage.load_orders()
     with ShalomPro(headless=True) as pro:
         activos = {e["orden"]: e for e in pro.listar()}
         for orden in ordenes:
@@ -278,7 +301,9 @@ def reavisar(ordenes):
                 print(f"[{orden}] esta '{envio['estado']}', todavia no ha llegado; "
                       f"se omite.")
                 continue
-            if avisar_llegada(pro, {"orden": orden}, envio["estado"]):
+            anotado = storage.find_order(orders, orden) or {}
+            pedido = {"orden": orden, "variante": anotado.get("variante", 0)}
+            if avisar_llegada(pro, pedido, envio["estado"]):
                 enviados += 1
     print(f"Reenviados {enviados} de {len(ordenes)}.")
     return 0 if enviados else 1
@@ -411,6 +436,7 @@ def _revisar():
     orders = storage.load_orders()
     state = storage.load_state()
     _estado_en_curso = state
+    memoria = variantes.Memoria()
     limpiar_datos_personales(orders)
     procesar_comandos(orders, state)
 
@@ -458,7 +484,7 @@ def _revisar():
                     pedido["registro_avisado"] = True
 
             if estado in AVISAR_EN and not pedido.get("avisado"):
-                if avisar_llegada(pro, pedido, estado):
+                if avisar_llegada(pro, pedido, estado, memoria):
                     pedido["avisado"] = True
             elif estado == "En tránsito" and not pedido.get("demora_avisada"):
                 if avisar_demora(pedido):
@@ -472,6 +498,7 @@ def _revisar():
     registrar_resultado(state, ok=True)
     storage.save_orders(orders)
     storage.save_state(state)
+    memoria.guardar()
     if sin_avisos:
         print("Modo --sin-avisos: estados sincronizados, no se avisó a nadie.")
     print("Listo.")

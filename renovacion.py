@@ -35,9 +35,18 @@ def disponible():
 
 
 def guardar_sesion(estado):
-    """Sube el storage_state al secret. True si se guardó.
+    """Sube el storage_state al secret. True si se guardó."""
+    if guardar_secret(NOMBRE_SECRET, json.dumps(estado)):
+        print("Sesión renovada: el secret queda actualizado.")
+        return True
+    return False
 
-    Nunca imprime ni el token ni las cookies: los logs de este repo son públicos.
+
+def guardar_secret(nombre, valor):
+    """Escribe el texto `valor` en el secret `nombre` del repo (lo crea si no
+    existe). True si se guardó.
+
+    Nunca imprime ni el token ni el valor: los logs de este repo son públicos.
     """
     if not disponible():
         return False
@@ -45,7 +54,7 @@ def guardar_sesion(estado):
     try:
         from nacl import encoding, public
     except ImportError:
-        print("Falta pynacl: no se puede renovar la sesión.")
+        print(f"Falta pynacl: no se puede guardar el secret {nombre}.")
         return False
 
     cabeceras = {
@@ -66,19 +75,18 @@ def guardar_sesion(estado):
         caja = public.SealedBox(
             public.PublicKey(clave["key"].encode(), encoding.Base64Encoder))
         cifrado = base64.b64encode(
-            caja.encrypt(json.dumps(estado).encode("utf-8"))).decode("utf-8")
+            caja.encrypt(valor.encode("utf-8"))).decode("utf-8")
 
         r2 = requests.put(
-            f"{API}/repos/{REPO}/actions/secrets/{NOMBRE_SECRET}",
+            f"{API}/repos/{REPO}/actions/secrets/{nombre}",
             headers=cabeceras,
             json={"encrypted_value": cifrado, "key_id": clave["key_id"]},
             timeout=30,
         )
         if r2.status_code in (201, 204):
-            print("Sesión renovada: el secret queda actualizado.")
             return True
-        print(f"No se pudo guardar la sesión ({r2.status_code}).")
+        print(f"No se pudo guardar el secret {nombre} ({r2.status_code}).")
         return False
     except Exception as e:
-        print("Fallo al renovar la sesión:", type(e).__name__)
+        print(f"Fallo al guardar el secret {nombre}:", type(e).__name__)
         return False

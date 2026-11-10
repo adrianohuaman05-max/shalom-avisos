@@ -55,21 +55,74 @@ def agencia(destino, ubigeo=""):
     return destino
 
 
-def mensaje_cliente(destinatario, destino, ubigeo="", estado="En destino"):
+# ── Aviso de llegada: varias versiones del mismo mensaje ─────────────
+# Un cliente que vuelve a comprar recibía siempre el mismo texto, letra por
+# letra. Ahora hay varias versiones y a cada cliente le toca una distinta de
+# la anterior (el turno lo lleva variantes.py).
+#
+# Para cambiar o añadir textos basta con tocar estas dos listas. Reglas:
+#   - {saludo} es "Hola Lucia 👋" (o "¡Hola! 👋" si no hay nombre).
+#   - {hola} es "Hola Lucia" (o "Hola"), para saludos con otra puntuación.
+#   - {lugar} es "la agencia Shalom de Chala". Solo en las de agencia.
+#   - Todas dicen dónde está el pedido y que hay que llevar el DNI.
+#   - La primera de cada lista es el mensaje de siempre: no la muevas de sitio,
+#     es la que se usa al reenviar avisos de pedidos antiguos.
+LLEGADA_AGENCIA = (
+    "{saludo} Tu pedido ya llegó a {lugar} y está listo para recoger. "
+    "Recuerda llevar tu DNI. ¡Gracias por tu compra! 🙌",
+
+    "¡{hola}! Buenas noticias: tu pedido ya está en {lugar}. Puedes pasar a "
+    "recogerlo cuando gustes, solo lleva tu DNI. ¡Gracias por la confianza! 💪",
+
+    "{saludo} Te aviso que tu pedido ya llegó a {lugar}. Ya lo puedes recoger, "
+    "no te olvides de llevar tu DNI. ¡Que lo disfrutes! 😋",
+
+    "{hola}, ¿qué tal? 👋 Tu pedido ya te espera en {lugar}. Para recogerlo "
+    "solo necesitas tu DNI. ¡Gracias por tu compra! 🙌",
+
+    "{saludo} Ya llegó tu pedido. Está en {lugar}, listo para que lo "
+    "recojas. Lleva tu DNI cuando vayas. ¡Gracias por tu preferencia! 🎉",
+
+    "¡{hola}! Paso a avisarte que tu pedido ya está listo para recoger en "
+    "{lugar}. Recuerda llevar tu DNI. Cualquier cosa, me escribes. ¡Gracias! 🙌",
+)
+
+# Entrega a domicilio: no tiene que ir a ninguna agencia.
+LLEGADA_REPARTO = (
+    "{saludo} Tu pedido ya está en reparto y va camino a tu dirección. "
+    "Ten a la mano tu DNI para recibirlo. ¡Gracias por tu compra! 🙌",
+
+    "¡{hola}! Buenas noticias: tu pedido ya salió a reparto y va rumbo a tu "
+    "dirección. Solo necesitas tu DNI para recibirlo. ¡Gracias por la "
+    "confianza! 💪",
+
+    "{saludo} Te aviso que tu pedido ya está en reparto, va en camino a tu "
+    "dirección. No te olvides de tener tu DNI a la mano. ¡Que lo disfrutes! 😋",
+
+    "{hola}, ¿qué tal? 👋 Tu pedido ya va en camino a tu dirección, está en "
+    "reparto. Ten tu DNI listo para recibirlo. ¡Gracias por tu compra! 🙌",
+)
+
+
+def variantes_de(estado):
+    """Las versiones del aviso que valen para este estado del pedido."""
+    return LLEGADA_REPARTO if estado == "En reparto" else LLEGADA_AGENCIA
+
+
+def mensaje_cliente(destinatario, destino, ubigeo="", estado="En destino",
+                    variante=0):
+    """El aviso de llegada. `variante` elige cuál de las versiones sale; si se
+    pasa de largo da la vuelta, así no revienta al quitar textos de la lista."""
     nombre = nombre_corto(destinatario)
-    saludo = f"Hola {nombre} 👋" if nombre else "¡Hola! 👋"
+    lugar = "la agencia Shalom"
+    if (destino or "").strip():
+        lugar += f" de {agencia(destino, ubigeo)}"
 
-    if estado == "En reparto":
-        # Entrega a domicilio: no tiene que ir a ninguna agencia.
-        return (
-            f"{saludo} Tu pedido ya está en reparto y va camino a tu dirección. "
-            f"Ten a la mano tu DNI para recibirlo. ¡Gracias por tu compra! 🙌"
-        )
-
-    return (
-        f"{saludo} Tu pedido ya llegó a la agencia Shalom de "
-        f"{agencia(destino, ubigeo)} y está listo para recoger. "
-        f"Recuerda llevar tu DNI. ¡Gracias por tu compra! 🙌"
+    plantillas = variantes_de(estado)
+    return plantillas[variante % len(plantillas)].format(
+        saludo=f"Hola {nombre} 👋" if nombre else "¡Hola! 👋",
+        hola=f"Hola {nombre}" if nombre else "Hola",
+        lugar=lugar,
     )
 
 

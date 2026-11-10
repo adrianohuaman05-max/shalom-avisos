@@ -63,6 +63,10 @@ jobs:
           # el bot renueve su propia sesion y no caduque nunca.
           GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          # Que version del aviso de llegada recibio cada cliente la ultima
+          # vez, para no repetirsela (variantes.py). No hay que crearlo: el
+          # bot lo escribe solo, con el mismo token de arriba.
+          AVISOS_VARIANTES: ${{ secrets.AVISOS_VARIANTES }}
           # Registro automatico de envios por Shalom (envios_shalom.py): la
           # URL del Apps Script del taller y la clave propia del bot. Sin
           # estos dos secrets esa parte queda apagada y todo sigue como antes.
