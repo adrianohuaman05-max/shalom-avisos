@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-10T16:31:00.980131+00:00"
+    "last_checked": "2026-11-10T17:01:07.180985+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-10T16:31:00.980124+00:00"
+    "last_checked": "2026-11-10T17:01:07.180977+00:00"
   },
   {
     "orden": "97152392",
@@ -1521,7 +1521,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:35.963349+00:00",
-    "last_checked": "2026-11-10T16:31:00.962960+00:00"
+    "last_checked": "2026-11-10T17:01:06.481335+00:00"
   },
   {
     "orden": "103029655",
@@ -1538,14 +1538,14 @@
   {
     "orden": "103029582",
     "codigo": "7TCH",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "08-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:43.968602+00:00",
-    "last_checked": "2026-11-10T16:31:00.980060+00:00"
+    "last_checked": "2026-11-10T17:01:06.501993+00:00"
   },
   {
     "orden": "103029730",
@@ -1557,19 +1557,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:48.250705+00:00",
-    "last_checked": "2026-11-10T16:31:00.980102+00:00"
+    "last_checked": "2026-11-10T17:01:07.180893+00:00"
   },
   {
     "orden": "103227183",
     "codigo": "TJD9",
-    "estado": "Entregado",
-    "fecha_envio": "09-11-2026",
+    "estado": "En origen",
+    "fecha_envio": "10-11-2026",
     "avisado": false,
     "registro_avisado": true,
-    "cerrado": true,
+    "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T13:01:32.278158+00:00",
-    "last_checked": "2026-11-10T13:01:32.278158+00:00"
+    "last_checked": "2026-11-10T17:00:59.339478+00:00"
   },
   {
     "orden": "103227202",
@@ -1582,5 +1582,17 @@
     "demora_avisada": false,
     "registrado": "2026-11-10T13:02:01.926928+00:00",
     "last_checked": "2026-11-10T13:02:01.926928+00:00"
+  },
+  {
+    "orden": "103227823",
+    "codigo": "J3KP",
+    "estado": "En origen",
+    "fecha_envio": "10-11-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-11-10T17:00:59.339506+00:00",
+    "last_checked": "2026-11-10T17:00:59.339509+00:00"
   }
 ]
