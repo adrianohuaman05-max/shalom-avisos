@@ -149,6 +149,65 @@ def avisar_registro(pro, pedido):
     return True
 
 
+def avisar_en_shalom(pro, pedido, clave=""):
+    """Una orden que creó el bot acaba de salir en el seguimiento: el paquete
+    ya se dejó en la agencia.
+
+    Al crearla se avisó con la clave, pero entonces el ticket todavía no
+    existía y el paquete ni siquiera estaba en Shalom. Este es el aviso del
+    momento de la entrega: mensaje para el cliente (con la clave si el
+    registro la tiene) y el ticket.
+    """
+    d = pro.detalle(pedido["orden"])
+    if not d:
+        print(f"[{pedido['orden']}] ya está en Shalom, pero sin detalle todavía; "
+              f"se reintenta en la próxima corrida.")
+        return False
+
+    texto = mensajes.mensaje_registro(
+        d.get("destinatario", ""), d.get("orden") or pedido["orden"],
+        d.get("codigo") or pedido.get("codigo", ""),
+        d.get("destino", ""), d.get("destino_ubigeo", ""))
+    if clave:
+        texto = texto.replace(mensajes.HUECO_CLAVE, clave)
+    link = mensajes.wa_link(d.get("telefono", ""), texto)
+    _e = envios_shalom._e
+
+    tg.send_message(
+        f"📦 <b>Ya está en Shalom</b>\n\n"
+        f"Cliente: <b>{_e(d.get('destinatario') or '—')}</b>\n"
+        f"Pedido: {_e(pedido['orden'])} · cód. {_e(d.get('codigo') or pedido.get('codigo') or '—')}\n"
+        f"Destino: {_e(mensajes.agencia(d.get('destino',''), d.get('destino_ubigeo','')))}\n\n"
+        f"Mensaje: <i>{_e(texto)}</i>\n\n"
+        + ("" if clave else "⚠️ Completa la clave antes de enviarlo.\n")
+        + f"👉 Toca para enviarle por WhatsApp:\n{link}"
+    )
+
+    pdf = pro.ticket_pdf(pedido["orden"])
+    if pdf:
+        tg.send_document(pdf, f"ticket-{pedido['orden']}.pdf",
+                         caption="🎫 Ticket Shalom — reenvíaselo si te lo pide.")
+    # El log es público: solo el número de orden.
+    print(f"[{pedido['orden']}] ya está en Shalom: aviso enviado"
+          f"{' con ticket' if pdf else ' (sin ticket)'}.")
+    return True
+
+
+def atender_recien_dejado(pro, pedido, state):
+    """Si es una orden del bot que sale por primera vez en el portal, avisa
+    que ya está en Shalom. Mismo `is False` que registro_avisado: los pedidos
+    de antes no tienen el campo y no se tocan."""
+    if pedido.get("en_portal") is not False:
+        return
+    if pedido.get("estado") in AVISAR_EN:
+        # Apareció ya en destino: el aviso de llegada lo cubre.
+        pedido["en_portal"] = True
+        return
+    clave = envios_shalom.clave_de(pedido["orden"], state, _ctx_envios())
+    if avisar_en_shalom(pro, pedido, clave):
+        pedido["en_portal"] = True
+
+
 def avisar_llegada(pro, pedido, estado):
     """Pide el detalle (trae el celular) y manda el aviso a Telegram."""
     d = pro.detalle(pedido["orden"])
@@ -223,18 +282,32 @@ def procesar_comandos(orders, state, espera=0):
                 lineas = ["📋 <b>Pedidos en curso</b>"]
                 for o in pend:
                     aviso = " ✅ avisado" if o.get("avisado") else ""
-                    lineas.append(f"• {o['orden']} — {o.get('estado') or '¿?'}{aviso}")
+                    estado = ("registrado, falta dejarlo en la agencia"
+                              if o.get("en_portal") is False else o.get("estado") or "¿?")
+                    lineas.append(f"• {o['orden']} — {estado}{aviso}")
                 tg.send_message("\n".join(lineas), chat_id=chat_id)
         elif texto:
             tg.send_message(mensajes.AYUDA, chat_id=chat_id)
 
 
+DIAS_SIN_APARECER = 7       # una orden del bot que nunca se dejó en la agencia
+
+
 def cerrar_desaparecidos(orders, vistos):
-    """Un envío que ya no está en seguimiento fue entregado y sale de la vista."""
+    """Un envío que ya no está en seguimiento fue entregado y sale de la vista.
+
+    Salvo las órdenes que creó el bot y todavía no salieron en el portal
+    (en_portal=False): esas no están porque el paquete aún no se dejó, no
+    porque ya se entregó. Si en una semana no aparecen, se cierran igual.
+    """
     cerrados = 0
     for o in orders:
         if o.get("cerrado") or o["orden"] in vistos:
             continue
+        if o.get("en_portal") is False:
+            horas = horas_desde(o.get("registrado"))
+            if horas is None or horas < DIAS_SIN_APARECER * 24:
+                continue
         o["cerrado"] = True
         o["estado"] = "Entregado"
         cerrados += 1
@@ -445,6 +518,8 @@ def _revisar():
                 pedido["last_checked"] = now().isoformat()
 
             if sin_avisos:
+                if pedido.get("en_portal") is False:
+                    pedido["en_portal"] = True
                 continue
 
             estado = pedido["estado"]
@@ -456,6 +531,8 @@ def _revisar():
             if pedido.get("registro_avisado") is False and estado not in AVISAR_EN:
                 if avisar_registro(pro, pedido):
                     pedido["registro_avisado"] = True
+
+            atender_recien_dejado(pro, pedido, state)
 
             if estado in AVISAR_EN and not pedido.get("avisado"):
                 if avisar_llegada(pro, pedido, estado):

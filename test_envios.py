@@ -218,9 +218,15 @@ check("antes de crear pidió permiso; después anotó ok con lo que llevaba",
 aviso = tg.mensajes[-1]
 check("el aviso trae orden, código, clave y el WhatsApp con la clave puesta",
       all(x in aviso for x in ("90000001", "AB11", "Clave: <b>4821</b>", "wa.me/51900000000", "Clave%3A%204821", "Flete: S/18.00")), True)
-check("y el ticket", len(tg.docs), 1)
+check("el ticket no va al crear (aún no existe: el paquete no se dejó)", len(tg.docs), 0)
+check("y avisa que el ticket llega al dejarlo en la agencia", "te aviso de nuevo, con el ticket" in aviso, True)
 check("la orden entra al seguimiento ya avisada (no se repite el 'pedido registrado')",
       (orders[0]["orden"], orders[0]["registro_avisado"], orders[0]["fecha_envio"]), ("90000001", True, "12-11-2026"))
+check("y marcada como que todavía no sale en el portal", orders[0]["en_portal"], False)
+check("la clave se recupera del registro por la orden", es.clave_de("90000001", state, ctx), "4821")
+check("una orden que no creó el bot no tiene clave", es.clave_de("12345678", state, ctx), "")
+check("ni la clave ni datos del cliente quedan en el seguimiento (repo público)",
+      any(x in json.dumps(orders) for x in ("4821", "Persona", "900000000", "00000000")), False)
 check("una segunda pasada no crea otra", (es.crear_confirmados(pro, state, ctx, orders), len(pro.creados)), (0, 1))
 check("y queda ok en la memoria", (local["estado"], local["orden"]), ("ok", "90000001"))
 es.atender_boton(toque("env:ok:a1b2c3d4e5f6"), state, ctx)

@@ -173,6 +173,80 @@ check("el visto sigue activo", orders[0].get("cerrado"), None)
 check("el ausente se cierra", orders[1]["cerrado"], True)
 check("y pasa a Entregado", orders[1]["estado"], "Entregado")
 
+print("\n=== Órdenes que creó el bot y aún no se dejaron en la agencia ===")
+def hace_horas(h):
+    return (revisar.now() - dt.timedelta(hours=h)).isoformat()
+
+orders = [{"orden": "C", "estado": "En origen", "en_portal": False, "registrado": hace_horas(1)},
+          {"orden": "D", "estado": "En origen", "en_portal": False, "registrado": hace_horas(8 * 24)}]
+revisar.cerrar_desaparecidos(orders, vistos=set())
+check("recién creada y sin aparecer: no se da por entregada", (orders[0].get("cerrado"), orders[0]["estado"]), (None, "En origen"))
+check("si en una semana no aparece, se cierra igual", orders[1]["cerrado"], True)
+
+
+class ProFalso:
+    def __init__(self, detalle=True):
+        self._detalle = detalle
+        self.tickets = []
+
+    def detalle(self, orden):
+        if not self._detalle:
+            return None
+        return {"destinatario": "Rojas Diaz Ana", "orden": orden, "codigo": "K9W7",
+                "destino": "Mall Lambramani", "telefono": "900000000"}
+
+    def ticket_pdf(self, orden):
+        self.tickets.append(orden)
+        return b"%PDF-falso"
+
+
+enviados, docs = [], []
+_send, _doc, _clave = revisar.tg.send_message, revisar.tg.send_document, revisar.envios_shalom.clave_de
+revisar.tg.send_message = lambda texto, **k: enviados.append(texto)
+revisar.tg.send_document = lambda *a, **k: docs.append(a)
+claves = {"103348163": "4821"}
+revisar.envios_shalom.clave_de = lambda orden, state, ctx: claves.get(orden, "")
+revisar._ctx = object()   # no hace falta el registro de verdad
+try:
+    pro = ProFalso()
+    p = {"orden": "103348163", "codigo": "K9W7", "estado": "En origen", "en_portal": False}
+    revisar.atender_recien_dejado(pro, p, {})
+    check("al aparecer en el portal avisa 'Ya está en Shalom'", "Ya está en Shalom" in enviados[-1], True)
+    check("con la clave del registro puesta en el mensaje al cliente",
+          ["Clave: 4821" in enviados[-1], "Completa la clave" in enviados[-1]], [True, False])
+    check("con link de WhatsApp al cliente", "wa.me/51900000000" in enviados[-1], True)
+    check("y manda el ticket", (pro.tickets, len(docs)), (["103348163"], 1))
+    check("queda como visto en el portal", p["en_portal"], True)
+    revisar.atender_recien_dejado(pro, p, {})
+    check("no se repite en la corrida siguiente", (len(enviados), len(docs)), (1, 1))
+
+    p2 = {"orden": "103359713", "estado": "En origen", "en_portal": False}
+    revisar.atender_recien_dejado(ProFalso(), p2, {})
+    check("sin clave en el registro, pide completarla", "Completa la clave" in enviados[-1], True)
+
+    p3 = {"orden": "1", "estado": "En origen", "en_portal": False}
+    revisar.atender_recien_dejado(ProFalso(detalle=False), p3, {})
+    check("si el detalle no carga, se reintenta luego", (p3["en_portal"], len(enviados)), (False, 2))
+
+    p4 = {"orden": "2", "estado": "En destino", "en_portal": False}
+    revisar.atender_recien_dejado(ProFalso(), p4, {})
+    check("si aparece ya en destino, el aviso de llegada lo cubre", (p4["en_portal"], len(enviados)), (True, 2))
+
+    viejo = {"orden": "3", "estado": "En origen", "registro_avisado": True}
+    revisar.atender_recien_dejado(ProFalso(), viejo, {})
+    check("los pedidos de antes (sin el campo) no se tocan", ("en_portal" in viejo, len(enviados)), (False, 2))
+
+    nombre_raro = ProFalso()
+    nombre_raro.detalle = lambda orden: {"destinatario": "Tienda <Fit> & Co", "codigo": "X",
+                                          "destino": "Chala", "telefono": "900000000"}
+    revisar.atender_recien_dejado(nombre_raro, {"orden": "4", "estado": "En origen", "en_portal": False}, {})
+    check("un nombre con < o & no rompe el HTML de Telegram",
+          "Tienda &lt;Fit&gt; &amp; Co" in enviados[-1], True)
+finally:
+    revisar.tg.send_message, revisar.tg.send_document = _send, _doc
+    revisar.envios_shalom.clave_de = _clave
+    revisar._ctx = None
+
 print("\n=== Por que no dejo entrar el portal ===")
 # El texto real que devolvio el portal en la caida de agosto de 2026. Que se
 # reconozca es lo que separa "renueva la sesion" de "revisa tu contrasena": los

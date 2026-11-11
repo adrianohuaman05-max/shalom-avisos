@@ -453,7 +453,9 @@ def crear_confirmados(pro, state, ctx, orders=None):
             # en la próxima pasada (proponer ve que ya está y no repite).
             print(f"[envío {id_envio}] creado, pero no se pudo anotar: {type(err).__name__}")
         avisar_creado(e, res, caja, ctx)
-        _mandar_ticket(pro, res, ctx)
+        # El ticket no va aquí: la orden recién creada no sale en el
+        # seguimiento hasta que el paquete se deja en la agencia, así que el
+        # ticket todavía no se puede bajar. Lo manda revisar.py cuando aparece.
         if orders is not None:
             _apuntar_en_seguimiento(orders, res, fecha)
         hechos += 1
@@ -491,25 +493,17 @@ def avisar_creado(e, res, caja, ctx):
         + "\n"
         f"Mensaje: <i>{_e(texto_cliente)}</i>\n\n"
         + (f"👉 Toca para enviárselo por WhatsApp:\n{link}" if (e.get("recibe") or {}).get("cel")
-           else "Sin celular guardado: cópialo y mándaselo tú."))
-
-
-def _mandar_ticket(pro, res, ctx):
-    """El ticket en PDF, como lo mandaba el aviso de registro. Si no sale (la
-    orden recién creada puede tardar en aparecer en el seguimiento), no pasa
-    nada: los datos de seguimiento ya llegaron."""
-    try:
-        pdf = pro.ticket_pdf(res.get("orden")) if res.get("orden") else None
-    except Exception:
-        pdf = None
-    if pdf:
-        ctx.tg.send_document(pdf, f"ticket-{res.get('orden')}.pdf",
-                             caption="🎫 Ticket Shalom — reenvíaselo si te lo pide.")
+           else "Sin celular guardado: cópialo y mándaselo tú.")
+        + "\n\n📦 Cuando lo dejes en la agencia te aviso de nuevo, con el ticket.")
 
 
 def _apuntar_en_seguimiento(orders, res, fecha):
-    """La orden nueva entra ya avisada al seguimiento: así revisar.py no manda
-    otro "pedido registrado" (este ya llevó la clave, que el otro no sabe)."""
+    """La orden nueva entra al seguimiento sin "pedido registrado" (este aviso
+    ya llevó la clave) y con en_portal=False: todavía no sale en el portal.
+
+    Cuando aparece, el paquete ya está en la agencia: revisar.py manda
+    entonces "Ya está en Shalom" con el ticket. Mientras no aparezca, no se da
+    por entregada (no está en el seguimiento porque aún no se dejó)."""
     orden = str(res.get("orden") or "")
     if not orden or any(str(o.get("orden")) == orden for o in orders):
         return
@@ -517,9 +511,30 @@ def _apuntar_en_seguimiento(orders, res, fecha):
     orders.append({
         "orden": orden, "codigo": res.get("codigo", ""), "estado": "En origen",
         "fecha_envio": "-".join(reversed(fecha.split("-"))),
-        "avisado": False, "registro_avisado": True, "cerrado": False,
+        "avisado": False, "registro_avisado": True, "en_portal": False, "cerrado": False,
         "demora_avisada": False, "registrado": ahora, "last_checked": ahora,
     })
+
+
+def clave_de(orden, state, ctx):
+    """La clave de recojo de una orden que creó el bot, o "" si no se sabe.
+
+    No se guarda en orders.json (el repo es público): se vuelve a pedir al
+    registro con el id y la fecha que quedaron en state["envios"]."""
+    orden = str(orden or "")
+    for id_envio, local in memoria(state).items():
+        if str(local.get("orden") or "") != orden or not local.get("fecha"):
+            continue
+        try:
+            if not ctx.api.disponible():
+                return ""
+            for e in ctx.api.envios(local["fecha"]):
+                if e.get("id") == id_envio:
+                    return e.get("clave") or ""
+        except Exception as err:
+            print(f"[{orden}] no se pudo leer la clave del registro: {type(err).__name__}")
+        return ""
+    return ""
 
 
 def hay_por_confirmar(state, ctx):
