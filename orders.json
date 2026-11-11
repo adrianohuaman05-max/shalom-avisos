@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-10T23:31:12.429080+00:00"
+    "last_checked": "2026-11-11T00:01:16.715207+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-10T23:31:12.429073+00:00"
+    "last_checked": "2026-11-11T00:01:16.715200+00:00"
   },
   {
     "orden": "97152392",
@@ -1521,7 +1521,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:35.963349+00:00",
-    "last_checked": "2026-11-10T23:31:12.422217+00:00"
+    "last_checked": "2026-11-11T00:01:16.673976+00:00"
   },
   {
     "orden": "103029655",
@@ -1545,16 +1545,16 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:43.968602+00:00",
-    "last_checked": "2026-11-10T23:31:12.429045+00:00"
+    "last_checked": "2026-11-11T00:01:16.715185+00:00"
   },
   {
     "orden": "103029730",
     "codigo": "J7JD",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "08-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:48.250705+00:00",
     "last_checked": "2026-11-10T23:31:12.429063+00:00"
@@ -1569,7 +1569,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T13:01:32.278158+00:00",
-    "last_checked": "2026-11-10T23:31:12.422166+00:00"
+    "last_checked": "2026-11-11T00:01:16.673937+00:00"
   },
   {
     "orden": "103227202",
@@ -1593,18 +1593,30 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T17:00:59.339506+00:00",
-    "last_checked": "2026-11-10T23:31:12.422204+00:00"
+    "last_checked": "2026-11-11T00:01:16.673964+00:00"
   },
   {
     "orden": "103348163",
     "codigo": "K9W7",
+    "estado": "Entregado",
+    "fecha_envio": "10-11-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": true,
+    "demora_avisada": false,
+    "registrado": "2026-11-10T23:34:42.957763+00:00",
+    "last_checked": "2026-11-10T23:34:42.957763+00:00"
+  },
+  {
+    "orden": "103359713",
+    "codigo": "H3DT",
     "estado": "En origen",
     "fecha_envio": "10-11-2026",
     "avisado": false,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
-    "registrado": "2026-11-10T23:34:42.957763+00:00",
-    "last_checked": "2026-11-10T23:34:42.957763+00:00"
+    "registrado": "2026-11-11T00:08:10.446713+00:00",
+    "last_checked": "2026-11-11T00:08:10.446713+00:00"
   }
 ]

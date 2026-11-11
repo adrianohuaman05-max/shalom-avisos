@@ -1,8 +1,8 @@
 {
-  "telegram_offset": 841229814,
+  "telegram_offset": 841229816,
   "fallos_seguidos": 0,
   "ultimo_fallo_avisado": "2026-10-20T05:01:25.149226+00:00",
-  "ultima_renovacion_sesion": "2026-11-10T23:34:43.763631+00:00",
+  "ultima_renovacion_sesion": "2026-11-11T00:08:11.274903+00:00",
   "envios": {
     "820f3e704157": {
       "estado": "ok",
@@ -30,6 +30,13 @@
       "caja": "m",
       "msg": 444,
       "orden": "103348163"
+    },
+    "771940dcbf67": {
+      "estado": "ok",
+      "fecha": "2026-11-10",
+      "caja": "m",
+      "msg": 446,
+      "orden": "103359713"
     }
   }
 }
