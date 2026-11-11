@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-11T23:01:21.995404+00:00"
+    "last_checked": "2026-11-11T23:31:22.333588+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-11T23:01:21.995398+00:00"
+    "last_checked": "2026-11-11T23:31:22.333583+00:00"
   },
   {
     "orden": "97152392",
@@ -1538,11 +1538,11 @@
   {
     "orden": "103029582",
     "codigo": "7TCH",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "08-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-08T15:31:43.968602+00:00",
     "last_checked": "2026-11-11T23:01:21.995389+00:00"
@@ -1569,7 +1569,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T13:01:32.278158+00:00",
-    "last_checked": "2026-11-11T23:01:21.333828+00:00",
+    "last_checked": "2026-11-11T23:31:22.333498+00:00",
     "en_portal": true
   },
   {
@@ -1582,7 +1582,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T13:02:01.926928+00:00",
-    "last_checked": "2026-11-11T23:01:21.320807+00:00",
+    "last_checked": "2026-11-11T23:31:20.716861+00:00",
     "en_portal": true
   },
   {
@@ -1595,7 +1595,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T17:00:59.339506+00:00",
-    "last_checked": "2026-11-11T23:01:21.995317+00:00"
+    "last_checked": "2026-11-11T23:31:22.333521+00:00"
   },
   {
     "orden": "103348163",
@@ -1607,20 +1607,20 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-10T23:34:42.957763+00:00",
-    "last_checked": "2026-11-11T23:01:21.320835+00:00",
+    "last_checked": "2026-11-11T23:31:20.716886+00:00",
     "en_portal": true
   },
   {
     "orden": "103359713",
     "codigo": "H3DT",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "10-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-11T00:08:10.446713+00:00",
-    "last_checked": "2026-11-11T23:01:21.333791+00:00",
+    "last_checked": "2026-11-11T23:31:20.733175+00:00",
     "en_portal": true
   }
 ]
