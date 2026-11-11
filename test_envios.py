@@ -216,8 +216,10 @@ check("en Shalom con la caja elegida, flete en destino, DNI, celular y clave",
 check("antes de crear pidió permiso; después anotó ok con lo que llevaba",
       [(a[1], a[2].get("caja"), a[2].get("pequenas")) for a in api.anotados], [("creando", None, None), ("ok", "m", 200)])
 aviso = tg.mensajes[-1]
-check("el aviso trae orden, código, clave y el WhatsApp con la clave puesta",
-      all(x in aviso for x in ("90000001", "AB11", "Clave: <b>4821</b>", "wa.me/51900000000", "Clave%3A%204821", "Flete: S/18.00")), True)
+check("el aviso trae orden, código, clave y flete",
+      all(x in aviso for x in ("90000001", "AB11", "Clave: <b>4821</b>", "Flete: S/18.00")), True)
+check("pero no el mensaje ni el link al cliente (van al dejarlo en la agencia)",
+      ["wa.me/" in aviso, "Mensaje:" in aviso], [False, False])
 check("el ticket no va al crear (aún no existe: el paquete no se dejó)", len(tg.docs), 0)
 check("y avisa que el ticket llega al dejarlo en la agencia", "te aviso de nuevo, con el ticket" in aviso, True)
 check("la orden entra al seguimiento ya avisada (no se repite el 'pedido registrado')",

@@ -32,7 +32,6 @@ momento, viajan a Telegram y no se escriben nunca a disco ni a los logs.
 import datetime as dt
 import html
 
-import mensajes
 import registro_api as api_registro
 import telegram_bot as tg_real
 
@@ -474,10 +473,9 @@ def datos_para_shalom(e, caja):
 
 
 def avisar_creado(e, res, caja, ctx):
-    texto_cliente = mensajes.mensaje_registro(
-        (e.get("recibe") or {}).get("nombre", ""), res.get("orden", ""),
-        res.get("codigo", ""), e.get("agencia", "")).replace(mensajes.HUECO_CLAVE, e.get("clave", ""))
-    link = mensajes.wa_link((e.get("recibe") or {}).get("cel", ""), texto_cliente)
+    """Solo la confirmación: el mensaje para el cliente y su link de WhatsApp
+    van en "Ya está en Shalom", cuando el paquete de verdad se dejó (Aldahir,
+    2026-11-11: antes de eso el cliente no tiene nada que seguir)."""
     ctx.tg.send_message(
         f"✅ <b>Registrado en Shalom</b>\n\n"
         f"Cliente: <b>{_e(e['cliente'])}</b>\n"
@@ -490,11 +488,8 @@ def avisar_creado(e, res, caja, ctx):
         + (f"ℹ️ Shalom no conocía ese DNI: quedó como {_e(res['nombre_separado']['nombres'])} / "
            f"{_e(res['nombre_separado']['paterno'])} / {_e(res['nombre_separado']['materno'])}.\n"
            if res.get("nombre_separado") else "")
-        + "\n"
-        f"Mensaje: <i>{_e(texto_cliente)}</i>\n\n"
-        + (f"👉 Toca para enviárselo por WhatsApp:\n{link}" if (e.get("recibe") or {}).get("cel")
-           else "Sin celular guardado: cópialo y mándaselo tú.")
-        + "\n\n📦 Cuando lo dejes en la agencia te aviso de nuevo, con el ticket.")
+        + "\n📦 Cuando lo dejes en la agencia te aviso de nuevo, con el ticket "
+          "y el mensaje para el cliente.")
 
 
 def _apuntar_en_seguimiento(orders, res, fecha):
