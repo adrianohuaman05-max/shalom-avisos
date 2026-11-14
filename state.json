@@ -2,7 +2,7 @@
   "telegram_offset": 841229827,
   "fallos_seguidos": 0,
   "ultimo_fallo_avisado": "2026-10-20T05:01:25.149226+00:00",
-  "ultima_renovacion_sesion": "2026-11-14T14:14:01.339027+00:00",
+  "ultima_renovacion_sesion": "2026-11-14T14:26:45.155487+00:00",
   "envios": {
     "820f3e704157": {
       "estado": "ok",
@@ -62,10 +62,11 @@
       "orden": "103842561"
     },
     "5a35595e1751": {
-      "estado": "confirmado",
+      "estado": "ok",
       "fecha": "2026-11-13",
       "caja": "xs",
-      "msg": 473
+      "msg": 473,
+      "orden": "103843821"
     }
   },
   "telegram_bot": "fc2113caefc0"
