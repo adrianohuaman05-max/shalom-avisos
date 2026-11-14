@@ -20,7 +20,13 @@ def get_updates(offset=0, timeout=0):
             timeout=30 + timeout,
         )
         data = r.json()
-        return data.get("result", []) if data.get("ok") else []
+        if not data.get("ok"):
+            # Antes se callaba: un 409 (otro programa leyendo el mismo bot, o un
+            # webhook puesto) dejaba los ✅ cargando sin que nada lo dijera.
+            print(f"get_updates rechazado por Telegram: {data.get('error_code')} "
+                  f"{str(data.get('description', ''))[:200]}")
+            return []
+        return data.get("result", [])
     except Exception as e:
         print("Error get_updates:", e)
         return []
