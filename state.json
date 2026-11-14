@@ -19,7 +19,7 @@
       "orden": "103227202"
     },
     "fe6d951d806d": {
-      "estado": "propuesto",
+      "estado": "cancelado",
       "fecha": "2026-11-09",
       "caja": "m",
       "msg": 439
@@ -39,13 +39,13 @@
       "orden": "103359713"
     },
     "d1c91a4e61c0": {
-      "estado": "propuesto",
+      "estado": "cancelado",
       "fecha": "2026-11-11",
       "caja": "l",
       "msg": 461
     },
     "ecffecbafdbf": {
-      "estado": "propuesto",
+      "estado": "cancelado",
       "fecha": "2026-11-12",
       "caja": "s",
       "msg": 465
