@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-14T15:31:32.063462+00:00"
+    "last_checked": "2026-11-14T16:01:28.867907+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-14T15:31:32.063451+00:00"
+    "last_checked": "2026-11-14T16:01:28.867885+00:00"
   },
   {
     "orden": "97152392",
@@ -1638,14 +1638,14 @@
   {
     "orden": "103713072",
     "codigo": "N7JJ",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "13-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-13T17:01:26.244270+00:00",
-    "last_checked": "2026-11-14T15:31:32.045716+00:00"
+    "last_checked": "2026-11-14T16:01:28.349013+00:00"
   },
   {
     "orden": "103842561",
