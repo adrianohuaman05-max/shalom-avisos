@@ -62,11 +62,10 @@
       "orden": "103842561"
     },
     "5a35595e1751": {
-      "estado": "ok",
+      "estado": "confirmado",
       "fecha": "2026-11-13",
-      "caja": "s",
-      "msg": 473,
-      "orden": "103842605"
+      "caja": "xs",
+      "msg": 473
     }
   },
   "telegram_bot": "fc2113caefc0"

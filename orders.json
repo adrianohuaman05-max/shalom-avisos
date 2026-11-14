@@ -1659,18 +1659,5 @@
     "demora_avisada": false,
     "registrado": "2026-11-14T14:13:35.555223+00:00",
     "last_checked": "2026-11-14T14:13:35.555223+00:00"
-  },
-  {
-    "orden": "103842605",
-    "codigo": "DKWT",
-    "estado": "En origen",
-    "fecha_envio": "13-11-2026",
-    "avisado": false,
-    "registro_avisado": true,
-    "en_portal": false,
-    "cerrado": false,
-    "demora_avisada": false,
-    "registrado": "2026-11-14T14:14:00.702539+00:00",
-    "last_checked": "2026-11-14T14:14:00.702539+00:00"
   }
 ]
