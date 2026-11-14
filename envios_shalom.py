@@ -533,8 +533,12 @@ def clave_de(orden, state, ctx):
 
 
 def hay_por_confirmar(state, ctx):
-    """¿Queda algo de hoy o mañana esperando un toque? Para decidir si esperar."""
+    """¿Queda algo de ayer, hoy o mañana esperando un toque? Para decidir si esperar.
+
+    Ayer también: el registro trae lo que quedó sin registrar del día
+    anterior, y sin esta espera el ✅ de esos pedidos no se escuchaba en vivo
+    (2026-11-14: se quedaban cargando)."""
     hoy_ = ctx.ahora().astimezone(LIMA).date()
-    fechas = {hoy_.isoformat(), (hoy_ + dt.timedelta(days=1)).isoformat()}
+    fechas = {(hoy_ + dt.timedelta(days=d)).isoformat() for d in (-1, 0, 1)}
     return any(v.get("estado") == "propuesto" and v.get("fecha") in fechas
                for v in memoria(state).values())

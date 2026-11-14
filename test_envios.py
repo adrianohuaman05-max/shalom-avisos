@@ -352,6 +352,12 @@ state["envios"] = {"viejo0000000": {"estado": "ok", "fecha": "2026-11-12"}, "nue
 es.olvidar_viejos(state, ctx)
 check("lo de hace más de una semana se olvida", sorted(state["envios"]), ["nuevo0000000"])
 
+# ── esperar el ✅ también para lo de ayer ─────────────────────────────
+state, ctx, tg, api = mundo([], fecha="2026-11-14")
+for f, esperado in (("2026-11-13", True), ("2026-11-14", True), ("2026-11-15", True), ("2026-11-12", False)):
+    state["envios"] = {"x00000000000": {"estado": "propuesto", "fecha": f}}
+    check(f"propuesto del {f}: {'espera' if esperado else 'no espera'} el ✅", es.hay_por_confirmar(state, ctx), esperado)
+
 print()
 if fallos:
     print(f"{len(fallos)} prueba(s) fallaron.")
