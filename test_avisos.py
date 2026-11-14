@@ -12,6 +12,7 @@ datos del destinatario —nombre, DNI, celular y número de orden— son inventa
 en un test no entran datos de clientes.
 """
 import datetime as dt
+import json
 import sys
 
 import mensajes
@@ -271,6 +272,23 @@ for motivo in ("recaptcha", "credenciales", "bloqueada", "sin_credenciales"):
     check(f"hay arreglo para '{motivo}'", bool(revisar.arreglo_de(err)), True)
 sin_motivo = RuntimeError("algo raro")
 check("un error cualquiera no inventa arreglo", revisar.arreglo_de(sin_motivo), "")
+
+print("\n=== Cambio de bot de Telegram ===")
+_token = revisar.tg.TOKEN
+try:
+    revisar.tg.TOKEN = "111111:viejo"
+    st = {"telegram_offset": 841229816}
+    check("la primera vez solo anota el bot, sin tocar el offset",
+          (revisar.revisar_cambio_de_bot(st), st["telegram_offset"], bool(st.get("telegram_bot"))), (False, 841229816, True))
+    check("el mismo bot otra vez no cambia nada", (revisar.revisar_cambio_de_bot(st), st["telegram_offset"]), (False, 841229816))
+    revisar.tg.TOKEN = "222222:nuevo"
+    check("con otro bot el offset vuelve a 0", (revisar.revisar_cambio_de_bot(st), st["telegram_offset"]), (True, 0))
+    check("la huella no deja ver el token ni el id del bot",
+          any(x in json.dumps(st) for x in ("222222", "nuevo")), False)
+    revisar.tg.TOKEN = ""
+    check("sin token no toca nada", revisar.revisar_cambio_de_bot(st), False)
+finally:
+    revisar.tg.TOKEN = _token
 
 print("\n=== Las horas caidas salen del cron de verdad ===")
 # Antes multiplicaba por 2 h cuando el cron sale cada 30 min: 23 fallos se

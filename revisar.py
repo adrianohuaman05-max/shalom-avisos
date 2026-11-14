@@ -24,6 +24,7 @@ Uso:
   python revisar.py --sin-avisos    # solo sincroniza estados, sin avisar a nadie
 """
 import datetime as dt
+import hashlib
 import sys
 import time
 
@@ -248,6 +249,30 @@ def avisar_demora(pedido):
     return True
 
 
+def huella_bot(token):
+    """Una marca del bot de Telegram que no revela el token (state.json es público)."""
+    bot_id = (token or "").split(":")[0]
+    return hashlib.sha256(bot_id.encode()).hexdigest()[:12] if bot_id else ""
+
+
+def revisar_cambio_de_bot(state):
+    """Si cambió el bot de Telegram (otro token), su offset no sirve: los
+    update_id del bot nuevo empiezan en otro número, y con el offset viejo
+    Telegram daría por leídos todos los toques. Se empieza de cero."""
+    huella = huella_bot(tg.TOKEN)
+    antes = state.get("telegram_bot")
+    if not huella or antes == huella:
+        return False
+    state["telegram_bot"] = huella
+    if not antes:
+        # Primera vez que se anota: es el mismo bot de siempre, el offset vale.
+        # Volver a 0 aquí podría releer un ✅ viejo y crear una orden repetida.
+        return False
+    print("Bot de Telegram nuevo: se lee desde el principio.")
+    state["telegram_offset"] = 0
+    return True
+
+
 def procesar_comandos(orders, state, espera=0):
     """Atiende /listar, /ayuda y los botones de los envíos por Shalom.
 
@@ -255,7 +280,11 @@ def procesar_comandos(orders, state, espera=0):
     novedad una vez y la da por leida al avanzar el offset, asi que un
     segundo lector se quedaria con la mitad de los toques. Con espera > 0
     aguarda hasta esos segundos a que llegue algo (para el ✅ de la mañana).
+
+    Ese lector único tiene que ser de verdad único: hasta el 14/11 el bot de
+    ventas del celular usaba el MISMO bot de Telegram y se quedaba con los ✅.
     """
+    revisar_cambio_de_bot(state)
     updates = tg.get_updates(offset=state.get("telegram_offset", 0), timeout=espera)
     for u in updates:
         state["telegram_offset"] = u["update_id"] + 1
