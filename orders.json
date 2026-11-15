@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-15T00:01:39.204723+00:00"
+    "last_checked": "2026-11-15T00:31:43.202810+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-15T00:01:39.204716+00:00"
+    "last_checked": "2026-11-15T00:31:43.202804+00:00"
   },
   {
     "orden": "97152392",
@@ -1645,7 +1645,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-13T17:01:26.244270+00:00",
-    "last_checked": "2026-11-15T00:01:39.204707+00:00"
+    "last_checked": "2026-11-15T00:31:43.202796+00:00"
   },
   {
     "orden": "103842561",
@@ -1658,7 +1658,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-14T14:13:35.555223+00:00",
-    "last_checked": "2026-11-15T00:01:39.204664+00:00"
+    "last_checked": "2026-11-15T00:31:43.202757+00:00"
   },
   {
     "orden": "103843821",
@@ -1671,7 +1671,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-14T14:26:44.532517+00:00",
-    "last_checked": "2026-11-15T00:01:39.204695+00:00"
+    "last_checked": "2026-11-15T00:31:43.202783+00:00"
   },
   {
     "orden": "103896978",
@@ -1680,11 +1680,11 @@
     "fecha_envio": "14-11-2026",
     "avisado": false,
     "registro_avisado": true,
-    "en_portal": false,
+    "en_portal": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-14T20:02:36.977474+00:00",
-    "last_checked": "2026-11-14T20:02:36.977474+00:00"
+    "last_checked": "2026-11-15T00:31:35.097228+00:00"
   },
   {
     "orden": "103902775",
@@ -1693,10 +1693,10 @@
     "fecha_envio": "14-11-2026",
     "avisado": false,
     "registro_avisado": true,
-    "en_portal": false,
+    "en_portal": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-14T20:32:30.520432+00:00",
-    "last_checked": "2026-11-14T20:32:30.520432+00:00"
+    "last_checked": "2026-11-15T00:31:28.693160+00:00"
   }
 ]
