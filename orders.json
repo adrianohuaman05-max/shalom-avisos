@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-18T18:00:59.754900+00:00"
+    "last_checked": "2026-11-18T18:30:56.728178+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-18T18:00:59.754888+00:00"
+    "last_checked": "2026-11-18T18:30:56.728157+00:00"
   },
   {
     "orden": "97152392",
@@ -1702,14 +1702,14 @@
   {
     "orden": "104175366",
     "codigo": "DJN3",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "17-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "en_portal": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-17T14:02:23.809476+00:00",
-    "last_checked": "2026-11-18T18:00:59.748466+00:00"
+    "last_checked": "2026-11-18T18:30:56.203686+00:00"
   }
 ]
