@@ -1,8 +1,8 @@
 {
-  "telegram_offset": 841229832,
+  "telegram_offset": 841229834,
   "fallos_seguidos": 0,
   "ultimo_fallo_avisado": "2026-11-19T05:01:26.229114+00:00",
-  "ultima_renovacion_sesion": "2026-11-19T12:01:57.774161+00:00",
+  "ultima_renovacion_sesion": "2026-11-19T13:17:13.539283+00:00",
   "envios": {
     "ecffecbafdbf": {
       "estado": "cancelado",
@@ -48,6 +48,12 @@
     "956c935f397a": {
       "estado": "falta",
       "fecha": "2026-11-18"
+    },
+    "6431b627d598": {
+      "estado": "propuesto",
+      "fecha": "2026-11-18",
+      "caja": "m",
+      "msg": 505
     }
   },
   "telegram_bot": "fc2113caefc0"
