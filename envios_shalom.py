@@ -125,7 +125,18 @@ def cuando_sale(e, ctx):
         return "hoy"
     if f == hoy_ + dt.timedelta(days=1):
         return "mañana"
+    if f == hoy_ - dt.timedelta(days=1):
+        return "ayer"
     return f.strftime("%d/%m")
+
+
+def es_pasado(e, ctx):
+    """Un pedido de un día que ya pasó y quedó sin registrar (el registro lo
+    trae junto con los de hoy): no 'sale', ya debió salir."""
+    try:
+        return dt.date.fromisoformat(e.get("fecha", "")) < ctx.ahora().astimezone(LIMA).date()
+    except ValueError:
+        return False
 
 
 def proxima_hora_programada(ctx):
@@ -143,8 +154,11 @@ def etiqueta_programada(ctx):
 
 def texto_propuesta(e, caja, ctx):
     cuando = cuando_sale(e, ctx)
+    pasado = es_pasado(e, ctx)
+    titulo = (f"Quedó pendiente {'de ayer' if cuando == 'ayer' else 'del ' + cuando}: va por Shalom"
+              if pasado else f"Sale {cuando} por Shalom")
     lineas = [
-        f"📦 <b>Sale {cuando} por Shalom</b>",
+        f"📦 <b>{titulo}</b>",
         "",
         f"Cliente: <b>{_e(e['cliente'])}</b>",
         f"Lleva: {_e(cantidad_texto(e))}",
@@ -156,8 +170,9 @@ def texto_propuesta(e, caja, ctx):
     ]
     for a in e.get("avisos") or []:
         lineas.append(f"⚠️ {_e(a)}")
-    if cuando != "hoy":
+    if cuando != "hoy" and not pasado:
         # Shalom da 24 h para dejar el paquete en la agencia desde que se registra.
+        # Un pedido que ya pasó no espera: el aviso de ⏰ confundiría.
         lineas.append("⏳ Si lo registras ahora, Shalom da 24 h para dejarlo en la agencia: "
                       f"para un envío de {cuando} conviene ⏰.")
     lineas += ["", "¿Lo registro en Shalom? Si la caja no es esa, tócala abajo antes."]
@@ -193,7 +208,8 @@ def texto_falta(e, ctx):
     lineas = [f"⚠️ <b>No puedo registrar solo el envío de {_e(e['cliente'])}</b> "
               f"(sale {cuando_sale(e, ctx)} por Shalom)", ""]
     lineas += [f"• {_e(f)}" for f in e.get("faltan") or []]
-    lineas += ["", "Corrígelo en el panel → Cotizar y en la próxima revisión te lo propongo."]
+    lineas += ["", "Corrígelo en el panel con «Envío Shalom» (en la tarjeta del pedido o en Clientes) "
+                   "y en la próxima revisión te lo propongo."]
     return "\n".join(lineas)
 
 

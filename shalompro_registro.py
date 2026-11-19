@@ -27,13 +27,23 @@ público (js/app.js):
   →  "Continuar" con el asistente en el paso 6 es el que crea la orden
      (POST /envia_ya/service_order/save). Antes de ese toque no existe nada.
   7. Resultado          "ENVÍO PENDIENTE DE CONFIRMACIÓN" con orden y código.
+  8. Detalle            (desde 2026-11-19) solo muestra la orden ya creada.
+
+El 2026-11-19 Shalom paso su portal de Vue 2 a Vue 3 + Vite (bundle
+/assets/index-*.js, el formulario en /assets/FormEnvio-*.js). Leido su
+codigo nuevo: mismos pasos 1-6, mismos campos del estado y mismos
+selectores; la orden se sigue creando al pulsar Continuar en el paso 6
+(V(): `t.status!==6||await F()`, y F() hace el POST y llena `guide` antes
+de pasar al 7). Lo unico que se rompio fue la forma de leer el estado
+(ver _ESTADO_JS). Si Shalom no conoce el DNI, el destinatario se registra
+al pulsar Continuar en el paso 4 (eso no crea ninguna orden).
 
 No hay paso de quién paga: Shalom asume el flete en destino (Aldahir).
 
 Cómo se trabaja: cada acción es en la pantalla, como una persona (clics y
 teclas; la API de detrás exige cabeceras firmadas y cifra el cuerpo). Y
 después de cada una se COMPRUEBA en el estado del propio formulario
-(storeModule de Vue, solo lectura): qué caja quedó, qué id de agencia, si
+(el `store` de Vue, solo lectura): qué caja quedó, qué id de agencia, si
 el destinatario quedó registrado. Así un clic que "parece" bueno pero no
 cuajó se detecta antes de crear nada.
 
@@ -63,13 +73,46 @@ ESPERA = 30000
 
 # Lo que se lee del formulario. Nunca devuelve nombres, DNI ni teléfonos:
 # solo el paso, ids y banderas.
+#
+# Donde esta el estado. Vue 3 (desde 2026-11-19): FormEnvio lo guarda en un
+# reactive() y se lo pasa a cada paso como prop `store` (los pasos van con
+# v-show, asi que siempre estan montados). En produccion no hay
+# __vueParentComponent, pero #app._vnode si: se baja por el arbol (vnode ->
+# component.subTree, children en lista, suspense.activeBranch) hasta el
+# primer componente cuyo props.store tenga typeProduct y status. Vue 2 (hasta
+# el 2026-11-18): #app.__vue__ y un componente con storeModule; se deja de
+# respaldo. Sin #app o sin estado devuelve null (y _esperar sigue esperando)
+# en vez de reventar como el 2026-11-19 ("Cannot read properties of
+# undefined").
 _ESTADO_JS = r"""
 (clave) => {
-  let r = null;
-  (function rec(vm){ if (vm.storeModule) r = vm; (vm.$children || []).forEach(rec); })(
-    document.querySelector('#app').__vue__);
-  if (!r) return null;
-  const s = r.storeModule;
+  const app = document.querySelector('#app');
+  if (!app) return null;
+  const esEstado = (x) => !!x && typeof x === 'object' && 'typeProduct' in x && 'status' in x;
+  let s = null;
+  const pila = [app._vnode];
+  let vueltas = 0;
+  while (pila.length && vueltas++ < 50000) {
+    const v = pila.pop();
+    if (!v || typeof v !== 'object') continue;
+    const c = v.component;
+    if (c) {
+      if (c.props && esEstado(c.props.store)) { s = c.props.store; break; }
+      pila.push(c.subTree);
+    }
+    if (v.suspense) pila.push(v.suspense.activeBranch);
+    if (Array.isArray(v.children)) {
+      for (let i = v.children.length - 1; i >= 0; i--) pila.push(v.children[i]);
+    }
+  }
+  if (!s && app.__vue__) {
+    (function rec(vm){
+      if (s || !vm) return;
+      if (vm.storeModule) { s = vm.storeModule; return; }
+      (vm.$children || []).forEach(rec);
+    })(app.__vue__);
+  }
+  if (!s) return null;
   return {
     paso: s.status,
     producto: (s.typeProduct && s.typeProduct.title) || '',
@@ -125,8 +168,24 @@ def separar_nombre(nombre):
     return " ".join(p[:-2]), p[-2], p[-1]
 
 
+def motivo(e, largo=120):
+    """El porqué de una excepción, corto y sin datos personales.
+
+    Hasta el 2026-11-19 el aviso solo decía el tipo ("Error") y costó saber
+    que era el cambio a Vue 3. Ahora va la primera línea del mensaje (la de
+    Playwright dice qué falló; las de abajo son el call log), cortada, y con
+    toda cifra de 4 o más dígitos tapada: DNI, celular o clave nunca salen.
+    """
+    texto = (str(e) or "").strip()
+    linea = texto.splitlines()[0].strip() if texto else ""
+    linea = re.sub(r"\d{4,}", "••••", linea)
+    if len(linea) > largo:
+        linea = linea[:largo - 1].rstrip() + "…"
+    return linea
+
+
 def _paso(nombre):
-    """Un fallo dice en qué paso fue, sin datos personales."""
+    """Un fallo dice en qué paso fue y por qué, sin datos personales."""
     def envolver(fn):
         def interno(*a, **k):
             try:
@@ -134,7 +193,10 @@ def _paso(nombre):
             except NoSeEnvio:
                 raise
             except Exception as e:
-                raise NoSeEnvio(f"Me quedé en el paso «{nombre}» ({type(e).__name__}).") from e
+                por = motivo(e)
+                tipo = type(e).__name__
+                raise NoSeEnvio(f"Me quedé en el paso «{nombre}» ({tipo}: {por})." if por
+                                else f"Me quedé en el paso «{nombre}» ({tipo}).") from e
         return interno
     return envolver
 
@@ -153,6 +215,21 @@ def _esperar(page, condicion, que, segundos=20, clave=None):
     raise NoSeEnvio(f"El formulario no llegó a: {que}.")
 
 
+# Copiado tal cual de k() en FormEnvio (portal Vue 3, 2026-11-19). Shalom
+# revisa la clave recien en el paso 7, cuando la orden YA se creo en el 6:
+# con una clave de esta lista se crearia la orden y luego Shalom la tumbaria.
+# Solo esas dos listas: 0000, 0123, 7890 o 4321 Shalom si las acepta.
+CLAVES_REPETIDAS = ("1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999")
+CLAVES_SEGUIDAS = ("1234", "2345", "3456", "4567", "5678", "6789")
+
+
+def clave_valida(clave):
+    """True si Shalom acepta la clave en su paso 7 (4 numeros, ni repetida ni seguida)."""
+    clave = clave or ""
+    return (bool(re.fullmatch(r"\d{4}", clave))
+            and clave not in CLAVES_REPETIDAS and clave not in CLAVES_SEGUIDAS)
+
+
 def crear_envio(pro, datos, enviar=True):
     """Llena el formulario y, con enviar=True, crea la orden.
 
@@ -162,14 +239,17 @@ def crear_envio(pro, datos, enviar=True):
     enviar=False, {'preparado': True, ...} dejando la página en el último
     paso SIN tocar el botón que crea (para probar con Aldahir mirando).
     """
-    page = pro.page
     if datos.get("caja") not in NOMBRE_PRODUCTO:
         raise NoSeEnvio(f"Caja desconocida: {datos.get('caja')}")
     if not re.fullmatch(r"\d{4}", datos.get("clave") or ""):
         raise NoSeEnvio("La clave para recoger no tiene 4 números.")
+    if not clave_valida(datos.get("clave")):
+        raise NoSeEnvio("La clave de hoy es repetida o seguida y Shalom la rechaza: "
+                        "cámbiala en el Sheets y vuelve a intentar.")
     if not re.fullmatch(r"\d{8}|\d{11}", datos.get("dni") or ""):
         raise NoSeEnvio("El DNI de quien recoge no tiene 8 números.")
 
+    page = pro.page
     _abrir(page)
     _elegir_producto(page, NOMBRE_PRODUCTO[datos["caja"]])
     _elegir_agencia(page, "Origen", ORIGEN, ORIGEN_ID)
@@ -273,7 +353,11 @@ def _destinatario(page, datos):
     # bloqueados), con placeholder DNI, Nombre, Apellido paterno, Apellido
     # materno y Celular. Si Shalom reconoce el DNI, los cuatro últimos
     # desaparecen (quedan enmascarados) y no hay nada más que llenar.
-    campo = lambda ph: page.locator(f"input[placeholder='{ph}']").filter(visible=True).first
+    # Desde Vue 3 (2026-11-19) los campos se buscan dentro del bloque del
+    # destinatario: el del remitente usa los mismos placeholders y, si a su
+    # ficha le faltara algo, saldría como campo libre y primero en la página.
+    campo = lambda ph: _bloque_destinatario(page).locator(
+        f"input[placeholder='{ph}']").filter(visible=True).first
     doc = campo("DNI")
     doc.click()
     doc.fill("")
@@ -302,6 +386,14 @@ def _destinatario(page, datos):
     _esperar(page, lambda e: e.get("destinatario") and e.get("paso", 0) >= 5,
              "el destinatario registrado")
     return separado
+
+
+def _bloque_destinatario(page):
+    """El FormClient del destinatario: el div.row más profundo que tiene su
+    interruptor DNI (id dni_client_receiver; el del remitente es
+    dni_client_sender). Los antepasados salen antes en la página: .last es
+    el bloque mismo."""
+    return page.locator("div.row").filter(has=page.locator("#dni_client_receiver")).last
 
 
 @_paso("clave de seguridad")

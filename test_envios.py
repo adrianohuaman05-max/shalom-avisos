@@ -358,6 +358,172 @@ for f, esperado in (("2026-11-13", True), ("2026-11-14", True), ("2026-11-15", T
     state["envios"] = {"x00000000000": {"estado": "propuesto", "fecha": f}}
     check(f"propuesto del {f}: {'espera' if esperado else 'no espera'} el ✅", es.hay_por_confirmar(state, ctx), esperado)
 
+# ── lo que quedó de ayer ─────────────────────────────────────────────
+# El registro lo trae junto con los de hoy, con su fecha y su id de ayer.
+state, ctx, tg, api = mundo([], fecha="2026-11-12")
+t_ayer = es.texto_propuesta(envio(fecha="2026-11-11"), "l", ctx)
+check("lo de ayer no 'sale ayer': quedó pendiente", "Quedó pendiente de ayer: va por Shalom" in t_ayer, True)
+check("y no aconseja ⏰ (ya debió salir)", "conviene ⏰" in t_ayer, False)
+check("lo de antes de ayer, con su fecha", "Quedó pendiente del 10/11" in es.texto_propuesta(envio(fecha="2026-11-10"), "l", ctx), True)
+t_man = es.texto_propuesta(envio(fecha="2026-11-13"), "l", ctx)
+check("lo de mañana sigue igual", ["Sale mañana por Shalom" in t_man, "conviene ⏰" in t_man], [True, True])
+check("lo de hoy sigue igual", "Sale hoy por Shalom" in es.texto_propuesta(envio(), "l", ctx), True)
+check("si falta algo, dice dónde corregirlo sin Cotizar",
+      "«Envío Shalom»" in es.texto_falta(envio(faltan=["falta el DNI"]), ctx), True)
+
+# ── el portal nuevo de Shalom (Vue 3, desde el 2026-11-19) ────────────
+# Leer el estado del formulario: se corre el JS de verdad en node con un
+# árbol de Vue falso (sin red). Si no hay node, se salta y se avisa.
+import shutil
+import subprocess
+
+JS_PRUEBA = r"""
+const estado = %s;
+const correr = (app, clave) => { globalThis.document = { querySelector: () => app }; return estado(clave); };
+const store = { status: 4, typeProduct: { title: 'Caja Paquete L' }, origin: { id: 565 }, destiny: { id: 144 },
+  price: '18', warranty: 0, collection_service: 0, declaracion_jurada: { tipo: '' }, receiver_uuid: 'u-1',
+  receiver: { document: '40000001', name: 'Persona Inventada', phone: '900000001' }, code: '2580',
+  guide: '', code_guide: '' };
+// App -> (Suspense) -> FormEnvio (props.active) -> pasos con props.store
+const paso = { component: { props: { store }, subTree: { children: [] } } };
+const otro = { component: { props: { store: { nada: 1 } }, subTree: { children: 'texto' } } };
+const form = { component: { props: { active: false }, subTree: { children: [otro, { children: [paso] }] } } };
+const vue3 = { _vnode: { component: { props: {}, subTree: { children: [{ children: null },
+  { suspense: { activeBranch: form } }] } } } };
+const vue2 = { __vue__: { $children: [{ $children: [{ storeModule: store, $children: [] }] }] } };
+const vacio = { _vnode: { component: { props: {}, subTree: { children: [] } } } };
+console.log(JSON.stringify({ vue3: correr(vue3, '2580'), vue2: correr(vue2, null),
+  mal: correr(vue3, '1111'), vacio: correr(vacio, null), sinapp: correr(null, null) }));
+"""
+if shutil.which("node"):
+    salida = subprocess.run(["node", "-"], input=JS_PRUEBA % spr._ESTADO_JS, capture_output=True,
+                            text=True, encoding="utf-8", timeout=60)
+    try:
+        r = json.loads(salida.stdout)
+    except ValueError:
+        r = {}
+        print(salida.stderr)
+    v3 = r.get("vue3") or {}
+    check("Vue 3: el estado se encuentra bajando desde #app._vnode",
+          [v3.get(k) for k in ("paso", "producto", "origen", "destino", "precio")],
+          [4, "Caja Paquete L", 565, 144, 18])
+    check("Vue 3: destinatario, celular y clave se leen como sí/no",
+          [v3.get("destinatario"), v3.get("destinatario_tiene_celular"), v3.get("clave_puesta"), v3.get("clave_ok")],
+          [True, True, 4, True])
+    check("Vue 3: una clave distinta no cuadra", (r.get("mal") or {}).get("clave_ok"), False)
+    check("Vue 2 sigue de respaldo", [(r.get("vue2") or {}).get(k) for k in ("paso", "destino", "clave_ok")], [4, 144, None])
+    check("sin estado o sin #app devuelve null (no revienta)", [r.get("vacio", 0), r.get("sinapp", 0)], [None, None])
+    check("ningún dato de la persona vuelve a Python",
+          [x in salida.stdout for x in ("40000001", "Persona", "900000001", "2580", "u-1")], [False] * 5)
+else:
+    print("SALTO el estado del formulario en JS: no hay node instalado.")
+
+# El aviso de un fallo dice el porqué, sin cifras largas.
+check("motivo: la primera línea, sin el call log",
+      spr.motivo(Exception("page.evaluate: TypeError: Cannot read properties of undefined (reading 'storeModule')\n"
+                           "    at eval (eval at evaluate (:291:30), <anonymous>:4:5)")),
+      "page.evaluate: TypeError: Cannot read properties of undefined (reading 'storeModule')")
+check("motivo: DNI, celular y clave tapados; 3 cifras quedan",
+      spr.motivo(Exception("Locator.fill: Timeout 30000ms exceeded 40000001 / 900000001 / 2580 en el paso 123")),
+      "Locator.fill: Timeout ••••ms exceeded •••• / •••• / •••• en el paso 123")
+largo = spr.motivo(Exception("x" * 300))
+check("motivo: corto (120 como mucho)", (len(largo), largo.endswith("…")), (120, True))
+check("motivo: sin mensaje queda vacío", spr.motivo(Exception("")), "")
+
+
+@spr._paso("abrir el formulario")
+def _revienta(texto):
+    raise RuntimeError(texto)
+
+
+def _aviso(texto):
+    try:
+        _revienta(texto)
+    except spr.NoSeEnvio as e:
+        return str(e)
+    return None
+
+
+check("el aviso del paso dice tipo y motivo",
+      _aviso("page.evaluate: TypeError: Cannot read properties of undefined\nmás líneas 40000001"),
+      "Me quedé en el paso «abrir el formulario» (RuntimeError: page.evaluate: TypeError: "
+      "Cannot read properties of undefined).")
+check("el aviso sin mensaje dice solo el tipo", _aviso(""), "Me quedé en el paso «abrir el formulario» (RuntimeError).")
+
+
+class PaginaFalsa:
+    """Solo lo que usan estado() y _continuar(); cuenta los clics."""
+
+    def __init__(self, paso):
+        self.paso, self.clics = paso, 0
+
+    def evaluate(self, js, clave=None):
+        return {"paso": self.paso}
+
+    def get_by_role(self, *a, **k):
+        return self
+
+    def filter(self, **k):
+        return self
+
+    @property
+    def last(self):
+        return self
+
+    def click(self):
+        self.clics += 1
+
+    def wait_for_timeout(self, ms):
+        pass
+
+
+check("con 8 pasos, el que crea sigue siendo el 6", spr.PASO_QUE_CREA, 6)
+p6 = PaginaFalsa(6)
+try:
+    spr._continuar(p6)
+    candado = "pasó"
+except spr.NoSeEnvio:
+    candado = "frenó"
+check("candado: en el paso 6 _continuar no pulsa", (candado, p6.clics), ("frenó", 0))
+p5 = PaginaFalsa(5)
+spr._continuar(p5)
+check("en el paso 5 sí pulsa Continuar", p5.clics, 1)
+
+# La clave: Shalom la revisa recien en el paso 7, con la orden ya creada.
+check("clave: repetidas y seguidas se rechazan",
+      [c for c in ("1111", "5555", "9999", "1234", "3456", "6789") if spr.clave_valida(c)], [])
+check("clave: las que Shalom acepta pasan",
+      [c for c in ("0000", "0123", "7890", "4321", "2580", "1123", "9876") if not spr.clave_valida(c)], [])
+check("clave: largo distinto de 4 o letras no pasan",
+      [c for c in ("", None, "123", "12345", "12a4") if spr.clave_valida(c)], [])
+
+
+class ProFalso:
+    """Si crear_envio llega a tocar la página, se nota."""
+
+    def __init__(self):
+        self.tocada = False
+
+    @property
+    def page(self):
+        self.tocada = True
+        raise AssertionError("tocó la página")
+
+
+for mala in ("1111", "1234"):
+    pro_falso = ProFalso()
+    try:
+        spr.crear_envio(pro_falso, {"caja": "m", "clave": mala, "dni": "40000001",
+                                    "agencia": "X", "nombre": "N", "celular": "900000001"})
+        aviso_clave = None
+    except spr.NoSeEnvio as e:
+        aviso_clave = str(e)
+    check(f"clave {mala}: crear_envio frena sin tocar el navegador",
+          (pro_falso.tocada, bool(aviso_clave), mala in (aviso_clave or "")), (False, True, False))
+check("clave mala: el aviso dice qué hacer",
+      aviso_clave, "La clave de hoy es repetida o seguida y Shalom la rechaza: "
+      "cámbiala en el Sheets y vuelve a intentar.")
+
 print()
 if fallos:
     print(f"{len(fallos)} prueba(s) fallaron.")
