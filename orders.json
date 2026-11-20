@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-20T12:31:43.231738+00:00"
+    "last_checked": "2026-11-20T13:07:55.089697+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-20T12:31:43.231731+00:00"
+    "last_checked": "2026-11-20T13:07:55.089691+00:00"
   },
   {
     "orden": "97152392",
@@ -1722,7 +1722,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-19T19:25:06.296257+00:00",
-    "last_checked": "2026-11-20T12:31:43.225370+00:00"
+    "last_checked": "2026-11-20T13:07:55.019517+00:00"
   },
   {
     "orden": "104499759",
@@ -1734,7 +1734,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-19T19:25:10.277865+00:00",
-    "last_checked": "2026-11-20T12:31:43.231683+00:00"
+    "last_checked": "2026-11-20T13:07:55.089644+00:00"
   },
   {
     "orden": "104499650",
@@ -1746,6 +1746,19 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-19T19:25:14.088141+00:00",
-    "last_checked": "2026-11-20T12:31:43.231723+00:00"
+    "last_checked": "2026-11-20T13:07:55.089682+00:00"
+  },
+  {
+    "orden": "104645938",
+    "codigo": "KPM3",
+    "estado": "En origen",
+    "fecha_envio": "20-11-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "en_portal": false,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-11-20T13:08:33.871177+00:00",
+    "last_checked": "2026-11-20T13:08:33.871177+00:00"
   }
 ]
