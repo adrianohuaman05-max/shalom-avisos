@@ -34,13 +34,6 @@
       "fecha": "2026-11-18",
       "caja": "m",
       "msg": 505
-    },
-    "4d71c970eb64": {
-      "estado": "ok",
-      "fecha": "2026-11-20",
-      "caja": "m",
-      "msg": 512,
-      "orden": "104645938"
     }
   },
   "telegram_bot": "fc2113caefc0"
