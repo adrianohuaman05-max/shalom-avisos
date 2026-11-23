@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-23T17:02:54.699058+00:00"
+    "last_checked": "2026-11-23T17:34:58.097563+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-23T17:02:54.699054+00:00"
+    "last_checked": "2026-11-23T17:34:58.097558+00:00"
   },
   {
     "orden": "97152392",
@@ -1722,7 +1722,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-19T19:25:06.296257+00:00",
-    "last_checked": "2026-11-23T17:02:54.698977+00:00"
+    "last_checked": "2026-11-23T17:34:58.097548+00:00"
   },
   {
     "orden": "104499759",
@@ -1739,11 +1739,11 @@
   {
     "orden": "104499650",
     "codigo": "9NNT",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "19-11-2026",
     "avisado": true,
     "registro_avisado": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-19T19:25:14.088141+00:00",
     "last_checked": "2026-11-23T17:02:54.699047+00:00"
@@ -1758,7 +1758,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-20T16:01:59.348858+00:00",
-    "last_checked": "2026-11-23T17:02:54.519362+00:00"
+    "last_checked": "2026-11-23T17:34:58.050154+00:00"
   },
   {
     "orden": "104649577",
@@ -1770,7 +1770,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-20T16:02:04.044241+00:00",
-    "last_checked": "2026-11-23T17:02:54.519372+00:00"
+    "last_checked": "2026-11-23T17:34:58.050164+00:00"
   },
   {
     "orden": "104649461",
@@ -1794,7 +1794,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-21T16:31:50.755539+00:00",
-    "last_checked": "2026-11-23T17:02:54.519336+00:00"
+    "last_checked": "2026-11-23T17:34:58.050129+00:00"
   },
   {
     "orden": "104968339",
