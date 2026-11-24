@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-24T22:02:06.111608+00:00"
+    "last_checked": "2026-11-24T22:31:45.747518+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-24T22:02:06.111600+00:00"
+    "last_checked": "2026-11-24T22:31:45.747510+00:00"
   },
   {
     "orden": "97152392",
@@ -1799,12 +1799,12 @@
   {
     "orden": "104968339",
     "codigo": "CMPP",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "23-11-2026",
     "avisado": true,
     "registro_avisado": true,
     "en_portal": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-23T14:33:46.928508+00:00",
     "last_checked": "2026-11-24T22:02:06.111589+00:00"
@@ -1820,6 +1820,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-24T15:02:20.412730+00:00",
-    "last_checked": "2026-11-24T22:02:06.111557+00:00"
+    "last_checked": "2026-11-24T22:31:45.747484+00:00"
   }
 ]
