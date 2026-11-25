@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-25T00:31:39.811703+00:00"
+    "last_checked": "2026-11-25T01:01:42.723230+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-25T00:31:39.811694+00:00"
+    "last_checked": "2026-11-25T01:01:42.723215+00:00"
   },
   {
     "orden": "97152392",
@@ -1812,7 +1812,7 @@
   {
     "orden": "105145044",
     "codigo": "NMCC",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "24-11-2026",
     "avisado": false,
     "registro_avisado": true,
@@ -1820,6 +1820,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-24T15:02:20.412730+00:00",
-    "last_checked": "2026-11-25T00:31:39.811668+00:00"
+    "last_checked": "2026-11-25T01:01:42.716588+00:00"
   }
 ]
