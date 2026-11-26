@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-26T18:01:14.637711+00:00"
+    "last_checked": "2026-11-26T18:30:50.320789+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-26T18:01:14.637704+00:00"
+    "last_checked": "2026-11-26T18:30:50.320780+00:00"
   },
   {
     "orden": "97152392",
@@ -1820,20 +1820,20 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-24T15:02:20.412730+00:00",
-    "last_checked": "2026-11-26T18:01:14.637691+00:00"
+    "last_checked": "2026-11-26T18:30:50.320756+00:00"
   },
   {
     "orden": "105304183",
     "codigo": "3PDM",
-    "estado": "En tránsito",
+    "estado": "En destino",
     "fecha_envio": "25-11-2026",
-    "avisado": false,
+    "avisado": true,
     "registro_avisado": true,
     "en_portal": true,
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-25T14:01:59.967414+00:00",
-    "last_checked": "2026-11-26T18:01:14.632044+00:00"
+    "last_checked": "2026-11-26T18:30:49.731675+00:00"
   },
   {
     "orden": "105474344",
@@ -1846,7 +1846,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:24.338982+00:00",
-    "last_checked": "2026-11-26T18:01:06.860467+00:00"
+    "last_checked": "2026-11-26T18:30:49.731657+00:00"
   },
   {
     "orden": "105474404",
@@ -1859,6 +1859,6 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:52.399352+00:00",
-    "last_checked": "2026-11-26T18:00:57.744217+00:00"
+    "last_checked": "2026-11-26T18:30:49.731626+00:00"
   }
 ]
