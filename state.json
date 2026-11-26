@@ -1,8 +1,8 @@
 {
-  "telegram_offset": 841229844,
+  "telegram_offset": 841229850,
   "fallos_seguidos": 0,
   "ultimo_fallo_avisado": "2026-11-19T05:01:26.229114+00:00",
-  "ultima_renovacion_sesion": "2026-11-26T14:31:22.727510+00:00",
+  "ultima_renovacion_sesion": "2026-11-26T15:16:30.958447+00:00",
   "envios": {
     "4d71c970eb64": {
       "estado": "incierto",
@@ -33,8 +33,11 @@
       "orden": "105304183"
     },
     "1ac7f63f757d": {
-      "estado": "falta",
-      "fecha": "2026-11-25"
+      "estado": "ok",
+      "fecha": "2026-11-25",
+      "caja": "xs",
+      "msg": 552,
+      "orden": "105474404"
     },
     "4fd2719d6252": {
       "estado": "propuesto",
@@ -47,6 +50,13 @@
       "fecha": "2026-11-26",
       "caja": "l",
       "msg": 550
+    },
+    "233a894b51e4": {
+      "estado": "ok",
+      "fecha": "2026-11-25",
+      "caja": "xs",
+      "msg": 551,
+      "orden": "105474344"
     }
   },
   "telegram_bot": "fc2113caefc0"
