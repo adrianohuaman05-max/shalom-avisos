@@ -2,7 +2,7 @@
   "telegram_offset": 841229844,
   "fallos_seguidos": 0,
   "ultimo_fallo_avisado": "2026-11-19T05:01:26.229114+00:00",
-  "ultima_renovacion_sesion": "2026-11-26T11:30:55.738904+00:00",
+  "ultima_renovacion_sesion": "2026-11-26T12:16:19.569143+00:00",
   "envios": {
     "4d71c970eb64": {
       "estado": "incierto",
@@ -41,6 +41,12 @@
       "fecha": "2026-11-26",
       "caja": "l",
       "msg": 547
+    },
+    "b377be5946d4": {
+      "estado": "propuesto",
+      "fecha": "2026-11-26",
+      "caja": "l",
+      "msg": 550
     }
   },
   "telegram_bot": "fc2113caefc0"
