@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-27T21:30:59.207185+00:00"
+    "last_checked": "2026-11-27T22:01:05.588602+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-27T21:30:59.207179+00:00"
+    "last_checked": "2026-11-27T22:01:05.588594+00:00"
   },
   {
     "orden": "97152392",
@@ -1820,7 +1820,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-24T15:02:20.412730+00:00",
-    "last_checked": "2026-11-27T21:30:59.207172+00:00"
+    "last_checked": "2026-11-27T22:01:05.588585+00:00"
   },
   {
     "orden": "105304183",
@@ -1846,7 +1846,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:24.338982+00:00",
-    "last_checked": "2026-11-27T21:30:59.207153+00:00"
+    "last_checked": "2026-11-27T22:01:05.588565+00:00"
   },
   {
     "orden": "105474404",
@@ -1859,7 +1859,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:52.399352+00:00",
-    "last_checked": "2026-11-27T21:30:59.189667+00:00"
+    "last_checked": "2026-11-27T22:01:05.582064+00:00"
   },
   {
     "orden": "105577287",
@@ -1871,6 +1871,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-27T01:00:53.869082+00:00",
-    "last_checked": "2026-11-27T21:30:59.189640+00:00"
+    "last_checked": "2026-11-27T22:01:01.201586+00:00"
+  },
+  {
+    "orden": "105646692",
+    "codigo": "9CWK",
+    "estado": "En origen",
+    "fecha_envio": "27-11-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-11-27T22:01:01.201617+00:00",
+    "last_checked": "2026-11-27T22:01:01.201620+00:00"
   }
 ]
