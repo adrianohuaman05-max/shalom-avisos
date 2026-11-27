@@ -561,7 +561,7 @@
     "cerrado": false,
     "demora_avisada": true,
     "registrado": "2026-09-05T02:32:04.084659+00:00",
-    "last_checked": "2026-11-27T00:30:50.427616+00:00"
+    "last_checked": "2026-11-27T01:00:59.053398+00:00"
   },
   {
     "orden": "94672142",
@@ -909,7 +909,7 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-09-24T16:31:25.947300+00:00",
-    "last_checked": "2026-11-27T00:30:50.427611+00:00"
+    "last_checked": "2026-11-27T01:00:59.053390+00:00"
   },
   {
     "orden": "97152392",
@@ -1820,17 +1820,17 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-24T15:02:20.412730+00:00",
-    "last_checked": "2026-11-27T00:30:50.427604+00:00"
+    "last_checked": "2026-11-27T01:00:59.053378+00:00"
   },
   {
     "orden": "105304183",
     "codigo": "3PDM",
-    "estado": "En destino",
+    "estado": "Entregado",
     "fecha_envio": "25-11-2026",
     "avisado": true,
     "registro_avisado": true,
     "en_portal": true,
-    "cerrado": false,
+    "cerrado": true,
     "demora_avisada": false,
     "registrado": "2026-11-25T14:01:59.967414+00:00",
     "last_checked": "2026-11-27T00:30:50.427594+00:00"
@@ -1838,7 +1838,7 @@
   {
     "orden": "105474344",
     "codigo": "MNWD",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "26-11-2026",
     "avisado": false,
     "registro_avisado": true,
@@ -1846,12 +1846,12 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:24.338982+00:00",
-    "last_checked": "2026-11-27T00:30:50.427582+00:00"
+    "last_checked": "2026-11-27T01:00:59.053332+00:00"
   },
   {
     "orden": "105474404",
     "codigo": "7DHD",
-    "estado": "En origen",
+    "estado": "En tránsito",
     "fecha_envio": "26-11-2026",
     "avisado": false,
     "registro_avisado": true,
@@ -1859,6 +1859,18 @@
     "cerrado": false,
     "demora_avisada": false,
     "registrado": "2026-11-26T15:05:52.399352+00:00",
-    "last_checked": "2026-11-27T00:30:50.427550+00:00"
+    "last_checked": "2026-11-27T01:00:59.046668+00:00"
+  },
+  {
+    "orden": "105577287",
+    "codigo": "9PDN",
+    "estado": "En origen",
+    "fecha_envio": "26-11-2026",
+    "avisado": false,
+    "registro_avisado": true,
+    "cerrado": false,
+    "demora_avisada": false,
+    "registrado": "2026-11-27T01:00:53.869082+00:00",
+    "last_checked": "2026-11-27T01:00:53.869099+00:00"
   }
 ]
